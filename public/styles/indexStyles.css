@@ -293,12 +293,13 @@ li {
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  cursor: pointer;
 }
 
 .sellers-section-grid-item-avatar {
-  width: 45px;
-  height: 45px;
+  width: 52px;
+  height: 52px;
   border-radius: 5px;
   background-color: #efefef;
 }

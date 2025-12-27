@@ -424,7 +424,10 @@ const PackageDetailsContent: React.FC = () => {
           >
             About the Store
           </h2>
-          <div className="package-detail-seller-container">
+          <div
+            className="package-detail-seller-container"
+            onClick={() => (window.location.href = '/store')}
+          >
             <div className="package-detail-seller-avatar"></div>
             <div className="package-detail-seller-information-container">
               <div className="package-detail-seller-username-container">

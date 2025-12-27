@@ -273,26 +273,13 @@ const FeaturedPackagesCarousel: React.FC = () => {
                         </h5>
                       ))}
                     </div>
-                    <a href="/">Suscribirse</a>
+                    <button
+                      className="card-button"
+                      onClick={() => (window.location.href = '/package')}
+                    >
+                      View Package
+                    </button>
                   </div>
-                  {/*
-                  
-                  
-                  800
-                  <div className="image">
-                    <img
-                      src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxivAs4UknzmDfLBXGMxQkayiZDhR2ftB4jcIV7LEnIEStiUyMygioZnbLXCAND-I_xWQpVp0jv-dv9NVNbuKn4sNpXYtLIJk2-IOdWQNpC2Ldapnljifu0pnQqAWU848Ja4lT9ugQex-nwECEh3a96GXwiRXlnGEE6FFF_tKm66IGe3fzmLaVIoNL/s1600/img_avatar.png"
-                      alt={card.title}
-                    />
-                  </div>
-                  <h3>{card.title}</h3>
-                  <p>Web Developer</p>
-                  <div className="stars">★★★★★</div>
-                  <div className="buttons">
-                    <button>About Me</button>
-                    <button>Hire Me</button>
-                  </div>
-                        */}
                 </div>
               </article>
             ))}

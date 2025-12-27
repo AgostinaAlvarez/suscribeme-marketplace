@@ -53,7 +53,10 @@ const BestSellersGrid: React.FC = () => {
     <ul className="sellers-section-grid">
       {topSellers.map((seller, index) => (
         <li key={index}>
-          <article className="sellers-section-grid-item">
+          <article
+            className="sellers-section-grid-item"
+            onClick={() => (window.location.href = '/store')}
+          >
             <div className="sellers-section-grid-item-avatar"></div>
             <div className="sellers-section-grid-item-content">
               <h3>{seller.name}</h3>

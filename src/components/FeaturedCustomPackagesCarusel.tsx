@@ -127,8 +127,8 @@ const FeaturedCustomPackagesCarusel: React.FC = () => {
         </button>
         <div className="viewport">
           <div className="track" ref={trackRef}>
-            {packages.map((pckg) => (
-              <article className="card" key={pckg._id}>
+            {packages.map((_, index) => (
+              <article className="card" key={index}>
                 <div className="card-content custom-package-card-content">
                   <div className="card-content-information custom-package-card-content-information">
                     <div className="card-content-information-description-container">
@@ -158,7 +158,12 @@ const FeaturedCustomPackagesCarusel: React.FC = () => {
                       </div>
                       <span>3.5 ★★★★★ (76)</span>
                     </div>
-                    <a href="/">Suscribirse</a>
+                    <button
+                      className="card-button"
+                      onClick={() => (window.location.href = '/package')}
+                    >
+                      View Package
+                    </button>
                   </div>
                 </div>
               </article>

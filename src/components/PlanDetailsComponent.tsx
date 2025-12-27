@@ -104,7 +104,7 @@ const PlanDetailsComponent: React.FC = () => {
             </div>
             <div className="plan-detail-hero-content-row">
               <span>
-                Created by <a href="/">{`Lazy Programmer Team`}</a>
+                Created by <a href="/store">{`Lazy Programmer Team`}</a>
               </span>
             </div>
             <div className="plan-detail-hero-content-row">
@@ -312,7 +312,10 @@ const PlanDetailsComponent: React.FC = () => {
           <h2 id="articles-section" className="plan-detail-section-title">
             About the Store
           </h2>
-          <div className="package-detail-seller-container">
+          <div
+            className="package-detail-seller-container"
+            onClick={() => (window.location.href = '/store')}
+          >
             <div className="package-detail-seller-avatar"></div>
             <div className="package-detail-seller-information-container">
               <div className="package-detail-seller-username-container">

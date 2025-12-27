@@ -225,10 +225,10 @@
 }
 
 .plan-button {
-  color: #7d2ae8;
-  background-color: white;
   border: none;
   border: 1px solid #7d2ae8;
+  color: #7d2ae8;
+  background-color: white;
   border-radius: 6px;
   padding: 8px 22px;
   font-size: 1rem;
@@ -436,6 +436,7 @@
   align-items: center;
   gap: 10px;
   margin-top: 10px;
+  cursor: pointer;
 }
 
 .package-detail-seller-avatar {

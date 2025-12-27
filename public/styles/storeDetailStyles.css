@@ -1,0 +1,214 @@
+.store-detail-main {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-bottom: 100px;
+}
+
+.store-detail-section-container {
+  width: 900px;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.store-section-title {
+  font-size: 23px;
+  margin: 0;
+  font-weight: 500;
+}
+
+.store-section-button {
+  border: none;
+  border: 1px solid #7d2ae8;
+  color: #7d2ae8;
+  background-color: white;
+  border-radius: 6px;
+  padding: 8px 22px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 25px;
+  margin-bottom: 5px;
+  width: fit-content;
+}
+
+.store-section-button:hover {
+  color: #7c2ae888;
+  border: 1px solid #7c2ae888;
+}
+
+/*================= STICKY BAR SECTION =================*/
+
+.store-detail-sticky-bar-section {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  width: 100vw;
+  z-index: 1000;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  padding: 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.2s;
+  background-color: #1a0f35;
+
+  /* Degradado principal (degradado lineal de arriba a abajo) */
+  background-image: 
+    /* 1. Degradado Radial para el "brillo" púrpura/violeta (arriba a la derecha).
+      El tamaño 'circle 600px at 75% 20%' lo posiciona y define su forma.
+      '#4e047f' es el color de inicio, 'rgba(26, 15, 53, 0)' es el transparente.
+    */
+    radial-gradient(
+      circle 600px at 75% 20%,
+      #4e047f 0%,
+      rgba(26, 15, 53, 0) 70%
+    ),
+    /* 2. Degradado Radial para el "brillo" azul (abajo a la izquierda).
+      Posicionado en 'circle 800px at 15% 90%'.
+      '#050830' es un azul muy oscuro, 'rgba(26, 15, 53, 0)' es el transparente.
+    */
+    radial-gradient(
+        circle 800px at 15% 90%,
+        #050830 0%,
+        rgba(26, 15, 53, 0) 70%
+      );
+  color: white;
+}
+
+.store-detail-sticky-bar-content {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.store-detail-sticky-bar-section button {
+  background: #7d2ae8;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 22px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.store-detail-sticky-bar-section button:hover {
+  background: #5a1bb0;
+}
+
+/* ================= HERO SECTION ================= */
+
+.store-detail-hero-section {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #101827;
+  color: #bfbfbf;
+}
+
+.store-detail-hero-section-container {
+  /*border: 1px solid violet;*/
+  height: 200px;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 30px;
+}
+
+.store-detail-user-container {
+  display: grid;
+  box-sizing: border-box;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 20px;
+}
+
+.store-detail-avatar {
+  width: 90px;
+  height: 90px;
+  background-color: #efefef;
+  border-radius: 5px;
+}
+
+.store-detail-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.store-detail-name {
+  margin: 0;
+  font-size: 30px;
+  color: white;
+}
+
+/* ================= STATS SECTION ================= */
+
+.store-detail-stats-section-container {
+  display: grid;
+  /*padding-left: 10px;
+  padding-right: 10px;*/
+  grid-template-columns: repeat(4, 1fr);
+  color: #595959;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.store-detail-stats-section-container article {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  text-align: center;
+}
+
+.store-detail-stats-section-container article .store-detail-stat-value {
+  color: black;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+/* ================= ABOUT SECTION ================= */
+
+.store-detail-about-section-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /*border: 1px solid red;*/
+  padding: 30px 0px;
+}
+
+.store-detail-about-section-container p {
+  margin: 0;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+/* ================= PACKAGES SECTION ================= */
+
+.store-detail-packages-section-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.store-detail-packages-section-grid {
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.store-detail-package-card {
+  width: 100%;
+  height: 300px;
+  box-sizing: border-box;
+  border: 1px solid #595959;
+}
