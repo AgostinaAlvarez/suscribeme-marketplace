@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import '../styles/planCarouselStyles.css';
+import '../../public/styles/planCarouselStyles.css';
 
 interface CustomPackageData {
   _id: string;

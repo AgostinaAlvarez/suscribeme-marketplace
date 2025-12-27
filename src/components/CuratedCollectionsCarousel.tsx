@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import '../styles/collectionsCarouselStyles.css';
+import '../../public/styles/collectionsCarouselStyles.css';
 
 interface CollectionData {
   _id: string;

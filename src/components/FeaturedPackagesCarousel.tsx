@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
-import '../styles/planCarouselStyles.css';
-import { Image } from 'astro:assets';
+//import { Image } from 'astro:assets';
+import '../../public/styles/planCarouselStyles.css';
 
 interface PackageData {
   _id: string;
@@ -273,7 +273,7 @@ const FeaturedPackagesCarousel: React.FC = () => {
                         </h5>
                       ))}
                     </div>
-                    <a href="/package">Suscribirse</a>
+                    <a href="/">Suscribirse</a>
                   </div>
                   {/*
                   
