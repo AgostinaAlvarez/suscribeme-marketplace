@@ -1,0 +1,305 @@
+.plan-detail-main {
+  width: 100%;
+  box-sizing: border-box;
+  /*padding: 40px 0px;*/
+  background-color: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  position: relative;
+  padding-bottom: 100px;
+}
+
+.plan-detail-section-container {
+  width: 1100px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding-right: 370px;
+  position: relative;
+  /*background-color: red;*/
+}
+
+.example-box {
+  width: 100%;
+  height: 600px;
+  /*background-color: green;*/
+}
+
+.plan-detail-section-title {
+  font-size: 20px;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* ================= HERO ================= */
+
+.plan-detail-hero-section {
+  background-color: #101827;
+  color: #bfbfbf;
+}
+
+.plan-detail-hero-content {
+  width: 100%;
+  box-sizing: border-box;
+  /*border: 1px solid violet;*/
+  padding: 40px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.plan-detail-hero-content h1 {
+  margin: 0;
+  font-size: 40px;
+  color: white;
+}
+
+.plan-detail-hero-content p {
+  margin: 0;
+  font-size: 18px;
+}
+
+.plan-detail-hero-content-row {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.plan-detail-hero-content .plan-detail-hero-content-row span {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.plan-detail-hero-rating {
+  color: #facb15;
+}
+
+.plan-detail-hero-content-row h3 {
+  margin: 0;
+  font-size: 14px;
+  color: violet;
+}
+
+.plan-detail-hero-navigation {
+  gap: 10px;
+}
+
+.plan-detail-hero-content-tag {
+  width: fit-content;
+  height: fit-content;
+  box-sizing: border-box;
+  background-color: #f97315;
+  color: white;
+  padding: 4px 10px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.plan-detail-hero-content-row .plan-detail-hero-content-tag span {
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.plan-detail-aside-card {
+  width: 330px;
+  height: fit-content;
+  box-sizing: border-box;
+  position: absolute;
+  top: 30px;
+  right: 0;
+}
+
+.plan-detail-aside-card-content {
+  width: 330px;
+  height: fit-content;
+  box-sizing: border-box;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  /*border-radius: 12px;*/
+  padding: 38px 27px;
+  display: flex;
+  flex-direction: column;
+  color: black;
+}
+
+.plan-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  margin-top: 0;
+}
+
+.plan-price {
+  margin: 0;
+}
+
+.plan-price .price {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.plan-price .period {
+  font-size: 1rem;
+  color: #6b7280;
+  margin-left: 4px;
+}
+
+.plan-save {
+  color: #16a34a;
+  font-size: 0.9rem;
+  margin: 8px 0 16px;
+}
+
+.plan-description {
+  font-size: 14px;
+  color: #8c8c8c;
+  margin-bottom: 20px;
+}
+
+.plan-button {
+  border: none;
+  border: 1px solid #7d2ae8;
+  background: #7d2ae8;
+  color: #fff;
+  border-radius: 6px;
+  padding: 8px 22px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 25px;
+}
+
+.plan-button:hover {
+  color: #fff;
+  background: #5a1bb0;
+  border: 1px solid #7d2ae8;
+}
+
+/* ================= ARTICLES IN PLAN SECTION ================= */
+
+.plan-detail-articles-section-container {
+  box-sizing: border-box;
+  padding: 25px;
+  border: 1px solid #dadada;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.plan-detail-articles-section-list {
+  width: 100%;
+  box-sizing: border-box;
+  /*background-color: red;*/
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.plan-detail-articles-section-item {
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  border: 1px solid #dadada;
+  border-radius: 10px;
+  padding: 15px;
+  gap: 15px;
+  align-items: center;
+}
+
+.plan-detail-articles-section-item-avatar {
+  width: 90px;
+  height: 100px;
+  box-sizing: border-box;
+  background-color: grey;
+  border-radius: 5px;
+}
+
+.plan-detail-articles-section-item-info {
+  display: flex;
+  flex-direction: column;
+  font-size: 11px;
+  gap: 10px;
+  color: #8c8c8c;
+}
+
+.plan-detail-articles-section-item-info h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+}
+
+.plan-detail-articles-section-item-info p {
+  margin: 0;
+  color: #434343;
+  font-size: 12px;
+}
+
+.plan-detail-articles-section-item-info-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.plan-detail-articles-section-item-info-tag {
+  width: fit-content;
+  height: fit-content;
+  box-sizing: border-box;
+  border: 1px solid #f97315;
+  color: white;
+  padding: 2px 10px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  color: #f97315;
+}
+
+.plan-detail-articles-section-item-info-tag span {
+  font-size: 10px;
+}
+
+.plan-detail-articles-section-item-type-container {
+  height: 100%;
+}
+
+/* ================= REVIEWS SECTION ================= */
+
+.plan-detail-reviews-section-container {
+  box-sizing: border-box;
+  padding: 25px;
+  border: 1px solid #dadada;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ================= SELLER SECTION ================= */
+
+.plan-detail-seller-section-container {
+  box-sizing: border-box;
+  padding: 25px;
+  border: 1px solid #dadada;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.package-detail-seller-username-container .plan-detail-section-seller-name {
+  font-size: 18px;
+}
+
+.package-detail-seller-username-container span {
+  font-size: 14px;
+}

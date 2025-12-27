@@ -1,0 +1,92 @@
+/* collectionsCarouselStyles.css */
+
+.carousel {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.viewport {
+  overflow: hidden;
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+/* CARD SIZE REAL */
+.collection-card {
+  flex: 0 0 33.33%;
+  max-width: 33.33%;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.collection-card-content {
+  background: white;
+  min-height: 350px;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+}
+
+.collection-card-content-img {
+  width: 100%;
+  height: 350px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  background-size: cover;
+  background-position: center;
+}
+
+.collection-card-content-layer {
+  width: 100%;
+  height: 350px;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.525);
+  position: absolute;
+  padding: 35px 30px;
+  top: 0;
+  left: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 15px;
+  color: white;
+}
+
+.collection-card-content-layer h3 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.collection-card-content-layer p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .collection-card {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+@media (max-width: 600px) {
+  .collection-card {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
