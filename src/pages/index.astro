@@ -1,0 +1,446 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FeaturedPackagesCarousel from '../components/FeaturedPackagesCarousel.tsx';
+import BestSellersGrid from '../components/BestSellersGrid.tsx';
+import FeaturedCustomPackagesCarusel from '../components/FeaturedCustomPackagesCarusel.tsx';
+import CuratedCollectionsCarousel from '../components/CuratedCollectionsCarousel.tsx';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Suscribeme | Marketplace de Suscripciones Digitales</title>
+    <meta
+      name="description"
+      content="Descubrí y gestioná suscripciones digitales desde un solo lugar. Encontrá planes de café, fitness, educación, entretenimiento y más."
+    />
+    <link rel="stylesheet" href="/src/styles/normalize.css" />
+    <link rel="stylesheet" href="/src/styles/globalStyles.css" />
+    <link rel="stylesheet" href="/src/styles/indexStyles.css" />
+
+    <script src="/src/scripts/slider.js" is:inline></script>
+
+    <!-- ===== Link Swiper's CSS ===== -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+  </head>
+  <body>
+    <!-- ================= HEADER ================= -->
+    <Header />
+    <!-- ================= MAIN ================= -->
+    <main class="main">
+      <h1 class="visually-hidden">
+        Marketplace de suscripciones para descubrir, combinar y gestionar planes
+        desde un solo lugar
+      </h1>
+      <!-- ================= HERO SLIDER ================= -->
+      <section aria-labelledby="hero-section-title" class="slider">
+        <div class="list">
+          <!-- SLIDE 1 -->
+          <article class="item slide-1">
+            <div class="item-content">
+              <h2>Gestioná todas tus suscripciones en un solo lugar</h2>
+              <p>
+                Pagos, envíos, renovaciones y comunicación con vendedores, todo
+                desde un dashboard centralizado.
+              </p>
+              <div>
+                <a href="/dashboard">Ver mis suscripciones</a>
+              </div>
+            </div>
+          </article>
+          <!-- SLIDE 2 -->
+          <article class="item slide-2">
+            <div class="item-content">
+              <h2>Creá tu suscripción a medida</h2>
+              <p>
+                Elegí productos, servicios y beneficios para armar una
+                suscripción personalizada según tus necesidades.
+              </p>
+              <div>
+                <a href="/packages">Empezar ahora</a>
+              </div>
+            </div>
+          </article>
+          <!-- SLIDE 3 -->
+          <article class="item slide-3">
+            <div class="item-content">
+              <h2>Descubrí tu suscripción ideal</h2>
+              <p>
+                Accedé a miles de planes de suscripción de vendedores
+                confiables. Construí tu paquete ideal y gestioná todo desde un
+                solo lugar.
+              </p>
+              <div>
+                <a href="/subscriptions">Explorar planes</a>
+                <a href="/packages">Crear mi paquete</a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="header-buttons">
+          <button id="prev" class="left-button">&lt;</button>
+          <button id="next" class="right-button">&gt;</button>
+        </div>
+
+        <ul class="dots">
+          <li class="active"></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </section>
+      <!-- ================= CATEGORIES ================= -->
+      <section
+        aria-labelledby="categories-title"
+        class="categories-section default-continer main-container"
+      >
+        <div class="main-container-row-title-container">
+          <h2 id="categories-title" class="main-container-ttl">
+            Explorar por categoría
+          </h2>
+          <a href="https://www.google.com/">View More</a>
+        </div>
+
+        <ul class="categories-section-grid">
+          <li>
+            <article class="categories-section-grid-item">
+              <div class="categories-section-grid-item-avatar">
+                <img
+                  src="/src/assets/icons/gift-black.svg"
+                  alt="Fitness icon"
+                  width="30"
+                  height="30"
+                />
+              </div>
+              <h3>Bennefits</h3>
+            </article>
+          </li>
+
+          <li>
+            <article class="categories-section-grid-item">
+              <div class="categories-section-grid-item-avatar">
+                <img
+                  src="/src/assets/icons/fitness-black.svg"
+                  alt="Fitness icon"
+                  width="30"
+                  height="30"
+                />
+              </div>
+              <h3>Fitness</h3>
+            </article>
+          </li>
+
+          <li>
+            <article class="categories-section-grid-item">
+              <div class="categories-section-grid-item-avatar">
+                <img
+                  src="/src/assets/icons/health-black.svg"
+                  alt="Fitness icon"
+                  width="30"
+                  height="30"
+                />
+              </div>
+              <h3>Health And Beauty</h3>
+            </article>
+          </li>
+
+          <li>
+            <article class="categories-section-grid-item">
+              <div class="categories-section-grid-item-avatar">
+                <img
+                  src="/src/assets/icons/food-black.svg"
+                  alt="Fitness icon"
+                  width="30"
+                  height="30"
+                />
+              </div>
+              <h3>Food & Drink</h3>
+            </article>
+          </li>
+
+          <li>
+            <article class="categories-section-grid-item">
+              <div class="categories-section-grid-item-avatar">
+                <img
+                  src="/src/assets/icons/box-black.svg"
+                  alt="Fitness icon"
+                  width="30"
+                  height="30"
+                />
+              </div>
+              <h3>Mistery Box</h3>
+            </article>
+          </li>
+          <li>
+            <article class="categories-section-grid-item">
+              <div class="categories-section-grid-item-avatar">
+                <img
+                  src="/src/assets/icons/box-black.svg"
+                  alt="Fitness icon"
+                  width="30"
+                  height="30"
+                />
+              </div>
+              <h3>Mistery Box</h3>
+            </article>
+          </li>
+        </ul>
+      </section>
+      <!-- ================= FEATURED PACKAGES ================= -->
+      <section
+        aria-labelledby="featured-plans-title"
+        class="featured-plans-section default-continer main-container"
+      >
+        <div class="main-container-row-title-container">
+          <h2 id="featured-plans-title" class="main-container-ttl">
+            Planes destacados
+          </h2>
+          <a href="https://www.google.com/">View More</a>
+        </div>
+        <div class="featured-plans-section-categories-container">
+          <div class="featured-plans-section-categorie-tag">
+            <span>All</span>
+          </div>
+          <div class="featured-plans-section-categorie-tag">
+            <span>Newest</span>
+          </div>
+          <div class="featured-plans-section-categorie-tag">
+            <span>Best</span>
+          </div>
+        </div>
+        <FeaturedPackagesCarousel client:load />
+      </section>
+      <!-- ================= BANNERS SECTION ================= -->
+      <section
+        aria-labelledby="banners-title"
+        class="banners-section default-continer main-container"
+      >
+        <article class="banners-section-left-col">
+          <h2>Freshness Begins with Quality Vegetables</h2>
+          <a href="/">Shop Now</a>
+        </article>
+        <div class="banners-section-right-col">
+          <article
+            class="banners-section-right-col-card banners-section-right-col-card-first"
+          >
+            <div class="banners-section-right-col-card-content">
+              <h2>Your favorite phone at Crazy Offers</h2>
+              <a href="/">Shop Now</a>
+            </div>
+          </article>
+          <article class="banners-section-right-col-card">
+            <div class="banners-section-right-col-card-content">
+              <h2>Trendy Styles Flat 30% Off</h2>
+              <a href="/">Shop Now</a>
+            </div>
+          </article>
+        </div>
+      </section>
+      <!-- ================= SELLERS ================= -->
+      <section
+        aria-labelledby="sellers-title"
+        class="sellers-section default-continer main-container"
+      >
+        <div class="main-container-row-title-container">
+          <h2 id="sellers-title" class="main-container-ttl">
+            Vendedores destacados
+          </h2>
+          <a href="https://www.google.com/">View More</a>
+        </div>
+
+        <BestSellersGrid />
+      </section>
+      <!-- ================= CUSTOM PACKAGES INFO ================= -->
+      <section
+        aria-labelledby="custom-packages-info"
+        class="custom-packages-info-section default-continer main-container"
+      >
+        <div class="custom-packages-info-section-grid">
+          <div class="custom-packages-info-section-left-col">
+            <h2 id="custom-packages-info">Build Your Custom Package</h2>
+            <p>
+              Mix and match subscriptions from different sellers and save up to
+              40% on bundled plans
+            </p>
+            <ul class="custom-packages-info-section-list">
+              <li>
+                <article>
+                  <h3 class="custom-packages-info-section-check-ttl">
+                    Choose from 10,000+ subscription options
+                  </h3>
+                </article>
+              </li>
+              <li>
+                <article>
+                  <h3 class="custom-packages-info-section-check-ttl">
+                    Automatic bundle discounts applied
+                  </h3>
+                </article>
+              </li>
+              <li>
+                <article>
+                  <h3 class="custom-packages-info-section-check-ttl">
+                    Single monthly payment for all subscriptions
+                  </h3>
+                </article>
+              </li>
+              <li>
+                <article>
+                  <h3 class="custom-packages-info-section-check-ttl">
+                    Cancel or modify anytime
+                  </h3>
+                </article>
+              </li>
+            </ul>
+            <a href="/">View More Information</a>
+          </div>
+
+          <div class="custom-packages-info-section-right-col">
+            <div class="container">
+              <div class="cube-1">
+                <div class="isometric-cube-top"></div>
+                <div class="isometric-cube-right"></div>
+                <div class="isometric-cube-left"></div>
+              </div>
+              <div class="cube-2">
+                <div class="isometric-cube-top"></div>
+                <div class="isometric-cube-right"></div>
+                <div class="isometric-cube-left"></div>
+              </div>
+              <div class="cube-3">
+                <div class="isometric-cube-top"></div>
+                <div class="isometric-cube-right"></div>
+                <div class="isometric-cube-left"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ================= CUSTOM PACKAGE ================= -->
+      <section
+        aria-labelledby="featured-custom-packages-title"
+        class="featured-plans-section default-continer main-container"
+      >
+        <div class="main-container-row-title-container">
+          <h2 id="featured-custom-packages-title" class="main-container-ttl">
+            Paquetes personalizables Destacados
+          </h2>
+          <a href="https://www.google.com/">View More</a>
+        </div>
+        <div class="featured-plans-section-categories-container">
+          <div class="featured-plans-section-categorie-tag">
+            <span>All</span>
+          </div>
+          <div class="featured-plans-section-categorie-tag">
+            <span>Newest</span>
+          </div>
+          <div class="featured-plans-section-categorie-tag">
+            <span>Best</span>
+          </div>
+        </div>
+        <FeaturedCustomPackagesCarusel client:load />
+      </section>
+      <!-- ================= CURATED COLLECTIONS ================= -->
+      <section
+        aria-labelledby="curated-collections-title"
+        class="curated-collections-section default-continer main-container"
+      >
+        <div class="main-container-row-title-container">
+          <h2 id="curated-collections-title" class="main-container-ttl">
+            Curated Collections
+          </h2>
+          <a href="https://www.google.com/">View More</a>
+        </div>
+        <CuratedCollectionsCarousel client:load />
+      </section>
+      <!-- ================= PLATFORM PROPS ================= -->
+      <section
+        aria-labelledby="platform-features-title"
+        class="platform-features-section default-continer main-container"
+      >
+        <div class="main-container-row-title-container">
+          <h2 id="platform-features-title" class="main-container-ttl">
+            Why Shop With Us?
+          </h2>
+          <a href="https://www.google.com/">View More</a>
+        </div>
+        <div class="platform-features-grid">
+          <article class="platform-features-card platform-features-card-1">
+            <div>Ic</div>
+            <div class="platform-features-card-info-container">
+              <h3>Active Users</h3>
+              <p>
+                Join thousands of active users discovering trending products,
+                fresh deals, and a vibrant shopping experience every day.
+              </p>
+            </div>
+          </article>
+          <article class="platform-features-card platform-features-card-2">
+            <div>Ic</div>
+            <div class="platform-features-card-info-container">
+              <h3>Product Sold</h3>
+              <p>
+                With over 50,000 products sold, we're proud to be the trusted
+                choice for shoppers seeking quality, and value.
+              </p>
+            </div>
+          </article>
+          <article class="platform-features-card platform-features-card-3">
+            <div>Ic</div>
+            <div class="platform-features-card-info-container">
+              <h3>Trusted Partner</h3>
+              <p>
+                Collaborating with leading global and local brands you know and
+                trust.
+              </p>
+            </div>
+          </article>
+          <article class="platform-features-card platform-features-card-4">
+            <div>Ic</div>
+            <div class="platform-features-card-info-container">
+              <h3>Happy Customer</h3>
+              <p>
+                Delighting customers every day with quality, value, and service.
+              </p>
+            </div>
+          </article>
+          <article class="platform-features-card platform-features-card-5">
+            <div>Ic</div>
+            <div class="platform-features-card-info-container">
+              <h3>Secure Payment</h3>
+              <p>Shop confidently with secure, encrypted payment options.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+      <!-- ================= TESTIMONIALS ================= -->
+      <!--
+		<section aria-labelledby="testimonials-title">
+		  <h2 id="testimonials-title">Qué dicen nuestros usuarios</h2>
+  
+		  <article>
+			<p>
+			  “Suscribeme me permitió gestionar todas mis suscripciones desde un
+			  solo lugar y ahorrar dinero.”
+			</p>
+			<p><strong>Emily R.</strong></p>
+		  </article>
+  
+		  <article>
+			<p>“Excelente experiencia, simple y muy clara.”</p>
+			<p><strong>Michael C.</strong></p>
+		  </article>
+		</section>
+	   -->
+    </main>
+    <!-- ================= FOOTER ================= -->
+    <Footer />
+  </body>
+</html>
