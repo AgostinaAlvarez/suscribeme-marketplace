@@ -83,7 +83,7 @@
   gap: 13px;
 }
 
-.card-content-information h4 {
+.card-content-information h3 {
   font-size: 15px;
   font-weight: 400;
   margin: 0;
@@ -102,13 +102,13 @@
   margin: 0;
 }
 
-.card-content-information h5 {
+.card-content-information h4 {
   font-size: 12px;
   margin: 0;
   font-weight: 500;
 }
 
-.card-content-information h5 span {
+.card-content-information h4 span {
   font-size: 11px;
   margin: 0;
   color: #8c8c8c;

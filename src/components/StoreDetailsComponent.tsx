@@ -262,29 +262,29 @@ const StoreDetailsComponent: React.FC = () => {
         </h2>
         <div className="store-detail-packages-section-grid">
           {packages.slice(0, 6).map((pckg, index) => (
-            <div className="card-content" key={index}>
+            <article className="card-content" key={index}>
               {pckg.coverImage ? (
                 <img
                   className="card-image"
                   src={pckg.coverImage.url}
-                  alt={`${pckg._id}-img`}
+                  alt={`${pckg.title}`}
                   loading="lazy"
                   decoding="async"
                   referrerPolicy="no-referrer"
                 />
               ) : (
-                <div className="card-image-default"></div>
+                <div className="card-image-default" aria-hidden="true"></div>
               )}
               <div className="card-content-information">
                 <div className="card-content-information-description-container">
-                  <h4>{pckg.title}</h4>
+                  <h3>{pckg.title}</h3>
                   <p>{pckg.briefDescription}</p>
                   <span>3.5 ★★★★★ (76)</span>
                   {pckg.plans.slice(0, 2).map((plan, index) => (
-                    <h5 key={index}>
+                    <h4 key={index}>
                       {plan.title} ${plan.price} {plan.currencyId}{' '}
                       <span>/mo</span>
-                    </h5>
+                    </h4>
                   ))}
                 </div>
                 <button
@@ -294,7 +294,7 @@ const StoreDetailsComponent: React.FC = () => {
                   View Package
                 </button>
               </div>
-            </div>
+            </article>
           ))}
         </div>
         <button className="store-section-button">View More Packages</button>
