@@ -60,7 +60,9 @@ const PackageDetailsContent: React.FC = () => {
         id="package-sticky-bar"
         className="package-sticky-bar-section"
         style={{
-          display: showStickyBar ? 'block' : 'none',
+          opacity: showStickyBar ? 1 : 0,
+          pointerEvents: showStickyBar ? 'auto' : 'none',
+          transition: 'opacity 0.3s',
           position: 'fixed',
           top: '50px',
           left: 0,

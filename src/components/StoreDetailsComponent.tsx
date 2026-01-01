@@ -177,10 +177,12 @@ const StoreDetailsComponent: React.FC = () => {
     <>
       {/* ================= STICKY BAR (React) ================= */}
       <section
-        id="store-detail-sticky-bar"
-        className="store-detail-sticky-bar-section"
+        id="package-sticky-bar"
+        className="package-sticky-bar-section"
         style={{
-          display: showStickyBar ? 'block' : 'none',
+          opacity: showStickyBar ? 1 : 0,
+          pointerEvents: showStickyBar ? 'auto' : 'none',
+          transition: 'opacity 0.3s',
           position: 'fixed',
           top: '50px',
           left: 0,
@@ -189,7 +191,7 @@ const StoreDetailsComponent: React.FC = () => {
         }}
         aria-hidden={!showStickyBar}
       >
-        <div className="store-detail-sticky-bar-content">
+        <div className="package-sticky-bar-content">
           <span>Complete Digital Marketing Mastery Package</span>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
