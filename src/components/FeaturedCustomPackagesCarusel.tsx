@@ -160,7 +160,7 @@ const FeaturedCustomPackagesCarusel: React.FC = () => {
                     </div>
                     <button
                       className="card-button"
-                      onClick={() => (window.location.href = '/package')}
+                      onClick={() => (window.location.href = '/custom-package')}
                     >
                       View Package
                     </button>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../../public/styles/planCarouselStyles.css';
+import '../../public/styles/storeDetailStyles.css';
 
 interface PackageData {
   _id: string;
@@ -178,7 +179,7 @@ const StoreDetailsComponent: React.FC = () => {
       {/* ================= STICKY BAR (React) ================= */}
       <section
         id="package-sticky-bar"
-        className="package-sticky-bar-section"
+        className="store-detail-sticky-bar-section"
         style={{
           opacity: showStickyBar ? 1 : 0,
           pointerEvents: showStickyBar ? 'auto' : 'none',
@@ -191,7 +192,7 @@ const StoreDetailsComponent: React.FC = () => {
         }}
         aria-hidden={!showStickyBar}
       >
-        <div className="package-sticky-bar-content">
+        <div className="store-detail-sticky-bar-content">
           <span>Complete Digital Marketing Mastery Package</span>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -342,7 +343,7 @@ const StoreDetailsComponent: React.FC = () => {
                 </div>
                 <button
                   className="card-button"
-                  onClick={() => (window.location.href = '/package')}
+                  onClick={() => (window.location.href = '/custom-package')}
                 >
                   View Package
                 </button>
