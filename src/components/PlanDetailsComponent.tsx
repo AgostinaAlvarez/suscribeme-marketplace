@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 const PlanDetailsComponent: React.FC = () => {
   // Sticky bar state
@@ -6,6 +6,7 @@ const PlanDetailsComponent: React.FC = () => {
 
   // Nuevo estado para saber si el aside debe ocultarse al llegar al footer
   const [hideAside, setHideAside] = useState(false);
+  const asideRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -53,14 +54,14 @@ const PlanDetailsComponent: React.FC = () => {
         id="package-sticky-bar"
         className="package-sticky-bar-section"
         style={{
-          display: showStickyBar ? 'block' : 'none',
+          opacity: showStickyBar ? 1 : 0,
+          pointerEvents: showStickyBar ? 'auto' : 'none',
+          transition: 'opacity 0.3s',
           position: 'fixed',
           top: '50px',
           left: 0,
           width: '100%',
           zIndex: 1000,
-          backgroundImage: 'none',
-          backgroundColor: '#101827',
         }}
         aria-hidden={!showStickyBar}
       >
@@ -113,54 +114,43 @@ const PlanDetailsComponent: React.FC = () => {
           </div>
 
           {/* Renderizado condicional: si hideAside, no renderiza nada */}
-          {/*
-            {hideAside ? (
-              <></>
-            ) : showStickyBar ? (
-              <div className="plan-detail-aside-responsive show">
-                <div className="plan-detail-aside-responsive-content"></div>
-              </div>
-            ) : (
-              <div className="plan-detail-aside"></div>
-            )}
-            */}
-          {hideAside ? (
-            <></>
-          ) : (
+          <div
+            className="plan-detail-aside-card"
+            ref={asideRef}
+            style={{
+              opacity: hideAside ? 0 : 1,
+              pointerEvents: hideAside ? 'none' : 'auto',
+              transition: 'opacity 0.3s',
+              ...(showStickyBar ? { top: 15, zIndex: 1200 } : { zIndex: 140 }),
+            }}
+          >
             <div
-              className="plan-detail-aside-card"
-              style={
-                showStickyBar ? { top: 15, zIndex: 1200 } : { zIndex: 140 }
-              }
+              className="plan-detail-aside-card-content"
+              style={showStickyBar ? { position: 'fixed', zIndex: 1200 } : {}}
             >
-              <div
-                className="plan-detail-aside-card-content"
-                style={showStickyBar ? { position: 'fixed', zIndex: 1200 } : {}}
-              >
-                <h3 className="plan-title">Essentials</h3>
-                <p className="plan-price">
-                  <span className="price">$45</span>
-                  <span className="period">/month</span>
-                </p>
-                <p className="plan-save">Pay yearly and save 17%</p>
+              <h3 className="plan-title">Essentials</h3>
+              <p className="plan-price">
+                <span className="price">$45</span>
+                <span className="period">/month</span>
+              </p>
+              <p className="plan-save">Pay yearly and save 17%</p>
 
-                <p className="plan-description">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor.
-                </p>
+              <p className="plan-description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor.
+              </p>
 
-                <ul className="plan-features">
-                  <li>19 instruments and effects</li>
-                  <li>8 expansions</li>
-                  <li>Over 15,000 sounds</li>
-                  <li>50GB+ sample library</li>
-                </ul>
-                <button className="plan-button plan-primary-button">
-                  Subscribe Now
-                </button>
-              </div>
+              <ul className="plan-features">
+                <li>19 instruments and effects</li>
+                <li>8 expansions</li>
+                <li>Over 15,000 sounds</li>
+                <li>50GB+ sample library</li>
+              </ul>
+              <button className="plan-button plan-primary-button">
+                Subscribe Now
+              </button>
             </div>
-          )}
+          </div>
         </div>
       </section>
       {/* ================= ARTICLES IN PLAN ================= */}

@@ -652,13 +652,12 @@
   z-index: 1000;
   background: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
-  padding: 16px 0;
+  padding: 16px 30px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   transition: box-shadow 0.2s;
   background-color: #1a0f35;
-
   /* Degradado principal (degradado lineal de arriba a abajo) */
   background-image: 
     /* 1. Degradado Radial para el "brillo" púrpura/violeta (arriba a la derecha).

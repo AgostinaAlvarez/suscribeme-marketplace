@@ -1,0 +1,38 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CustomPackageDetailsContent from '../components/CustomPackageDetailsContent.tsx';
+
+//background-color: #f9fafb;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Suscribeme | Marketplace de Suscripciones Digitales</title>
+    <meta
+      name="description"
+      content="Descubrí y gestioná suscripciones digitales desde un solo lugar. Encontrá planes de café, fitness, educación, entretenimiento y más."
+    />
+    <link rel="stylesheet" href="/styles/normalize.css" />
+    <link rel="stylesheet" href="/styles/globalStyles.css" />
+    <link rel="stylesheet" href="/styles/packageDetailStyles.css" />
+
+    <link rel="stylesheet" href="/styles/customPackageDetailStyles.css" />
+  </head>
+  <body>
+    <!-- ================= HEADER ================= -->
+    <Header />
+    <!-- ================= MAIN ================= -->
+    <main class="main detail-screen-standar-main">
+      <!-- ================= SCREEN CONTENT ================= -->
+
+      <CustomPackageDetailsContent client:load />
+    </main>
+    <!-- ================= FOOTER ================= -->
+    <Footer />
+  </body>
+</html>

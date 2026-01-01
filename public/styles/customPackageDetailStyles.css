@@ -1,0 +1,236 @@
+.custom-package-section-container {
+  max-width: 1300px;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.custom-package-section-title {
+  font-size: 20px;
+  margin: 0;
+  font-weight: 700;
+}
+
+/* ================= HERO SECTION ================= */
+
+.custom-package-hero-section {
+  box-sizing: border-box;
+  background-color: #101827;
+  color: #bfbfbf;
+}
+
+.custom-package-hero-section-content {
+  padding: 40px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.custom-package-hero-section-content h1 {
+  margin: 0;
+  font-size: 40px;
+  color: #fff;
+}
+
+.custom-package-hero-section-content p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.4;
+  margin-bottom: 15px;
+  max-width: 950px;
+}
+
+/* ================= PRINCIPAL GRID SECTION ================= */
+
+.custom-package-principal-grid-section {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 50px;
+  position: relative;
+}
+
+.custom-package-principal-grid-left-col {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.custom-package-principal-grid-left-col p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.custom-package-items-grid {
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.custom-package-item-card {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 5px;
+  /*box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);*/
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: space-between;
+  border: 1px solid #e4e4e4;
+}
+
+.custom-package-item-card-content {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.custom-package-item-card-content h3 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.custom-package-item-card-content p {
+  font-size: 12px;
+  margin: 0;
+  line-height: 1.5;
+  font-weight: 350;
+  color: #545454;
+}
+
+.custom-package-item-card-img {
+  width: 100%;
+  height: 180px;
+  background-color: black;
+  border-radius: 5px;
+  margin-bottom: 8px;
+}
+
+.card-button {
+  border: none;
+  border: 1px solid #7d2ae8;
+  background: #7d2ae8;
+  color: #fff;
+  border-radius: 6px;
+  padding: 8px 22px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.card-button:hover {
+  color: #fff;
+  background: #5a1bb0;
+  border: 1px solid #7d2ae8;
+}
+
+.custom-package-items-grid-right-col {
+  width: 400px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 40;
+}
+
+.custom-package-items-grid-right-col-content {
+  width: 400px;
+  height: fit-content;
+
+  /*
+  position: sticky;
+  top: 0;
+  */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 40;
+}
+
+.custom-package-aside-total-card {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 15.5px;
+  font-weight: 500;
+}
+
+.custom-package-aside-total-card a {
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.custom-package-aside-total-card-title-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #5d5d5d;
+}
+
+.bi-cart {
+  color: #37afe1;
+}
+
+.custom-package-aside-total-container {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: #000;
+}
+
+.custom-package-aside-total-container h4 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.custom-package-aside-total-container h4 span {
+  font-size: 13px;
+  font-weight: 400;
+  color: #545454;
+}
+
+.custom-package-aside-total-button {
+  border: none;
+  border: 1px solid #7d2ae8;
+  background: #7d2ae8;
+  color: #fff;
+  border-radius: 6px;
+  padding: 8px 22px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.custom-package-aside-total-button:hover {
+  color: #fff;
+  background: #5a1bb0;
+  border: 1px solid #7d2ae8;
+}
+
+/**/
+
+.custom-package-info-section {
+  box-sizing: border-box;
+  border: 1px solid #d9d9d9;
+  padding: 35px 30px;
+  background-color: #fff;
+}

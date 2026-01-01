@@ -250,14 +250,16 @@ const FeaturedPackagesCarousel: React.FC = () => {
               <article className="card" key={pckg._id}>
                 <div className="card-content">
                   {pckg.coverImage ? (
-                    <img
-                      className="card-image"
-                      src={pckg.coverImage.url}
-                      alt={`${pckg.title}`}
-                      loading="lazy"
-                      decoding="async"
-                      referrerPolicy="no-referrer"
-                    />
+                    <div className="card-image-container">
+                      <img
+                        className="card-image"
+                        src={pckg.coverImage.url}
+                        alt={`${pckg.title}`}
+                        loading="lazy"
+                        decoding="async"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
                   ) : (
                     <div
                       className="card-image-default"
