@@ -1257,20 +1257,20 @@ const CustomPackageDetailsContent: React.FC = () => {
                           </div>
                         </div>
                         <div className="custom-package-plan-details-drawer-list-item-right-col">
-                          <div style={{ display: 'flex', gap: 5 }}>
+                          <div style={{ display: 'flex', gap: 7 }}>
                             <img
                               src="/assets/icons/trash3.svg"
                               alt="Trash icon"
-                              width="15"
-                              height="15"
+                              width="13"
+                              height="13"
                               style={{ cursor: 'pointer' }}
                               onClick={() => removeProductfromCart(item.listId)}
                             />
                             <img
                               src="/assets/icons/edit-icon.svg"
                               alt="Edit icon"
-                              width="15"
-                              height="15"
+                              width="14"
+                              height="14"
                               style={{ cursor: 'pointer' }}
                               onClick={() => handleEditProductClick(item)}
                             />
@@ -1306,7 +1306,7 @@ const CustomPackageDetailsContent: React.FC = () => {
                   <span style={{ fontWeight: 300, fontSize: 13 }}>
                     Subtotal
                   </span>
-                  <span style={{ fontWeight: 600, fontSize: 13 }}>
+                  <span style={{ fontWeight: 420, fontSize: 13 }}>
                     ${calculateTotal()}
                   </span>
                 </div>
@@ -1314,7 +1314,11 @@ const CustomPackageDetailsContent: React.FC = () => {
                   <span style={{ fontWeight: 300, fontSize: 13 }}>
                     Store Tax
                   </span>
-                  <span style={{ fontWeight: 600, fontSize: 13 }}>$0</span>
+                  <span
+                    style={{ fontWeight: 420, fontSize: 13, color: '#95de64' }}
+                  >
+                    + $0
+                  </span>
                 </div>
                 <div className="divider"></div>
                 <div className="custom-package-plan-details-drawer-footer-row">
