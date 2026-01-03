@@ -215,6 +215,10 @@ const CustomPackageDetailsContent: React.FC = () => {
     }, 0);
   };
 
+  const getTotalProductsInCart = () => {
+    return productsInCart.reduce((acc, item) => acc + item.amount, 0);
+  };
+
   const [planDetailsDrawerOpen, setPlanDetailsDrawerOpen] =
     useState<boolean>(false);
 
@@ -235,6 +239,90 @@ const CustomPackageDetailsContent: React.FC = () => {
           : item,
       ),
     );
+  };
+
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [editProduct, setEditProduct] = useState<{
+    listId: string;
+    productId: string;
+    selectedOptions: { keyOption: string; valueOption: string }[];
+    amount: number;
+  } | null>(null);
+  const [editAmount, setEditAmount] = useState(1);
+
+  const handleUpdateProductInCart = (data: any) => {
+    if (!editProduct) return;
+    setProductsInCart((prev) =>
+      prev.map((item) =>
+        item.listId === editProduct.listId
+          ? {
+              ...item,
+              amount: editAmount,
+              selectedOptions: editProduct.selectedOptions.map((opt) => ({
+                ...opt,
+                valueOption: data[opt.keyOption] || opt.valueOption,
+              })),
+            }
+          : item,
+      ),
+    );
+    setEditModalOpen(false);
+    setEditProduct(null);
+    setEditAmount(1);
+  };
+
+  // Estado para modal de edición de producto
+  const [openEditProductModal, setOpenEditProductModal] = useState(false);
+  const [editProductData, setEditProductData] = useState<any>(null);
+  const [editProductModalError, setEditProductModalError] = useState<
+    string | null
+  >(null);
+
+  // Función para abrir modal de edición (renombrada para evitar conflicto)
+  const handleEditProductClick = (item: any) => {
+    setPlanDetailsDrawerOpen(false);
+    const productData = products.find(
+      (prod) => prod.product._id === item.productId,
+    );
+    if (!productData) return;
+    setEditProductData({
+      ...productData.product,
+      shipping_required: productData.shipping_required,
+      selectedOptions: item.selectedOptions,
+      listId: item.listId,
+    });
+    setEditAmount(item.amount);
+    setOpenEditProductModal(true);
+    setEditProductModalError(null);
+  };
+
+  // Función para actualizar producto editado en el carrito
+  const updateEditedProductInCart = (data: any) => {
+    if (!editProductData) return;
+    // Validar opciones seleccionadas
+    const selectedOptions = editProductData.selectableOptions.map(
+      (option: any) => {
+        const value = data[option.keyOption];
+        if (!value) {
+          setEditProductModalError(
+            `Selecciona una opción para ${option.keyOption}`,
+          );
+          throw new Error('Faltan opciones');
+        }
+        return { keyOption: option.keyOption, valueOption: value };
+      },
+    );
+    setProductsInCart((prev) =>
+      prev.map((item) =>
+        item.listId === editProductData.listId
+          ? { ...item, selectedOptions, amount: editAmount }
+          : item,
+      ),
+    );
+    setOpenEditProductModal(false);
+    setEditProductData(null);
+    setEditAmount(1);
+    setEditProductModalError(null);
   };
 
   return (
@@ -531,7 +619,60 @@ const CustomPackageDetailsContent: React.FC = () => {
           >
             <div className="custom-package-aside-total-card">
               {productsInCart.length === 0 ? (
-                <div>Valor del plan... </div>
+                <>
+                  <div
+                    className="custom-package-aside-total-card-title-container"
+                    style={{ marginBottom: 10 }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      fill="currentColor"
+                      className="bi bi-cart"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                    </svg>
+                    <span style={{ fontSize: 15 }}>Tu Plan Personalizado</span>
+                  </div>
+
+                  <div className="custom-package-aside-total-container">
+                    <span style={{ fontSize: 15 }}>Total mensual</span>
+                    <h4>
+                      $0 <span>ARS</span>
+                    </h4>
+                  </div>
+
+                  <button
+                    className="custom-package-aside-total-button"
+                    style={{
+                      background:
+                        'linear-gradient(90deg, #e0e0e0 0%, #f5f5f5 100%)',
+                      color: '#bdbdbd',
+                      border: '1px solid #e0e0e0',
+                      cursor: 'not-allowed',
+                      opacity: 0.7,
+                      boxShadow: 'none',
+                      fontWeight: 600,
+                    }}
+                    disabled
+                  >
+                    Subscribe Now
+                  </button>
+                  <span
+                    style={{
+                      fontSize: 12,
+                      color: '#8c8c8c',
+                      fontWeight: 300,
+                      display: 'block',
+                      textAlign: 'center',
+                    }}
+                  >
+                    ¡Tu carrito está vacío! Agrega productos para crear tu plan
+                    personalizado.
+                  </span>
+                </>
               ) : (
                 <>
                   <div className="custom-package-aside-total-card-title-container">
@@ -545,8 +686,18 @@ const CustomPackageDetailsContent: React.FC = () => {
                     >
                       <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
                     </svg>
-                    <span>Tu Plan</span>
+                    <span style={{ fontSize: 15 }}>Tu Plan Personalizado</span>
                   </div>
+                  <span
+                    style={{
+                      fontSize: 13,
+                      color: '#8c8c8c',
+                      fontWeight: 300,
+                    }}
+                  >
+                    • {getTotalProductsInCart()} producto
+                    {getTotalProductsInCart() > 1 ? 's' : ''}
+                  </span>
                   <button
                     type="button"
                     style={{
@@ -563,16 +714,18 @@ const CustomPackageDetailsContent: React.FC = () => {
                       boxShadow: 'none',
                       display: 'inline',
                       fontWeight: 400,
+                      fontSize: 13,
+                      textDecoration: 'underline',
                     }}
                     onClick={() => {
                       console.log(productsInCart);
                       setPlanDetailsDrawerOpen(true);
                     }}
                   >
-                    Ver mas detalles
+                    Ver Detalles
                   </button>
                   <div className="custom-package-aside-total-container">
-                    <span>Total mensual</span>
+                    <span style={{ fontSize: 15 }}>Total mensual</span>
                     <h4>
                       ${calculateTotal()} <span>ARS</span>
                     </h4>
@@ -777,7 +930,7 @@ const CustomPackageDetailsContent: React.FC = () => {
                             className="bi bi-shop"
                             viewBox="0 0 16 16"
                           >
-                            <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.37 2.37 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0M1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5M4 15h3v-5H4zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zm3 0h-2v3h2z" />
+                            <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.37 2.37 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.375 2.375 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0M1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5M4 15h3v-5H4zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zm3 0h-2v3h2z" />
                           </svg>
                           <span style={{ fontSize: 11, fontWeight: 500 }}>
                             Store Pickup
@@ -1104,14 +1257,24 @@ const CustomPackageDetailsContent: React.FC = () => {
                           </div>
                         </div>
                         <div className="custom-package-plan-details-drawer-list-item-right-col">
-                          <img
-                            src="/assets/icons/trash3.svg"
-                            alt="Fitness icon"
-                            width="15"
-                            height="15"
-                            style={{ cursor: 'pointer' }}
-                            onClick={() => removeProductfromCart(item.listId)}
-                          />
+                          <div style={{ display: 'flex', gap: 5 }}>
+                            <img
+                              src="/assets/icons/trash3.svg"
+                              alt="Trash icon"
+                              width="15"
+                              height="15"
+                              style={{ cursor: 'pointer' }}
+                              onClick={() => removeProductfromCart(item.listId)}
+                            />
+                            <img
+                              src="/assets/icons/edit-icon.svg"
+                              alt="Edit icon"
+                              width="15"
+                              height="15"
+                              style={{ cursor: 'pointer' }}
+                              onClick={() => handleEditProductClick(item)}
+                            />
+                          </div>
                           <div
                             style={{
                               display: 'flex',
@@ -1406,6 +1569,568 @@ const CustomPackageDetailsContent: React.FC = () => {
           */}
         </>
       </DrawerComponent>
+      <ModalComponent
+        open={editModalOpen}
+        onClose={() => {
+          setEditModalOpen(false);
+          setEditProduct(null);
+          setEditAmount(1);
+        }}
+        containerStyles={{ width: '780px', height: '500px' }}
+      >
+        {editProduct &&
+          (() => {
+            const productData = products.find(
+              (p) => p.product._id === editProduct.productId,
+            );
+            if (!productData) return null;
+            return (
+              <form
+                onSubmit={handleSubmit((data) =>
+                  handleUpdateProductInCart(data),
+                )}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  boxSizing: 'border-box',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  position: 'relative',
+                }}
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: 10,
+                    right: 20,
+                    cursor: 'pointer',
+                  }}
+                  onClick={() => {
+                    setEditModalOpen(false);
+                    setEditProduct(null);
+                    setEditAmount(1);
+                  }}
+                >
+                  x
+                </div>
+                <div className="custom-package-add-item-modal-base-container custom-package-add-item-modal-content">
+                  {productData.product.image ? (
+                    <img
+                      className="custom-package-add-item-modal-img"
+                      src={productData.product.image.url}
+                    />
+                  ) : (
+                    <div
+                      className="custom-package-add-item-modal-img"
+                      style={{ backgroundColor: 'grey' }}
+                    ></div>
+                  )}
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      width: '100%',
+                      boxSizing: 'border-box',
+                      gap: 12,
+                    }}
+                  >
+                    <span style={{ fontWeight: 600, fontSize: 19 }}>
+                      {productData.product.name}
+                    </span>
+                    <span style={{ fontWeight: 800, fontSize: 23 }}>
+                      ${productData.product.price}{' '}
+                      <span
+                        style={{
+                          fontWeight: 300,
+                          fontSize: 12,
+                          color: '#595959',
+                        }}
+                      >
+                        per unit
+                      </span>
+                    </span>
+                    {/* Opciones seleccionables */}
+                    {productData.product.selectableOptions.map((option) => (
+                      <div
+                        key={option.keyOption}
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: 5,
+                        }}
+                      >
+                        <label style={{ display: 'block', fontSize: 13 }}>
+                          {option.keyOption}
+                        </label>
+                        <div className="radio-group">
+                          {option.valueOption.map((value) => (
+                            <label key={value} className="radio-card">
+                              <input
+                                type="radio"
+                                value={value}
+                                defaultChecked={
+                                  !!editProduct.selectedOptions.find(
+                                    (opt) =>
+                                      opt.keyOption === option.keyOption &&
+                                      opt.valueOption === value,
+                                  )
+                                }
+                                {...register(option.keyOption, {
+                                  onChange: () => setProductModalError(null),
+                                })}
+                                name={option.keyOption}
+                              />
+                              <span>{value}</span>
+                            </label>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                    {/* Cantidad */}
+                    <div
+                      style={{
+                        width: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 10,
+                        boxSizing: 'border-box',
+                      }}
+                    >
+                      <span style={{ fontSize: 13, fontWeight: 450 }}>
+                        Quantity
+                      </span>
+                      <div
+                        className="custom-package-plan-details-drawer-list-item-quantity-control"
+                        style={{ margin: 0 }}
+                      >
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setEditAmount((prev) => Math.max(1, prev - 1))
+                          }
+                          disabled={editAmount === 1}
+                        >
+                          -
+                        </button>
+                        <span>{editAmount}</span>
+                        <button
+                          type="button"
+                          onClick={() => setEditAmount((prev) => prev + 1)}
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                    <div className="custom-package-add-item-total-amount-container">
+                      <div className="custom-package-add-item-total-amount-row">
+                        <span style={{ fontSize: 11, color: '#4b5563' }}>
+                          Unit Price
+                        </span>
+                        <span
+                          style={{
+                            fontWeight: 500,
+                            fontSize: 11,
+                            color: 'black',
+                          }}
+                        >
+                          ${productData.product.price}
+                        </span>
+                      </div>
+                      <div className="divider"></div>
+                      <div className="custom-package-add-item-total-amount-row">
+                        <span
+                          style={{
+                            fontWeight: 600,
+                            fontSize: 12,
+                            color: 'black',
+                          }}
+                        >
+                          Subtotal
+                        </span>
+                        <span
+                          style={{
+                            fontWeight: 800,
+                            fontSize: 17,
+                            color: '#7d2ae8',
+                          }}
+                        >
+                          ${editAmount * productData.product.price}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="custom-package-add-item-modal-base-container custom-package-add-item-modal-footer">
+                  <button
+                    className="card-button"
+                    style={{ width: 'calc(100% - 20px)', margin: '0 auto' }}
+                    type="submit"
+                  >
+                    Save Changes
+                  </button>
+                </div>
+              </form>
+            );
+          })()}
+      </ModalComponent>
+      <ModalComponent
+        open={openEditProductModal}
+        onClose={() => {
+          setOpenEditProductModal(false);
+          setEditProductData(null);
+          setEditAmount(1);
+          setEditProductModalError(null);
+        }}
+        containerStyles={{ width: '780px', height: '500px' }}
+      >
+        {editProductData && (
+          <form
+            onSubmit={handleSubmit((data) => {
+              try {
+                updateEditedProductInCart({ ...data, amount: editAmount });
+              } catch {}
+            })}
+            style={{
+              width: '100%',
+              height: '100%',
+              boxSizing: 'border-box',
+              display: 'flex',
+              flexDirection: 'column',
+              position: 'relative',
+            }}
+          >
+            <div
+              style={{
+                position: 'absolute',
+                top: 10,
+                right: 20,
+                cursor: 'pointer',
+              }}
+              onClick={() => {
+                setOpenEditProductModal(false);
+                setEditProductData(null);
+                setEditAmount(1);
+                setEditProductModalError(null);
+              }}
+            >
+              x
+            </div>
+            <div className="custom-package-add-item-modal-base-container custom-package-add-item-modal-content">
+              {editProductData?.image ? (
+                <img
+                  className="custom-package-add-item-modal-img"
+                  src={editProductData.image.url}
+                />
+              ) : (
+                <div
+                  className="custom-package-add-item-modal-img"
+                  style={{ backgroundColor: 'grey' }}
+                ></div>
+              )}
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  width: '100%',
+                  boxSizing: 'border-box',
+                  gap: 12,
+                }}
+              >
+                <span style={{ fontWeight: 600, fontSize: 19 }}>
+                  {editProductData?.name}
+                </span>
+                <p
+                  style={{
+                    fontSize: 11,
+                    lineHeight: 1.3,
+                    margin: 0,
+                    fontWeight: 400,
+                    color: 'grey',
+                  }}
+                >
+                  Smooth, rich cold brew coffee made from premium organic beans.
+                  Perfect for your morning routine or afternoon pick-me-up. Low
+                  acidity and naturally sweet.
+                </p>
+                <span style={{ fontWeight: 800, fontSize: 23 }}>
+                  ${editProductData?.price}{' '}
+                  <span
+                    style={{ fontWeight: 300, fontSize: 12, color: '#595959' }}
+                  >
+                    per unit
+                  </span>
+                </span>
+
+                <div
+                  className="custom-package-add-item-info-container"
+                  style={{
+                    marginBottom: 10,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 10,
+                  }}
+                >
+                  <div
+                    style={{
+                      width: '100%',
+                      boxSizing: 'border-box',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 10,
+                    }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="15"
+                      height="15"
+                      fill="currentColor"
+                      className="bi bi-truck"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5zm1.294 7.456A2 2 0 0 1 4.732 11h5.536a2 2 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456M12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
+                    </svg>
+                    <span style={{ fontSize: 11.5, fontWeight: 500 }}>
+                      Delivery Type
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      width: '100%',
+                      boxSizing: 'border-box',
+                      border: '2px solid #1d39c4',
+                      backgroundColor: ' #ffffff',
+                      padding: 10,
+                      borderRadius: 8,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 6,
+                    }}
+                  >
+                    {editProductData.shipping_required ? (
+                      <>
+                        <div
+                          style={{
+                            width: '100%',
+                            boxSizing: 'border-box',
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                            gap: 5,
+                          }}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="11"
+                            height="11"
+                            fill="currentColor"
+                            className="bi bi-house-fill"
+                            viewBox="0 0 16 16"
+                          >
+                            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
+                            <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z" />
+                          </svg>
+                          <span style={{ fontSize: 11, fontWeight: 500 }}>
+                            Home Delivery
+                          </span>
+                        </div>
+                        <p
+                          style={{
+                            fontSize: 10,
+                            fontWeight: 300,
+                            color: 'grey',
+                            margin: 0,
+                            lineHeight: 1.3,
+                          }}
+                        >
+                          Delivered to your doorstep with your subscription
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <div
+                          style={{
+                            width: '100%',
+                            boxSizing: 'border-box',
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                            gap: 5,
+                          }}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="11"
+                            height="11"
+                            fill="currentColor"
+                            className="bi bi-shop"
+                            viewBox="0 0 16 16"
+                          >
+                            <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.37 2.37 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.375 2.375 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0M1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5M4 15h3v-5H4zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zm3 0h-2v3h2z" />
+                          </svg>
+                          <span style={{ fontSize: 11, fontWeight: 500 }}>
+                            Store Pickup
+                          </span>
+                        </div>
+                        <p
+                          style={{
+                            fontSize: 10,
+                            fontWeight: 300,
+                            color: 'grey',
+                            margin: 0,
+                            lineHeight: 1.3,
+                          }}
+                        >
+                          Pick up at your nearest location
+                        </p>
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                {editProductModalError && (
+                  <span
+                    style={{ marginBottom: 10, fontSize: 12, color: '#f5222d' }}
+                  >
+                    *{editProductModalError}
+                  </span>
+                )}
+
+                {editProductData.selectableOptions.map((option: any) => (
+                  <div
+                    key={option.keyOption}
+                    style={{ display: 'flex', flexDirection: 'column', gap: 5 }}
+                  >
+                    <label style={{ display: 'block', fontSize: 13 }}>
+                      {option.keyOption}
+                    </label>
+                    <div className="radio-group">
+                      {option.valueOption.map((value: string) => (
+                        <label key={value} className="radio-card">
+                          <input
+                            type="radio"
+                            value={value}
+                            {...register(option.keyOption, {
+                              onChange: () => setEditProductModalError(null),
+                            })}
+                            name={option.keyOption}
+                            defaultChecked={
+                              editProductData.selectedOptions?.find(
+                                (opt: any) =>
+                                  opt.keyOption === option.keyOption,
+                              )?.valueOption === value
+                            }
+                          />
+                          <span>{value}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  width: '100%',
+                  boxSizing: 'border-box',
+                  gap: 15,
+                }}
+              >
+                <div
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 10,
+                    boxSizing: 'border-box',
+                  }}
+                >
+                  <span style={{ fontSize: 13, fontWeight: 450 }}>
+                    Quantity
+                  </span>
+                  <div
+                    className="custom-package-plan-details-drawer-list-item-quantity-control"
+                    style={{ margin: 0 }}
+                  >
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setEditAmount((prev) => Math.max(1, prev - 1))
+                      }
+                      disabled={editAmount === 1}
+                    >
+                      -
+                    </button>
+                    <span>{editAmount}</span>
+                    <button
+                      type="button"
+                      onClick={() => setEditAmount((prev) => prev + 1)}
+                    >
+                      +
+                    </button>
+                  </div>
+                  <span style={{ fontSize: 11, fontWeight: 300 }}>
+                    Min: 1 | Max: 12 bottles per delivery
+                  </span>
+                </div>
+                <div className="custom-package-add-item-total-amount-container">
+                  <div className="custom-package-add-item-total-amount-row">
+                    <span style={{ fontSize: 11, color: '#4b5563' }}>
+                      Unit Price
+                    </span>
+                    <span
+                      style={{ fontWeight: 500, fontSize: 11, color: 'black' }}
+                    >
+                      ${editProductData.price}
+                    </span>
+                  </div>
+                  <div className="divider"></div>
+                  <div className="custom-package-add-item-total-amount-row">
+                    <span
+                      style={{ fontWeight: 600, fontSize: 12, color: 'black' }}
+                    >
+                      Subtotal
+                    </span>
+                    <span
+                      style={{
+                        fontWeight: 800,
+                        fontSize: 17,
+                        color: '#7d2ae8',
+                      }}
+                    >
+                      ${editAmount * editProductData.price}
+                    </span>
+                  </div>
+                </div>
+                <div className="custom-package-add-item-info-container">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="13"
+                    height="13"
+                    fill="#2762ea"
+                    className="bi bi-info-circle-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
+                  </svg>
+                  <p style={{ margin: 0, lineHeight: 1.2, fontSize: 12 }}>
+                    This product will be included in your recurring
+                    subscription. You can modify or cancel anytime from your
+                    account dashboard.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="custom-package-add-item-modal-base-container custom-package-add-item-modal-footer">
+              <button
+                className="card-button"
+                style={{ width: 'calc(100% - 20px)', margin: '0 auto' }}
+                type="submit"
+              >
+                Save Changes
+              </button>
+            </div>
+          </form>
+        )}
+      </ModalComponent>
     </>
   );
 };
