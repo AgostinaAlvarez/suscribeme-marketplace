@@ -14,9 +14,10 @@
 .drawer-container {
   width: 400px;
   height: 100vh;
+  box-sizing: border-box;
   background-color: #fff;
-  border-radius: 10px;
-
+  border-radius: 10px 0px 0px 10px;
+  overflow: hidden;
   transform: translateY(20px) scale(0.98);
   opacity: 0;
 

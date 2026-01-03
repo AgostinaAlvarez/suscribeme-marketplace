@@ -5,9 +5,15 @@ interface ModalProps {
   open: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  containerStyles?: React.CSSProperties;
 }
 
-const ModalComponent: React.FC<ModalProps> = ({ open, onClose, children }) => {
+const ModalComponent: React.FC<ModalProps> = ({
+  open,
+  onClose,
+  children,
+  containerStyles,
+}) => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -25,7 +31,11 @@ const ModalComponent: React.FC<ModalProps> = ({ open, onClose, children }) => {
   if (!visible) return null;
   return (
     <div className={`modal-mask ${open ? 'open' : 'close'}`} onClick={onClose}>
-      <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="modal-container"
+        style={containerStyles}
+        onClick={(e) => e.stopPropagation()}
+      >
         {children}
       </div>
     </div>
