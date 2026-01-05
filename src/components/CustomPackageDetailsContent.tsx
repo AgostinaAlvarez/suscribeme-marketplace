@@ -634,14 +634,15 @@ const CustomPackageDetailsContent: React.FC = () => {
         <section
           className="secondary-sticky-bar-section"
           style={{
+            opacity: showSecondaryStickyBar ? 1 : 0,
+            transition: 'opacity 0.3s',
+            pointerEvents: showSecondaryStickyBar ? 'auto' : 'none',
             position: 'fixed',
             top: 115, // debajo del sticky bar principal
             left: 0,
             width: '930px',
             zIndex: 999,
             background: '#fff',
-            transition: 'opacity 0.3s',
-            opacity: 1,
             boxSizing: 'border-box',
             paddingTop: '10px',
             paddingLeft: '45px',

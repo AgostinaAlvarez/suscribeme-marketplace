@@ -97,10 +97,10 @@ const BenefitsSection: React.FC<ComponentProps> = ({
                 boxSizing: 'border-box',
                 padding: 18,
                 backgroundColor: ' #ffffff',
-
                 border: '1px solid #e4e4e4',
                 display: 'flex',
                 flexDirection: 'column',
+                justifyContent: 'space-between',
                 gap: 18,
                 borderRadius: 10,
               }}
