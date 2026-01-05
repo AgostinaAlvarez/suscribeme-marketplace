@@ -1,197 +1,89 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import { v4 as uuidv4 } from 'uuid';
-import ModalComponent from '../ModalComponent.tsx';
+import ModalComponent from '../ModalComponent';
 
 interface ComponentProps {
-  selectedBenefit: {
-    _id: string;
-    title: string;
-    description: string;
-    price: number;
-    currencyId: string;
-    delivery_mode: 'inperson' | 'online' | 'athome';
-  } | null;
-  setSelectedBenefit: React.Dispatch<
+  openEditDiscountModal: boolean;
+  setOpenEditDiscountModal: React.Dispatch<React.SetStateAction<boolean>>;
+  editDiscountData: any;
+  setEditDiscountData: React.Dispatch<React.SetStateAction<any>>;
+  editDiscountAmount: number;
+  setEditDiscountAmount: React.Dispatch<React.SetStateAction<number>>;
+  //editBenefitModalError: string | null;
+  //setEditBenefitModalError: React.Dispatch<React.SetStateAction<string | null>>;
+  setDiscountsInCart: React.Dispatch<
+    React.SetStateAction<
+      {
+        listId: string;
+        discountId: string;
+        amount: number;
+      }[]
+    >
+  >;
+  setSelectedDiscount: React.Dispatch<
     React.SetStateAction<{
       _id: string;
       title: string;
       description: string;
       price: number;
       currencyId: string;
-      delivery_mode: 'inperson' | 'online' | 'athome';
     } | null>
-  >;
-  benefits: {
-    benefit: {
-      _id: string;
-      title: string;
-      description: string;
-      price: number;
-      currencyId: string;
-    };
-    delivery_mode: 'inperson' | 'online' | 'athome';
-  }[];
-  setBenefitsInCart: React.Dispatch<
-    React.SetStateAction<
-      {
-        listId: string;
-        benefitId: string;
-        amount: number;
-      }[]
-    >
   >;
 }
 
-const BenefitsSection: React.FC<ComponentProps> = ({
-  selectedBenefit,
-  setSelectedBenefit,
-  benefits,
-  setBenefitsInCart,
+const EditDiscountModal: React.FC<ComponentProps> = ({
+  openEditDiscountModal,
+  setOpenEditDiscountModal,
+  editDiscountData,
+  setEditDiscountData,
+  editDiscountAmount,
+  setEditDiscountAmount,
+  //editBenefitModalError,
+  //setEditBenefitModalError,
+  setDiscountsInCart,
+  setSelectedDiscount,
 }) => {
-  const [openBenefitModal, setOpenBenefitModal] = useState(false);
-
-  const [amountModal, setAmountModal] = useState(1);
-
   const { handleSubmit, reset, register } = useForm();
 
-  const addBenefitToCart = (data: any) => {
-    if (!selectedBenefit) return;
-    const newCartItem: {
-      listId: string;
-      benefitId: string;
-      amount: number;
-    } = {
-      listId: uuidv4(),
-      benefitId: selectedBenefit._id,
-      amount: data.amount,
-    };
-    setBenefitsInCart((prevCart) => [...prevCart, newCartItem]);
-    reset();
-    setSelectedBenefit(null);
-    setOpenBenefitModal(false);
-    setAmountModal(1);
-  };
+  const updateEditedDiscountInCart = (data: any) => {
+    if (!editDiscountData) return;
 
+    setDiscountsInCart((prev) =>
+      prev.map((item) =>
+        item.listId === editDiscountData.listId
+          ? { ...item, amount: editDiscountAmount }
+          : item,
+      ),
+    );
+    setOpenEditDiscountModal(false);
+    setEditDiscountAmount(1);
+    //setEditBenefitModalError(null);
+    reset();
+    setEditDiscountData(null);
+    setSelectedDiscount(null);
+  };
   return (
     <>
-      <section
-        aria-labelledby="benefits"
-        style={{
-          width: '100%',
-          boxSizing: 'border-box',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '20px',
-        }}
-      >
-        <h2 id="benefits" style={{ margin: 0, fontSize: 16 }}>
-          Benefits
-        </h2>
-        <div className="custom-package-items-grid custom-package-benefit-grid">
-          {benefits.map((item, index) => (
-            <article
-              key={index}
-              style={{
-                width: '100%',
-                boxSizing: 'border-box',
-                padding: 18,
-                backgroundColor: ' #ffffff',
-
-                border: '1px solid #e4e4e4',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 18,
-                borderRadius: 10,
-              }}
-            >
-              <div
-                style={{
-                  boxSizing: 'border-box',
-                  display: 'grid',
-                  gridTemplateColumns: 'auto 1fr',
-                  gap: 15,
-                }}
-              >
-                <div
-                  style={{
-                    width: 30,
-                    height: 30,
-                    boxSizing: 'border-box',
-                    border: '1px solid #e5e7eb',
-                    borderRadius: 5,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginBottom: 10,
-                    backgroundColor: '#f9fafb',
-                  }}
-                >
-                  <img
-                    src="/assets/icons/verified.svg"
-                    alt="Verified icon"
-                    width="18"
-                    height="18"
-                    style={{ cursor: 'pointer' }}
-                  />
-                </div>
-                <div
-                  className="custom-package-item-card-content "
-                  style={{ display: 'flex', flexDirection: 'column' }}
-                >
-                  <h3>{item.benefit.title}</h3>
-                  <p style={{ margin: 0, lineHeight: 1.3, fontSize: 13 }}>
-                    {item.benefit.description}
-                  </p>
-                  <span style={{ fontSize: 11, color: '#8c8c8c' }}>
-                    {item.delivery_mode}
-                  </span>
-                  <span style={{ fontSize: 20, fontWeight: 700 }}>
-                    ${item.benefit.price.toLocaleString()}{' '}
-                    <span
-                      style={{
-                        fontSize: 13,
-                        color: '#8c8c8c',
-                        fontWeight: 400,
-                      }}
-                    >
-                      {item.benefit.currencyId}
-                    </span>
-                  </span>
-                </div>
-              </div>
-              <button
-                className="card-button"
-                onClick={() => {
-                  setSelectedBenefit({
-                    ...item.benefit,
-                    delivery_mode: item.delivery_mode,
-                  });
-                  setOpenBenefitModal(true);
-                }}
-              >
-                + Add
-              </button>
-            </article>
-          ))}
-        </div>
-      </section>
-      {/*ADD*/}
       <ModalComponent
-        open={openBenefitModal}
+        open={openEditDiscountModal}
         onClose={() => {
-          setSelectedBenefit(null);
-          setOpenBenefitModal(false);
-          reset();
-          setAmountModal(1);
+          setOpenEditDiscountModal(false);
+          setEditDiscountData(null);
+          setEditDiscountAmount(1);
+          //setEditBenefitModalError(null);
         }}
         containerStyles={{ width: '780px', height: '500px' }}
       >
-        {selectedBenefit && (
+        {editDiscountData && (
           <form
-            onSubmit={handleSubmit((data) =>
-              addBenefitToCart({ ...data, amount: amountModal }),
-            )}
+            onSubmit={handleSubmit((data) => {
+              try {
+                updateEditedDiscountInCart({
+                  ...data,
+                  amount: editDiscountAmount,
+                });
+              } catch {}
+            })}
             style={{
               width: '100%',
               height: '100%',
@@ -209,10 +101,10 @@ const BenefitsSection: React.FC<ComponentProps> = ({
                 cursor: 'pointer',
               }}
               onClick={() => {
-                setSelectedBenefit(null);
-                setOpenBenefitModal(false);
-                reset();
-                setAmountModal(1);
+                setOpenEditDiscountModal(false);
+                setEditDiscountData(null);
+                setEditDiscountAmount(1);
+                //setEditBenefitModalError(null);
               }}
             >
               x
@@ -232,7 +124,7 @@ const BenefitsSection: React.FC<ComponentProps> = ({
                 }}
               >
                 <span style={{ fontWeight: 600, fontSize: 19 }}>
-                  {selectedBenefit?.title}
+                  {editDiscountData?.title}
                 </span>
                 <p
                   style={{
@@ -248,7 +140,7 @@ const BenefitsSection: React.FC<ComponentProps> = ({
                   acidity and naturally sweet.
                 </p>
                 <span style={{ fontWeight: 800, fontSize: 23 }}>
-                  ${selectedBenefit?.price}{' '}
+                  ${editDiscountData?.price}{' '}
                   <span
                     style={{ fontWeight: 300, fontSize: 12, color: '#595959' }}
                   >
@@ -301,51 +193,85 @@ const BenefitsSection: React.FC<ComponentProps> = ({
                       gap: 6,
                     }}
                   >
-                    <div
-                      style={{
-                        width: '100%',
-                        boxSizing: 'border-box',
-                        display: 'flex',
-                        alignItems: 'flex-start',
-                        gap: 5,
-                      }}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="11"
-                        height="11"
-                        fill="currentColor"
-                        className="bi bi-house-fill"
-                        viewBox="0 0 16 16"
+                    <>
+                      <div
+                        style={{
+                          width: '100%',
+                          boxSizing: 'border-box',
+                          display: 'flex',
+                          alignItems: 'flex-start',
+                          gap: 5,
+                        }}
                       >
-                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
-                        <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z" />
-                      </svg>
-                      <span style={{ fontSize: 11, fontWeight: 500 }}>
-                        Home Delivery
-                      </span>
-                    </div>
-                    <p
-                      style={{
-                        fontSize: 10,
-                        fontWeight: 300,
-                        color: 'grey',
-                        margin: 0,
-                        lineHeight: 1.3,
-                      }}
-                    >
-                      Delivered to your doorstep with your subscription
-                    </p>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="11"
+                          height="11"
+                          fill="currentColor"
+                          className="bi bi-house-fill"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
+                          <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z" />
+                        </svg>
+                        <span style={{ fontSize: 11, fontWeight: 500 }}>
+                          Home Delivery
+                        </span>
+                      </div>
+                      <p
+                        style={{
+                          fontSize: 10,
+                          fontWeight: 300,
+                          color: 'grey',
+                          margin: 0,
+                          lineHeight: 1.3,
+                        }}
+                      >
+                        Delivered to your doorstep with your subscription
+                      </p>
+                    </>
                   </div>
                 </div>
 
-                {/*serviceModalError && (
+                {/*editBenefitModalError && (
                   <span
                     style={{ marginBottom: 10, fontSize: 12, color: '#f5222d' }}
                   >
-                    *{serviceModalError}
+                    *{editBenefitModalError}
                   </span>
                 )*/}
+
+                {/*editBenefitData.selectableOptions.map((option: any) => (
+                  <div
+                    key={option.keyOption}
+                    style={{ display: 'flex', flexDirection: 'column', gap: 5 }}
+                  >
+                    <label style={{ display: 'block', fontSize: 13 }}>
+                      {option.keyOption}
+                    </label>
+                    <div className="radio-group">
+                      {option.valueOption.map((value: string) => (
+                        <label key={value} className="radio-card">
+                          <input
+                            type="radio"
+                            value={value}
+                            {...register(option.keyOption, {
+                              onChange: () => setEditServiceModalError(null),
+                            })}
+                            name={option.keyOption}
+                            defaultChecked={
+                              editServiceData.selectedOptions?.find(
+                                (opt: any) =>
+                                  opt.keyOption === option.keyOption,
+                              )?.valueOption === value
+                            }
+                          />
+                          <span>{value}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                ))*/}
               </div>
               <div
                 style={{
@@ -375,16 +301,16 @@ const BenefitsSection: React.FC<ComponentProps> = ({
                     <button
                       type="button"
                       onClick={() =>
-                        setAmountModal((prev) => Math.max(1, prev - 1))
+                        setEditDiscountAmount((prev) => Math.max(1, prev - 1))
                       }
-                      disabled={amountModal === 1}
+                      disabled={editDiscountAmount === 1}
                     >
                       -
                     </button>
-                    <span>{amountModal}</span>
+                    <span>{editDiscountAmount}</span>
                     <button
                       type="button"
-                      onClick={() => setAmountModal((prev) => prev + 1)}
+                      onClick={() => setEditDiscountAmount((prev) => prev + 1)}
                     >
                       +
                     </button>
@@ -395,18 +321,13 @@ const BenefitsSection: React.FC<ComponentProps> = ({
                 </div>
                 <div className="custom-package-add-item-total-amount-container">
                   <div className="custom-package-add-item-total-amount-row">
-                    <span
-                      style={{
-                        fontSize: 11,
-                        color: '#4b5563',
-                      }}
-                    >
+                    <span style={{ fontSize: 11, color: '#4b5563' }}>
                       Unit Price
                     </span>
                     <span
                       style={{ fontWeight: 500, fontSize: 11, color: 'black' }}
                     >
-                      ${selectedBenefit.price}
+                      ${editDiscountData.price}
                     </span>
                   </div>
                   <div className="divider"></div>
@@ -423,7 +344,7 @@ const BenefitsSection: React.FC<ComponentProps> = ({
                         color: '#7d2ae8',
                       }}
                     >
-                      ${amountModal * selectedBenefit.price}
+                      ${editDiscountAmount * editDiscountData.price}
                     </span>
                   </div>
                 </div>
@@ -446,14 +367,13 @@ const BenefitsSection: React.FC<ComponentProps> = ({
                 </div>
               </div>
             </div>
-
             <div className="custom-package-add-item-modal-base-container custom-package-add-item-modal-footer">
               <button
                 className="card-button"
                 style={{ width: 'calc(100% - 20px)', margin: '0 auto' }}
                 type="submit"
               >
-                + Add to Plan
+                Save Changes
               </button>
             </div>
           </form>
@@ -463,4 +383,4 @@ const BenefitsSection: React.FC<ComponentProps> = ({
   );
 };
 
-export default BenefitsSection;
+export default EditDiscountModal;

@@ -98,6 +98,31 @@ interface ComponentProps {
     >
   >;
   handleEditBenefitClick: (item: any) => void;
+  /*================= DISCOUNTS =================*/
+  discounts: {
+    discount: {
+      _id: string;
+      title: string;
+      description: string;
+      price: number;
+      currencyId: string;
+    };
+  }[];
+  discountsInCart: {
+    listId: string;
+    discountId: string;
+    amount: number;
+  }[];
+  setDiscountsInCart: React.Dispatch<
+    React.SetStateAction<
+      {
+        listId: string;
+        discountId: string;
+        amount: number;
+      }[]
+    >
+  >;
+  handleEditDiscountClick: (item: any) => void;
 }
 
 const DetailsDrawer: React.FC<ComponentProps> = ({
@@ -115,6 +140,10 @@ const DetailsDrawer: React.FC<ComponentProps> = ({
   benefitsInCart,
   setBenefitsInCart,
   handleEditBenefitClick,
+  discounts,
+  discountsInCart,
+  setDiscountsInCart,
+  handleEditDiscountClick,
 }) => {
   /*================= PRODUCTS LOGIC =================*/
   const handleIncreaseProductAmount = (listId: string) => {
@@ -199,6 +228,37 @@ const DetailsDrawer: React.FC<ComponentProps> = ({
     return benefitsInCart.reduce((acc, item) => acc + item.amount, 0);
   };
 
+  /*================= DISCOUNTS LOGIC =================*/
+
+  const handleIncreaseDiscountAmount = (listId: string) => {
+    setDiscountsInCart((prev) =>
+      prev.map((item) =>
+        item.listId === listId ? { ...item, amount: item.amount + 1 } : item,
+      ),
+    );
+  };
+
+  const handleDecreaseDiscountAmount = (listId: string) => {
+    setDiscountsInCart((prev) =>
+      prev.map((item) =>
+        item.listId === listId && item.amount > 1
+          ? { ...item, amount: item.amount - 1 }
+          : item,
+      ),
+    );
+  };
+
+  const removeDiscountfromCart = (listId: string) => {
+    const updateData = discountsInCart.filter(
+      (discount) => discount.listId !== listId,
+    );
+    setDiscountsInCart(updateData);
+  };
+
+  const getTotalDiscountsInCart = () => {
+    return discountsInCart.reduce((acc, item) => acc + item.amount, 0);
+  };
+
   /*================= GENERAL LOGIC =================*/
 
   const calculateTotal = () => {
@@ -217,7 +277,16 @@ const DetailsDrawer: React.FC<ComponentProps> = ({
       const price = benefit ? benefit.benefit.price : 0;
       return total + price * item.amount;
     }, 0);
-    return productsTotal + servicesTotal + benefitsTotal;
+
+    const discountsTotal = discountsInCart.reduce((total, item) => {
+      const discount = discounts.find(
+        (d) => d.discount._id === item.discountId,
+      );
+      const price = discount ? discount.discount.price : 0;
+      return total + price * item.amount;
+    }, 0);
+
+    return productsTotal + servicesTotal + benefitsTotal + discountsTotal;
   };
 
   const getTotalServicesInCart = () => {
@@ -235,7 +304,8 @@ const DetailsDrawer: React.FC<ComponentProps> = ({
         <>
           {productsInCart.length !== 0 ||
           servicesInCart.length !== 0 ||
-          benefitsInCart.length !== 0 ? (
+          benefitsInCart.length !== 0 ||
+          discountsInCart.length !== 0 ? (
             <>
               <div className="custom-package-plan-details-drawer-base-container custom-package-plan-details-drawer-header">
                 <div
@@ -588,6 +658,122 @@ const DetailsDrawer: React.FC<ComponentProps> = ({
                                   }}
                                 >
                                   ${benefitData.benefit.price * item.amount}
+                                </span>
+                              </div>
+                            </div>
+                          </li>
+                        </>
+                      );
+                    })}
+                  </>
+                )}
+                {discountsInCart.length !== 0 && (
+                  <>
+                    <li>
+                      <span style={{ fontSize: 12 }}>
+                        Discounts in Plan ({getTotalDiscountsInCart()})
+                      </span>
+                    </li>
+                    {discountsInCart.map((item, index) => {
+                      const discountData = discounts.find(
+                        (benefit) => benefit.discount._id === item.discountId,
+                      );
+                      if (!discountData) return null;
+                      return (
+                        <>
+                          <li
+                            key={index}
+                            className="custom-package-plan-details-drawer-list-item"
+                          >
+                            <></>
+
+                            <div
+                              style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: 3,
+                              }}
+                            >
+                              <div
+                                style={{
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  boxSizing: 'border-box',
+                                  gap: 5,
+                                }}
+                              >
+                                <img
+                                  src="/assets/icons/verified.svg"
+                                  alt="Verified icon"
+                                  width="18"
+                                  height="18"
+                                  loading="lazy"
+                                  decoding="async"
+                                  referrerPolicy="no-referrer"
+                                />
+                                <span style={{ fontSize: 13, fontWeight: 600 }}>
+                                  {discountData.discount.title}
+                                </span>
+                              </div>
+
+                              <div className="custom-package-plan-details-drawer-list-item-quantity-control">
+                                <button
+                                  onClick={() =>
+                                    handleDecreaseDiscountAmount(item.listId)
+                                  }
+                                  disabled={item.amount === 1}
+                                >
+                                  -
+                                </button>
+                                <span>{item.amount}</span>
+                                <button
+                                  onClick={() =>
+                                    handleIncreaseDiscountAmount(item.listId)
+                                  }
+                                >
+                                  +
+                                </button>
+                              </div>
+                            </div>
+                            <div className="custom-package-plan-details-drawer-list-item-right-col">
+                              <div style={{ display: 'flex', gap: 7 }}>
+                                <img
+                                  src="/assets/icons/trash3.svg"
+                                  alt="Trash icon"
+                                  width="13"
+                                  height="13"
+                                  style={{ cursor: 'pointer' }}
+                                  onClick={() =>
+                                    removeDiscountfromCart(item.listId)
+                                  }
+                                />
+                                <img
+                                  src="/assets/icons/edit-icon.svg"
+                                  alt="Edit icon"
+                                  width="14"
+                                  height="14"
+                                  style={{ cursor: 'pointer' }}
+                                  onClick={() => handleEditDiscountClick(item)}
+                                />
+                              </div>
+                              <div
+                                style={{
+                                  display: 'flex',
+                                  flexDirection: 'column',
+                                  gap: 2,
+                                  textAlign: 'end',
+                                }}
+                              >
+                                <span style={{ fontSize: 11, fontWeight: 300 }}>
+                                  ${discountData.discount.price} c/u
+                                </span>
+                                <span
+                                  style={{
+                                    fontSize: 16,
+                                    fontWeight: 800,
+                                  }}
+                                >
+                                  ${discountData.discount.price * item.amount}
                                 </span>
                               </div>
                             </div>

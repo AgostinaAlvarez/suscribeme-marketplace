@@ -1,82 +1,79 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
-import ModalComponent from '../ModalComponent.tsx';
+import ModalComponent from '../ModalComponent';
 
 interface ComponentProps {
-  selectedBenefit: {
+  selectedDiscount: {
     _id: string;
     title: string;
     description: string;
     price: number;
     currencyId: string;
-    delivery_mode: 'inperson' | 'online' | 'athome';
   } | null;
-  setSelectedBenefit: React.Dispatch<
+  setSelectedDiscount: React.Dispatch<
     React.SetStateAction<{
       _id: string;
       title: string;
       description: string;
       price: number;
       currencyId: string;
-      delivery_mode: 'inperson' | 'online' | 'athome';
     } | null>
   >;
-  benefits: {
-    benefit: {
+  discounts: {
+    discount: {
       _id: string;
       title: string;
       description: string;
       price: number;
       currencyId: string;
     };
-    delivery_mode: 'inperson' | 'online' | 'athome';
   }[];
-  setBenefitsInCart: React.Dispatch<
+  setDiscountsInCart: React.Dispatch<
     React.SetStateAction<
       {
         listId: string;
-        benefitId: string;
+        discountId: string;
         amount: number;
       }[]
     >
   >;
 }
 
-const BenefitsSection: React.FC<ComponentProps> = ({
-  selectedBenefit,
-  setSelectedBenefit,
-  benefits,
-  setBenefitsInCart,
+const DiscountsSection: React.FC<ComponentProps> = ({
+  selectedDiscount,
+  setSelectedDiscount,
+  discounts,
+  setDiscountsInCart,
 }) => {
-  const [openBenefitModal, setOpenBenefitModal] = useState(false);
+  const [openDiscountModal, setOpenDiscountModal] = useState(false);
 
   const [amountModal, setAmountModal] = useState(1);
 
   const { handleSubmit, reset, register } = useForm();
 
-  const addBenefitToCart = (data: any) => {
-    if (!selectedBenefit) return;
+  const addDiscountToCart = (data: any) => {
+    if (!selectedDiscount) return;
     const newCartItem: {
       listId: string;
-      benefitId: string;
+      discountId: string;
       amount: number;
     } = {
       listId: uuidv4(),
-      benefitId: selectedBenefit._id,
+      discountId: selectedDiscount._id,
       amount: data.amount,
     };
-    setBenefitsInCart((prevCart) => [...prevCart, newCartItem]);
+    setDiscountsInCart((prevCart) => [...prevCart, newCartItem]);
     reset();
-    setSelectedBenefit(null);
-    setOpenBenefitModal(false);
+    setSelectedDiscount(null);
+    setOpenDiscountModal(false);
     setAmountModal(1);
   };
 
   return (
     <>
       <section
-        aria-labelledby="benefits"
+        aria-labelledby="discounts"
         style={{
           width: '100%',
           boxSizing: 'border-box',
@@ -85,11 +82,11 @@ const BenefitsSection: React.FC<ComponentProps> = ({
           gap: '20px',
         }}
       >
-        <h2 id="benefits" style={{ margin: 0, fontSize: 16 }}>
-          Benefits
+        <h2 id="discounts" style={{ margin: 0, fontSize: 16 }}>
+          Discounts
         </h2>
         <div className="custom-package-items-grid custom-package-benefit-grid">
-          {benefits.map((item, index) => (
+          {discounts.map((item, index) => (
             <article
               key={index}
               style={{
@@ -128,7 +125,7 @@ const BenefitsSection: React.FC<ComponentProps> = ({
                   }}
                 >
                   <img
-                    src="/assets/icons/verified.svg"
+                    src="/assets/icons/tag.svg"
                     alt="Verified icon"
                     width="18"
                     height="18"
@@ -139,15 +136,13 @@ const BenefitsSection: React.FC<ComponentProps> = ({
                   className="custom-package-item-card-content "
                   style={{ display: 'flex', flexDirection: 'column' }}
                 >
-                  <h3>{item.benefit.title}</h3>
+                  <h3>{item.discount.title}</h3>
                   <p style={{ margin: 0, lineHeight: 1.3, fontSize: 13 }}>
-                    {item.benefit.description}
+                    {item.discount.description}
                   </p>
-                  <span style={{ fontSize: 11, color: '#8c8c8c' }}>
-                    {item.delivery_mode}
-                  </span>
+
                   <span style={{ fontSize: 20, fontWeight: 700 }}>
-                    ${item.benefit.price.toLocaleString()}{' '}
+                    ${item.discount.price.toLocaleString()}{' '}
                     <span
                       style={{
                         fontSize: 13,
@@ -155,7 +150,7 @@ const BenefitsSection: React.FC<ComponentProps> = ({
                         fontWeight: 400,
                       }}
                     >
-                      {item.benefit.currencyId}
+                      {item.discount.currencyId}
                     </span>
                   </span>
                 </div>
@@ -163,11 +158,10 @@ const BenefitsSection: React.FC<ComponentProps> = ({
               <button
                 className="card-button"
                 onClick={() => {
-                  setSelectedBenefit({
-                    ...item.benefit,
-                    delivery_mode: item.delivery_mode,
+                  setSelectedDiscount({
+                    ...item.discount,
                   });
-                  setOpenBenefitModal(true);
+                  setOpenDiscountModal(true);
                 }}
               >
                 + Add
@@ -178,19 +172,19 @@ const BenefitsSection: React.FC<ComponentProps> = ({
       </section>
       {/*ADD*/}
       <ModalComponent
-        open={openBenefitModal}
+        open={openDiscountModal}
         onClose={() => {
-          setSelectedBenefit(null);
-          setOpenBenefitModal(false);
+          setSelectedDiscount(null);
+          setOpenDiscountModal(false);
           reset();
           setAmountModal(1);
         }}
         containerStyles={{ width: '780px', height: '500px' }}
       >
-        {selectedBenefit && (
+        {selectedDiscount && (
           <form
             onSubmit={handleSubmit((data) =>
-              addBenefitToCart({ ...data, amount: amountModal }),
+              addDiscountToCart({ ...data, amount: amountModal }),
             )}
             style={{
               width: '100%',
@@ -209,8 +203,8 @@ const BenefitsSection: React.FC<ComponentProps> = ({
                 cursor: 'pointer',
               }}
               onClick={() => {
-                setSelectedBenefit(null);
-                setOpenBenefitModal(false);
+                setSelectedDiscount(null);
+                setOpenDiscountModal(false);
                 reset();
                 setAmountModal(1);
               }}
@@ -232,7 +226,7 @@ const BenefitsSection: React.FC<ComponentProps> = ({
                 }}
               >
                 <span style={{ fontWeight: 600, fontSize: 19 }}>
-                  {selectedBenefit?.title}
+                  {selectedDiscount?.title}
                 </span>
                 <p
                   style={{
@@ -248,7 +242,7 @@ const BenefitsSection: React.FC<ComponentProps> = ({
                   acidity and naturally sweet.
                 </p>
                 <span style={{ fontWeight: 800, fontSize: 23 }}>
-                  ${selectedBenefit?.price}{' '}
+                  ${selectedDiscount?.price}{' '}
                   <span
                     style={{ fontWeight: 300, fontSize: 12, color: '#595959' }}
                   >
@@ -406,7 +400,7 @@ const BenefitsSection: React.FC<ComponentProps> = ({
                     <span
                       style={{ fontWeight: 500, fontSize: 11, color: 'black' }}
                     >
-                      ${selectedBenefit.price}
+                      ${selectedDiscount.price}
                     </span>
                   </div>
                   <div className="divider"></div>
@@ -423,7 +417,7 @@ const BenefitsSection: React.FC<ComponentProps> = ({
                         color: '#7d2ae8',
                       }}
                     >
-                      ${amountModal * selectedBenefit.price}
+                      ${amountModal * selectedDiscount.price}
                     </span>
                   </div>
                 </div>
@@ -463,4 +457,4 @@ const BenefitsSection: React.FC<ComponentProps> = ({
   );
 };
 
-export default BenefitsSection;
+export default DiscountsSection;

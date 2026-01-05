@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import '../../public/styles/cartStyles.css';
 import ServiceSection from './CustomPackage/ServiceSection.tsx';
 import DetailsDrawer from './CustomPackage/DetailsDrawer.tsx';
@@ -6,6 +6,9 @@ import ProductsSection from './CustomPackage/ProductsSection.tsx';
 import EditProductModal from './CustomPackage/EditProductModal.tsx';
 import EditServiceModal from './CustomPackage/EditServiceModal.tsx';
 import BenefitsSection from './CustomPackage/BenefitsSection.tsx';
+import EditBenefitModal from './CustomPackage/EditBenefitModal.tsx';
+import DiscountsSection from './CustomPackage/DiscountsSection.tsx';
+import EditDiscountModal from './CustomPackage/EditDiscountModal.tsx';
 
 const CustomPackageDetailsContent: React.FC = () => {
   // Sticky bar state
@@ -17,62 +20,6 @@ const CustomPackageDetailsContent: React.FC = () => {
   const [showSecondaryStickyBar, setShowSecondaryStickyBar] = useState(false);
   const secondaryStickyRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    let ticking = false;
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          // Sticky bar
-          const hero = document.querySelector('.custom-package-hero-section');
-          const heroHeight = hero
-            ? hero.getBoundingClientRect().bottom + window.scrollY
-            : 400;
-          if (window.scrollY > heroHeight - 80) {
-            setShowStickyBar(true);
-          } else {
-            setShowStickyBar(false);
-          }
-
-          // Footer detection
-          const footer = document.querySelector('footer');
-          const aside = asideRef.current;
-          if (footer && aside) {
-            const footerRect = footer.getBoundingClientRect();
-            const asideRect = aside.getBoundingClientRect();
-            // Ajusta el margen de seguridad para que el aside desaparezca antes de tocar el footer
-            if (asideRect.bottom > footerRect.top - 20) {
-              setHideAside(true);
-            } else {
-              setHideAside(false);
-            }
-          }
-
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!secondaryStickyRef.current) return;
-      const rect = secondaryStickyRef.current.getBoundingClientRect();
-      // El sticky bar principal está en top: 50px y mide ~40px, así que el segundo debe aparecer debajo
-      setShowSecondaryStickyBar(rect.top <= 50 + 40); // 90px
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const [planDetailsDrawerOpen, setPlanDetailsDrawerOpen] =
-    useState<boolean>(false);
-
-  /* ================= PRODUCTS ================= */
   const products: {
     product: {
       _id: string;
@@ -141,63 +88,6 @@ const CustomPackageDetailsContent: React.FC = () => {
       auto_approve_changes: null,
     },
   ];
-  const [selectedProduct, setSelectedProduct] = useState<{
-    _id: string;
-    name: string;
-    image?: {
-      url: string;
-    } | null;
-    description: string;
-    selectableOptions: { keyOption: string; valueOption: string[] }[];
-    price: number;
-    currencyId: string;
-    shipping_required: boolean;
-  } | null>(null);
-  const [productsInCart, setProductsInCart] = useState<
-    {
-      listId: string;
-      productId: string;
-      selectedOptions: { keyOption: string; valueOption: string }[];
-      amount: number;
-    }[]
-  >([]);
-  const getTotalProductsInCart = () => {
-    return productsInCart.reduce((acc, item) => acc + item.amount, 0);
-  };
-  const [editProductAmount, setEditProductAmount] = useState(1);
-
-  const [openEditProductModal, setOpenEditProductModal] = useState(false);
-  const [editProductData, setEditProductData] = useState<any>(null);
-  const [editProductModalError, setEditProductModalError] = useState<
-    string | null
-  >(null);
-
-  const handleEditProductClick = (item: any) => {
-    setPlanDetailsDrawerOpen(false);
-    const productData = products.find(
-      (prod) => prod.product._id === item.productId,
-    );
-    if (!productData) return;
-    setEditProductData({
-      ...productData.product,
-      shipping_required: productData.shipping_required,
-      selectedOptions: item.selectedOptions,
-      listId: item.listId,
-    });
-    setEditProductAmount(item.amount);
-    setOpenEditProductModal(true);
-    setEditProductModalError(null);
-  };
-
-  /* ================= SERVICES ================= */
-  const [servicesInCart, setServicesInCart] = useState<
-    {
-      listId: string;
-      serviceId: string;
-      selectedOptions: { keyOption: string; valueOption: string }[];
-      amount: number;
-    }[]
-  >([]);
   const services: {
     service: {
       _id: string;
@@ -291,48 +181,6 @@ const CustomPackageDetailsContent: React.FC = () => {
       delivery_mode: 'inperson',
     },
   ];
-  const [selectedService, setSelectedService] = useState<{
-    _id: string;
-    name: string;
-    image?: {
-      url: string;
-    } | null;
-    description: string;
-    selectableOptions: { keyOption: string; valueOption: string[] }[];
-    price: number;
-    currencyId: string;
-    delivery_mode: 'inperson' | 'online' | 'athome';
-  } | null>(null);
-
-  const [openEditServiceModal, setOpenEditServiceModal] = useState(false);
-  const [editServiceData, setEditServiceData] = useState<any>(null);
-  const [editServiceAmount, setEditServiceAmount] = useState(1);
-  const [editServiceModalError, setEditServiceModalError] = useState<
-    string | null
-  >(null);
-
-  const handleEditServiceClick = (item: any) => {
-    setPlanDetailsDrawerOpen(false);
-    const serviceData = services.find(
-      (serv) => serv.service._id === item.serviceId,
-    );
-    if (!serviceData) return;
-    setEditServiceData({
-      ...serviceData.service,
-      delivery_mode: serviceData.delivery_mode,
-      selectedOptions: item.selectedOptions,
-      listId: item.listId,
-    });
-    setEditServiceAmount(item.amount);
-    setOpenEditServiceModal(true);
-    setEditServiceModalError(null);
-  };
-
-  const getTotalServicesInCart = () => {
-    return servicesInCart.reduce((acc, item) => acc + item.amount, 0);
-  };
-
-  /* ================= BENEFITS ================= */
   const benefits: {
     benefit: {
       _id: string;
@@ -386,6 +234,265 @@ const CustomPackageDetailsContent: React.FC = () => {
       delivery_mode: 'inperson',
     },
   ];
+
+  const discounts: {
+    discount: {
+      _id: string;
+      title: string;
+      description: string;
+      price: number;
+      currencyId: string;
+    };
+  }[] = [
+    {
+      discount: {
+        _id: 'disc1',
+        title: 'Descuento de Primavera',
+        description: 'Aprovecha un 20% de descuento en todos los servicios.',
+        price: 20,
+        currencyId: 'USD',
+      },
+    },
+    {
+      discount: {
+        _id: 'disc2',
+        title: 'Oferta de Fin de Año',
+        description: 'Obtén un 25% de descuento en compras superiores a $200.',
+        price: 25,
+        currencyId: 'USD',
+      },
+    },
+    {
+      discount: {
+        _id: 'disc3',
+        title: 'Descuento para Nuevos Clientes',
+        description: 'Recibe un 15% de descuento en tu primera compra.',
+        price: 15,
+        currencyId: 'USD',
+      },
+    },
+  ];
+
+  // ================= CATEGORÍAS Y NAVEGACIÓN SINCRONIZADA =================
+  const productsSectionRef = useRef<HTMLDivElement>(null);
+  const servicesSectionRef = useRef<HTMLDivElement>(null);
+  const benefitsSectionRef = useRef<HTMLDivElement>(null);
+  const discountsSectionRef = useRef<HTMLDivElement>(null);
+
+  // Forzamos el tipo correcto en el array categories
+  const categories: {
+    name: string;
+    count: number;
+    ref: React.RefObject<HTMLDivElement>;
+  }[] = [
+    {
+      name: 'Productos',
+      count: products.length,
+      ref: productsSectionRef as React.RefObject<HTMLDivElement>,
+    },
+    {
+      name: 'Servicios',
+      count: services.length,
+      ref: servicesSectionRef as React.RefObject<HTMLDivElement>,
+    },
+    {
+      name: 'Beneficios',
+      count: benefits.length,
+      ref: benefitsSectionRef as React.RefObject<HTMLDivElement>,
+    },
+    {
+      name: 'Descuentos',
+      count: discounts.length,
+      ref: discountsSectionRef as React.RefObject<HTMLDivElement>,
+    },
+  ];
+
+  const [activeCategory, setActiveCategory] = useState('Productos');
+
+  // Scroll suave al hacer click en categoría
+  const handleCategoryClick = (
+    ref: React.RefObject<HTMLDivElement>,
+    name: string,
+  ) => {
+    setActiveCategory(name);
+    if (ref.current) {
+      const offset = 120; // Ajusta según altura de sticky bars
+      const top =
+        ref.current.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  };
+
+  // Sincronizar categoría activa al hacer scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = 130; // Ajusta según altura de sticky bars
+      const sectionTops = categories.map((cat) => {
+        if (!cat.ref.current) return Infinity;
+        return Math.abs(cat.ref.current.getBoundingClientRect().top - offset);
+      });
+      const minIndex = sectionTops.indexOf(Math.min(...sectionTops));
+      setActiveCategory(categories[minIndex].name);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [categories]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          // Sticky bar
+          const hero = document.querySelector('.custom-package-hero-section');
+          const heroHeight = hero
+            ? hero.getBoundingClientRect().bottom + window.scrollY
+            : 400;
+          if (window.scrollY > heroHeight - 80) {
+            setShowStickyBar(true);
+          } else {
+            setShowStickyBar(false);
+          }
+
+          // Footer detection
+          const footer = document.querySelector('footer');
+          const aside = asideRef.current;
+          if (footer && aside) {
+            const footerRect = footer.getBoundingClientRect();
+            const asideRect = aside.getBoundingClientRect();
+            // Ajusta el margen de seguridad para que el aside desaparezca antes de tocar el footer
+            if (asideRect.bottom > footerRect.top - 20) {
+              setHideAside(true);
+            } else {
+              setHideAside(false);
+            }
+          }
+
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!secondaryStickyRef.current) return;
+      const rect = secondaryStickyRef.current.getBoundingClientRect();
+      // El sticky bar principal está en top: 50px y mide ~40px, así que el segundo debe aparecer debajo
+      setShowSecondaryStickyBar(rect.top <= 50 + 40); // 90px
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const [planDetailsDrawerOpen, setPlanDetailsDrawerOpen] =
+    useState<boolean>(false);
+
+  /* ================= PRODUCTS ================= */
+  const [selectedProduct, setSelectedProduct] = useState<{
+    _id: string;
+    name: string;
+    image?: {
+      url: string;
+    } | null;
+    description: string;
+    selectableOptions: { keyOption: string; valueOption: string[] }[];
+    price: number;
+    currencyId: string;
+    shipping_required: boolean;
+  } | null>(null);
+  const [productsInCart, setProductsInCart] = useState<
+    {
+      listId: string;
+      productId: string;
+      selectedOptions: { keyOption: string; valueOption: string }[];
+      amount: number;
+    }[]
+  >([]);
+  const getTotalProductsInCart = () => {
+    return productsInCart.reduce((acc, item) => acc + item.amount, 0);
+  };
+  const [editProductAmount, setEditProductAmount] = useState(1);
+
+  const [openEditProductModal, setOpenEditProductModal] = useState(false);
+  const [editProductData, setEditProductData] = useState<any>(null);
+  const [editProductModalError, setEditProductModalError] = useState<
+    string | null
+  >(null);
+
+  const handleEditProductClick = (item: any) => {
+    setPlanDetailsDrawerOpen(false);
+    const productData = products.find(
+      (prod) => prod.product._id === item.productId,
+    );
+    if (!productData) return;
+    setEditProductData({
+      ...productData.product,
+      shipping_required: productData.shipping_required,
+      selectedOptions: item.selectedOptions,
+      listId: item.listId,
+    });
+    setEditProductAmount(item.amount);
+    setOpenEditProductModal(true);
+    setEditProductModalError(null);
+  };
+
+  /* ================= SERVICES ================= */
+  const [servicesInCart, setServicesInCart] = useState<
+    {
+      listId: string;
+      serviceId: string;
+      selectedOptions: { keyOption: string; valueOption: string }[];
+      amount: number;
+    }[]
+  >([]);
+  const [selectedService, setSelectedService] = useState<{
+    _id: string;
+    name: string;
+    image?: {
+      url: string;
+    } | null;
+    description: string;
+    selectableOptions: { keyOption: string; valueOption: string[] }[];
+    price: number;
+    currencyId: string;
+    delivery_mode: 'inperson' | 'online' | 'athome';
+  } | null>(null);
+
+  const [openEditServiceModal, setOpenEditServiceModal] = useState(false);
+  const [editServiceData, setEditServiceData] = useState<any>(null);
+  const [editServiceAmount, setEditServiceAmount] = useState(1);
+  const [editServiceModalError, setEditServiceModalError] = useState<
+    string | null
+  >(null);
+
+  const handleEditServiceClick = (item: any) => {
+    setPlanDetailsDrawerOpen(false);
+    const serviceData = services.find(
+      (serv) => serv.service._id === item.serviceId,
+    );
+    if (!serviceData) return;
+    setEditServiceData({
+      ...serviceData.service,
+      delivery_mode: serviceData.delivery_mode,
+      selectedOptions: item.selectedOptions,
+      listId: item.listId,
+    });
+    setEditServiceAmount(item.amount);
+    setOpenEditServiceModal(true);
+    setEditServiceModalError(null);
+  };
+
+  const getTotalServicesInCart = () => {
+    return servicesInCart.reduce((acc, item) => acc + item.amount, 0);
+  };
+
+  /* ================= BENEFITS ================= */
   const [selectedBenefit, setSelectedBenefit] = useState<{
     _id: string;
     title: string;
@@ -402,18 +509,96 @@ const CustomPackageDetailsContent: React.FC = () => {
     }[]
   >([]);
 
+  const [openEditBenefitModal, setOpenEditBenefitModal] = useState(false);
+  const [editBenefitData, setEditBenefitData] = useState<any>(null);
+  const [editBenefitAmount, setEditBenefitAmount] = useState(1);
+
+  const handleEditBenefitClick = (item: any) => {
+    setPlanDetailsDrawerOpen(false);
+    const benefitData = benefits.find(
+      (benefit) => benefit.benefit._id === item.benefitId,
+    );
+    if (!benefitData) return;
+    setEditBenefitData({
+      ...benefitData.benefit,
+      delivery_mode: benefitData.delivery_mode,
+      listId: item.listId,
+    });
+    setEditBenefitAmount(item.amount);
+    setOpenEditBenefitModal(true);
+  };
+
   const getTotalBenefitsInCart = () => {
     return benefitsInCart.reduce((acc, item) => acc + item.amount, 0);
+  };
+
+  /* ================= DISCOUNTS ================= */
+
+  const [selectedDiscount, setSelectedDiscount] = useState<{
+    _id: string;
+    title: string;
+    description: string;
+    price: number;
+    currencyId: string;
+  } | null>(null);
+
+  const [discountsInCart, setDiscountsInCart] = useState<
+    {
+      listId: string;
+      discountId: string;
+      amount: number;
+    }[]
+  >([]);
+
+  const [openEditDiscountModal, setOpenEditDiscountModal] = useState(false);
+  const [editDiscountData, setEditDiscountData] = useState<any>(null);
+  const [editDiscountAmount, setEditDiscountAmount] = useState(1);
+
+  const handleEditDiscountClick = (item: any) => {
+    setPlanDetailsDrawerOpen(false);
+    const discountData = discounts.find(
+      (discount) => discount.discount._id === item.discountId,
+    );
+    if (!discountData) return;
+    setEditDiscountData({
+      ...discountData.discount,
+      listId: item.listId,
+    });
+    setEditDiscountAmount(item.amount);
+    setOpenEditDiscountModal(true);
+  };
+
+  const getTotalDiscountsInCart = () => {
+    return discountsInCart.reduce((acc, item) => acc + item.amount, 0);
   };
 
   /* ================= ----------- ================= */
 
   const calculateTotal = () => {
-    return productsInCart.reduce((total, item) => {
+    const productsTotal = productsInCart.reduce((total, item) => {
       const product = products.find((p) => p.product._id === item.productId);
       const price = product ? product.product.price : 0;
       return total + price * item.amount;
     }, 0);
+    const servicesTotal = servicesInCart.reduce((total, item) => {
+      const service = services.find((s) => s.service._id === item.serviceId);
+      const price = service ? service.service.price : 0;
+      return total + price * item.amount;
+    }, 0);
+    const benefitsTotal = benefitsInCart.reduce((total, item) => {
+      const benefit = benefits.find((b) => b.benefit._id === item.benefitId);
+      const price = benefit ? benefit.benefit.price : 0;
+      return total + price * item.amount;
+    }, 0);
+    const discountsTotal = discountsInCart.reduce((total, item) => {
+      const discount = discounts.find(
+        (d) => d.discount._id === item.discountId,
+      );
+      const price = discount ? discount.discount.price : 0;
+      return total + price * item.amount;
+    }, 0);
+
+    return productsTotal + servicesTotal + benefitsTotal + discountsTotal;
   };
 
   return (
@@ -469,15 +654,18 @@ const CustomPackageDetailsContent: React.FC = () => {
           aria-hidden={!showSecondaryStickyBar}
         >
           <div className="custom-package-categories-section">
-            <div className="custom-package-categories-item">
-              <span>Productos ({products.length})</span>
-            </div>
-            <div className="custom-package-categories-item custom-package-categories-item-cta">
-              <span>Servicios ({services.length})</span>
-            </div>
-            <div className="custom-package-categories-item">
-              <span>Beneficios ({benefits.length})</span>
-            </div>
+            {categories.map((cat) => (
+              <div
+                key={cat.name}
+                className={`custom-package-categories-item${activeCategory === cat.name ? ' custom-package-categories-item-cta' : ''}`}
+                onClick={() => handleCategoryClick(cat.ref, cat.name)}
+                style={{ cursor: 'pointer' }}
+              >
+                <span>
+                  {cat.name} ({cat.count})
+                </span>
+              </div>
+            ))}
           </div>
         </section>
       )}
@@ -543,17 +731,21 @@ const CustomPackageDetailsContent: React.FC = () => {
             className="custom-package-categories-section"
             ref={secondaryStickyRef}
           >
-            <div className="custom-package-categories-item custom-package-categories-item-cta">
-              <span>Productos ({products.length})</span>
-            </div>
-            <div className="custom-package-categories-item">
-              <span>Servicios ({services.length})</span>
-            </div>
-            <div className="custom-package-categories-item">
-              <span>Beneficios ({benefits.length})</span>
-            </div>
+            {categories.map((cat) => (
+              <div
+                key={cat.name}
+                className={`custom-package-categories-item${activeCategory === cat.name ? ' custom-package-categories-item-cta' : ''}`}
+                onClick={() => handleCategoryClick(cat.ref, cat.name)}
+                style={{ cursor: 'pointer' }}
+              >
+                <span>
+                  {cat.name} ({cat.count})
+                </span>
+              </div>
+            ))}
           </div>
           {/* ================= PRODUCTS ================= */}
+          <div ref={productsSectionRef} />
           <ProductsSection
             products={products}
             setProductsInCart={setProductsInCart}
@@ -561,6 +753,7 @@ const CustomPackageDetailsContent: React.FC = () => {
             setSelectedProduct={setSelectedProduct}
           />
           {/* ================= SERVICES ================= */}
+          <div ref={servicesSectionRef} />
           <ServiceSection
             services={services}
             setServicesInCart={setServicesInCart}
@@ -568,11 +761,20 @@ const CustomPackageDetailsContent: React.FC = () => {
             setSelectedService={setSelectedService}
           />
           {/* ================= BENEFITS ================= */}
+          <div ref={benefitsSectionRef} />
           <BenefitsSection
             benefits={benefits}
             setBenefitsInCart={setBenefitsInCart}
             selectedBenefit={selectedBenefit}
             setSelectedBenefit={setSelectedBenefit}
+          />
+          {/* ================= DISCOUNTS ================= */}
+          <div ref={discountsSectionRef} />
+          <DiscountsSection
+            selectedDiscount={selectedDiscount}
+            setSelectedDiscount={setSelectedDiscount}
+            discounts={discounts}
+            setDiscountsInCart={setDiscountsInCart}
           />
           {/* ================= REVIEWS ================= */}
           <section
@@ -724,7 +926,8 @@ const CustomPackageDetailsContent: React.FC = () => {
             <div className="custom-package-aside-total-card">
               {productsInCart.length !== 0 ||
               servicesInCart.length !== 0 ||
-              benefitsInCart.length !== 0 ? (
+              benefitsInCart.length !== 0 ||
+              discountsInCart.length !== 0 ? (
                 <>
                   <div className="custom-package-aside-total-card-title-container">
                     <svg
@@ -763,7 +966,7 @@ const CustomPackageDetailsContent: React.FC = () => {
                       {getTotalServicesInCart() > 1 ? 's' : ''}
                     </span>
                   )}
-                  {/*getTotalBenefitsInCart()*/}
+
                   {benefitsInCart.length !== 0 && (
                     <span
                       style={{
@@ -774,6 +977,19 @@ const CustomPackageDetailsContent: React.FC = () => {
                     >
                       • {getTotalBenefitsInCart()} beneficio
                       {getTotalBenefitsInCart() > 1 ? 's' : ''}
+                    </span>
+                  )}
+
+                  {discountsInCart.length !== 0 && (
+                    <span
+                      style={{
+                        fontSize: 13,
+                        color: '#8c8c8c',
+                        fontWeight: 300,
+                      }}
+                    >
+                      • {getTotalDiscountsInCart()} descuento
+                      {getTotalDiscountsInCart() > 1 ? 's' : ''}
                     </span>
                   )}
                   <button
@@ -889,7 +1105,11 @@ const CustomPackageDetailsContent: React.FC = () => {
         benefits={benefits}
         benefitsInCart={benefitsInCart}
         setBenefitsInCart={setBenefitsInCart}
-        handleEditBenefitClick={() => {}}
+        handleEditBenefitClick={handleEditBenefitClick}
+        discounts={discounts}
+        discountsInCart={discountsInCart}
+        setDiscountsInCart={setDiscountsInCart}
+        handleEditDiscountClick={handleEditDiscountClick}
       />
       {/* ================= EDIT PRODUCT ================= */}
       <EditProductModal
@@ -916,6 +1136,28 @@ const CustomPackageDetailsContent: React.FC = () => {
         setEditServiceModalError={setEditServiceModalError}
         setServicesInCart={setServicesInCart}
         setSelectedService={setSelectedService}
+      />
+      {/* ================= EDIT BENEFIT ================= */}
+      <EditBenefitModal
+        openEditBenefitModal={openEditBenefitModal}
+        setOpenEditBenefitModal={setOpenEditBenefitModal}
+        editBenefitData={editBenefitData}
+        setEditBenefitData={setEditBenefitData}
+        editBenefitAmount={editBenefitAmount}
+        setEditBenefitAmount={setEditBenefitAmount}
+        setBenefitsInCart={setBenefitsInCart}
+        setSelectedBenefit={setSelectedBenefit}
+      />
+      {/* ================= EDIT DISCOUNT ================= */}
+      <EditDiscountModal
+        openEditDiscountModal={openEditDiscountModal}
+        setOpenEditDiscountModal={setOpenEditDiscountModal}
+        editDiscountData={editDiscountData}
+        setEditDiscountData={setEditDiscountData}
+        editDiscountAmount={editDiscountAmount}
+        setEditDiscountAmount={setEditDiscountAmount}
+        setDiscountsInCart={setDiscountsInCart}
+        setSelectedDiscount={setSelectedDiscount}
       />
     </>
   );
