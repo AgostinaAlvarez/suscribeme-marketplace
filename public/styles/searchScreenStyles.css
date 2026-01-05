@@ -66,7 +66,7 @@
 }
 
 .search-screen-content-container {
-  max-width: 860px;
+  max-width: 930px;
   box-sizing: border-box;
   margin: 0 auto;
   display: flex;
@@ -94,7 +94,7 @@
 .search-screen-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 28px;
   margin-bottom: 40px;
 }
 

@@ -203,6 +203,10 @@ const SearchScreenComponent: React.FC = () => {
     string[]
   >([]);
 
+  const [transactionAmountFilter, setTransactionAmountFilter] = useState<
+    (number | undefined)[]
+  >([]);
+
   return (
     <>
       <aside className="search-screen-aside">
@@ -219,14 +223,29 @@ const SearchScreenComponent: React.FC = () => {
               backgroundColor: ' #ffffff',
               display: 'flex',
               flexDirection: 'column',
-              gap: 25,
+              gap: 15,
 
               opacity: hideAside ? 0 : 1,
               pointerEvents: hideAside ? 'none' : 'auto',
               transition: 'opacity 0.3s',
             }}
           >
-            <span style={{ fontSize: 15, fontWeight: 600 }}>Filter</span>
+            <div
+              style={{
+                width: '100%',
+                boxSizing: 'border-box',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}
+            >
+              <span style={{ fontSize: 15, fontWeight: 600 }}>Filter</span>
+              <span
+                style={{ fontSize: 12, color: '#1890ff', cursor: 'pointer' }}
+              >
+                Reset Filters
+              </span>
+            </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <span style={{ fontSize: 13, color: '#595959' }}>
                 Tipo de suscripcion
@@ -294,6 +313,88 @@ const SearchScreenComponent: React.FC = () => {
                   </label>
                 ))}
               </div>
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 10,
+              }}
+            >
+              <span style={{ fontSize: 13, color: '#595959' }}>
+                Rango de precio
+              </span>
+
+              <div
+                style={{
+                  width: '100%',
+                  display: 'grid',
+                  gridTemplateColumns: '1fr auto 1fr',
+                  alignItems: 'center',
+                  gap: 5,
+                }}
+              >
+                <input
+                  type="number"
+                  style={{
+                    width: '100%',
+                    fontSize: 13,
+                    padding: '5px',
+                    boxSizing: 'border-box',
+                  }}
+                  min={0}
+                  value={
+                    transactionAmountFilter[0] === undefined
+                      ? ''
+                      : transactionAmountFilter[0]
+                  }
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    const newMin = val === '' ? undefined : Number(val);
+                    const newMax = transactionAmountFilter[1];
+                    if (
+                      (newMin === undefined || newMin === 0) &&
+                      (newMax === undefined || newMax === 0)
+                    ) {
+                      setTransactionAmountFilter([]);
+                    } else {
+                      setTransactionAmountFilter([newMin, newMax]);
+                    }
+                  }}
+                  placeholder="Mínimo"
+                />
+                <span style={{ fontSize: 20 }}>-</span>
+                <input
+                  type="number"
+                  style={{
+                    width: '100%',
+                    fontSize: 13,
+                    padding: '5px',
+                    boxSizing: 'border-box',
+                  }}
+                  min={0}
+                  value={
+                    transactionAmountFilter[1] === undefined
+                      ? ''
+                      : transactionAmountFilter[1]
+                  }
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    const newMax = val === '' ? undefined : Number(val);
+                    const newMin = transactionAmountFilter[0];
+                    if (
+                      (newMin === undefined || newMin === 0) &&
+                      (newMax === undefined || newMax === 0)
+                    ) {
+                      setTransactionAmountFilter([]);
+                    } else {
+                      setTransactionAmountFilter([newMin, newMax]);
+                    }
+                  }}
+                  placeholder="Máximo"
+                />
+              </div>
+              <button>Aplicar</button>
             </div>
           </div>
           {/*
