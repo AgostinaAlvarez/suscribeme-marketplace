@@ -18,6 +18,40 @@ interface CustomPackageData {
 }
 
 const SearchScreenComponent: React.FC = () => {
+  // Estado para ocultar el aside al llegar al footer
+  const [hideAside, setHideAside] = useState(false);
+  const asideRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          // Footer detection
+          const footer = document.querySelector('footer');
+          const aside = asideRef.current;
+          if (footer && aside) {
+            const footerRect = footer.getBoundingClientRect();
+            const asideRect = aside.getBoundingClientRect();
+            // Ajusta el margen de seguridad para que el aside desaparezca antes de tocar el footer
+            if (asideRect.bottom > footerRect.top - 20) {
+              setHideAside(true);
+            } else {
+              setHideAside(false);
+            }
+          }
+
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const packages: PackageData[] = [
     {
       _id: '1',
@@ -151,16 +185,126 @@ const SearchScreenComponent: React.FC = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
+  const [selectedSubscriptionType, setSelectedSubscriptionType] = useState<
+    'standar-package' | 'custom-package'
+  >('standar-package');
+
+  const subscriptionTypeOptions = [
+    'Productos',
+    'Servicios',
+    'Mistery Box',
+    'Beneficios',
+    'Descuentos',
+  ];
+  const [selectedTypeOptions, setSelectedTypeOptions] = useState<string[]>([]);
+
+  const filterTypeOptions = ['Más Relevante', 'Menor Precio', 'Mayor Precio'];
+  const [selectedFilterTypeOptions, setSelectedFilterTypeOptions] = useState<
+    string[]
+  >([]);
+
   return (
     <>
       <aside className="search-screen-aside">
         <section className="search-screen-aside-container">
+          <h1 className="visually-hidden">Zapatillas</h1>
+          <div
+            ref={asideRef}
+            style={{
+              width: '100%',
+
+              boxSizing: 'border-box',
+              padding: '20px',
+              border: '1px solid #efefef',
+              backgroundColor: ' #ffffff',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 25,
+
+              opacity: hideAside ? 0 : 1,
+              pointerEvents: hideAside ? 'none' : 'auto',
+              transition: 'opacity 0.3s',
+            }}
+          >
+            <span style={{ fontSize: 15, fontWeight: 600 }}>Filter</span>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <span style={{ fontSize: 13, color: '#595959' }}>
+                Tipo de suscripcion
+              </span>
+              <div className="radio-group" style={{ marginTop: 10 }}>
+                {subscriptionTypeOptions.map((value) => (
+                  <label
+                    key={value}
+                    className="radio-card"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 6,
+                      marginBottom: 6,
+                    }}
+                  >
+                    <input
+                      type="checkbox"
+                      value={value}
+                      checked={selectedTypeOptions.includes(value)}
+                      onChange={() => {
+                        setSelectedTypeOptions((prev) =>
+                          prev.includes(value)
+                            ? prev.filter((v) => v !== value)
+                            : [...prev, value],
+                        );
+                      }}
+                      name="subscription-type"
+                    />
+                    <span>{value}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <span style={{ fontSize: 13, color: '#595959' }}>
+                Filtrar por
+              </span>
+              <div className="radio-group" style={{ marginTop: 10 }}>
+                {filterTypeOptions.map((value) => (
+                  <label
+                    key={value}
+                    className="radio-card"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 6,
+                      marginBottom: 6,
+                    }}
+                  >
+                    <input
+                      type="checkbox"
+                      value={value}
+                      checked={selectedFilterTypeOptions.includes(value)}
+                      onChange={() => {
+                        setSelectedFilterTypeOptions((prev) =>
+                          prev.includes(value)
+                            ? prev.filter((v) => v !== value)
+                            : [...prev, value],
+                        );
+                      }}
+                      name="subscription-type"
+                    />
+                    <span>{value}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          </div>
+          {/*
           <article>
             <h1>Zapatillas</h1>
             <span>1,600 resultados</span>
             <a href="#standar-packages-section">1,400 paquetes standar</a>
             <a href="#custom-packages-section">200 paquetes personalizados</a>
           </article>
+            */}
+          {/*
           <nav aria-label="Filtrar por tipo de suscripción">
             <h2 className="search-screen-aside-subttl">Tipo de suscripcion</h2>
             <ul>
@@ -195,10 +339,100 @@ const SearchScreenComponent: React.FC = () => {
               </li>
             </ul>
           </nav>
+              */}
         </section>
       </aside>
       <div className="search-screen-content">
+        <div
+          style={{
+            width: '100%',
+            boxSizing: 'border-box',
+            position: 'sticky',
+            //backgroundColor: 'green',
+            backgroundColor: '#f9fafb',
+            top: '110px',
+            left: 0,
+            zIndex: 100,
+            padding: '15px 20px',
+            paddingBottom: 35,
+            paddingRight: 70,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 20,
+          }}
+        >
+          {/*Subscription Type*/}
+          <div
+            style={{
+              width: '100%',
+              boxSizing: 'border-box',
+              display: 'flex',
+              gap: 10,
+              alignItems: 'center',
+              height: 'fit-content',
+            }}
+          >
+            <div
+              onClick={() => {
+                setSelectedSubscriptionType('standar-package');
+              }}
+              className={`search-screen-type-content ${selectedSubscriptionType === 'standar-package' ? 'search-screen-type-content-selected' : ''}`}
+            >
+              <span>Standar Package</span>
+              <div
+                className={`search-screen-type-value ${selectedSubscriptionType === 'standar-package' ? 'search-screen-type-value-selected' : ''}`}
+              >
+                <span>4,500 results</span>
+              </div>
+            </div>
+            <div
+              style={{
+                height: '30px',
+                width: '1px',
+                backgroundColor: '#bfbfbf',
+              }}
+            ></div>
+            <div
+              onClick={() => {
+                setSelectedSubscriptionType('custom-package');
+              }}
+              className={`search-screen-type-content ${selectedSubscriptionType === 'custom-package' ? 'search-screen-type-content-selected' : ''}`}
+            >
+              <span>Custom Package</span>
+              <div
+                className={`search-screen-type-value ${selectedSubscriptionType === 'custom-package' ? 'search-screen-type-value-selected' : ''}`}
+              >
+                <span>4,500 results</span>
+              </div>
+            </div>
+          </div>
+          {/*Results*/}
+          <div
+            style={{
+              width: '100%',
+              boxSizing: 'border-box',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              fontSize: 13,
+              color: '#8c8c8c',
+            }}
+          >
+            <span style={{ color: ' #000000' }}>
+              1 - 16 over 7,000 results for{' '}
+              <span
+                style={{ color: ' #ec781c', marginLeft: 5, fontWeight: 600 }}
+              >
+                "Zapatillas"
+              </span>
+            </span>
+            <span>Sort By:</span>
+          </div>
+        </div>
         <div className="search-screen-content-container">
+          {selectedSubscriptionType === 'standar-package' && (
+            <>
+              {/*
           <section
             className="search-screen-content-section-container"
             id="standar-packages-section"
@@ -207,132 +441,146 @@ const SearchScreenComponent: React.FC = () => {
             <h2 id="standar-packages-title">Paquetes de Suscripcion</h2>
             <span>(1,400 resultados)</span>
           </section>
-          <section
-            className="search-screen-grid"
-            aria-label="Paquetes de Suscripcion"
-          >
-            {packages.slice(0, 6).map((pckg, index) => (
-              <article className="card-content" key={index}>
-                {pckg.coverImage ? (
-                  <img
-                    className="card-image"
-                    src={pckg.coverImage.url}
-                    alt={`${pckg.title}`}
-                    loading="lazy"
-                    decoding="async"
-                    referrerPolicy="no-referrer"
-                  />
-                ) : (
-                  <div className="card-image-default" aria-hidden="true"></div>
-                )}
-                <div className="card-content-information">
-                  <div className="card-content-information-description-container">
-                    <h3>{pckg.title}</h3>
-                    <p>{pckg.briefDescription}</p>
-                    <span>3.5 ★★★★★ (76)</span>
-                    {pckg.plans.slice(0, 2).map((plan, index) => (
-                      <h4 key={index}>
-                        {plan.title} ${plan.price} {plan.currencyId}{' '}
-                        <span>/mo</span>
-                      </h4>
-                    ))}
-                  </div>
-                  <button
-                    className="card-button"
-                    onClick={() => (window.location.href = '/package')}
-                  >
-                    View Package
-                  </button>
-                </div>
-              </article>
-            ))}
-          </section>
-          <nav
-            className="pagination-container"
-            aria-label="Paginación de paquetes estándar"
-          >
-            <button className="pagination-arrow">‹</button>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((page) => (
-              <button
-                key={page}
-                className={`pagination-item ${currentPage === page ? 'active' : ''}`}
-                onClick={() => setCurrentPage(page)}
+            */}
+              <section
+                className="search-screen-grid"
+                aria-label="Paquetes de Suscripcion"
               >
-                {page}
-              </button>
-            ))}
-            <button className="pagination-next">Siguiente ›</button>
-          </nav>
-          <section
-            className="search-screen-content-section-container"
-            id="custom-packages-section"
-            aria-labelledby="custom-packages-title"
-          >
-            <h2 id="custom-packages-title">Paquetes Personalizables</h2>
-            <span>(300 resultados)</span>
-          </section>
-          <section
-            className="search-screen-grid"
-            aria-label="Paquetes Personalizables"
-          >
-            {custom_packages.slice(0, 3).map((_, index) => (
-              <article
-                className="card-content custom-package-card-content"
-                key={index}
-              >
-                <div className="card-content-information custom-package-card-content-information">
-                  <div className="card-content-information-description-container">
-                    <div className="card-tag">
-                      <span>Belleza y Care</span>
-                    </div>
-                    <div className="store-container">
-                      <div className="store-container-avatar"></div>
-                      <div className="store-container-data-content">
-                        <span className="store-container-name">
-                          Beauty Store
-                        </span>
-                        <span className="store-container-username">
-                          @beautystoreofficial
-                        </span>
+                {packages.slice(0, 6).map((pckg, index) => (
+                  <article className="card-content" key={index}>
+                    {pckg.coverImage ? (
+                      <img
+                        className="card-image"
+                        src={pckg.coverImage.url}
+                        alt={`${pckg.title}`}
+                        loading="lazy"
+                        decoding="async"
+                        referrerPolicy="no-referrer"
+                      />
+                    ) : (
+                      <div
+                        className="card-image-default"
+                        aria-hidden="true"
+                      ></div>
+                    )}
+                    <div className="card-content-information">
+                      <div className="card-content-information-description-container">
+                        <h3>{pckg.title}</h3>
+                        <p>{pckg.briefDescription}</p>
+                        <span>3.5 ★★★★★ (76)</span>
+                        {pckg.plans.slice(0, 2).map((plan, index) => (
+                          <h4 key={index}>
+                            {plan.title} ${plan.price} {plan.currencyId}{' '}
+                            <span>/mo</span>
+                          </h4>
+                        ))}
                       </div>
+                      <button
+                        className="card-button"
+                        onClick={() => (window.location.href = '/package')}
+                      >
+                        View Package
+                      </button>
                     </div>
-                    <div className="card-started-amount-content">
-                      <h4>Desde $4,500</h4>
-                      <p>Monto mínimo de suscripción</p>
-                    </div>
-                    <div className="card-features">
-                      <span>23 productos configurables</span>
-                      <span>Cantidades mínimas y máximas</span>
-                      <span>Envío a domicilio o retiro en tienda</span>
-                    </div>
-                    <span>3.5 ★★★★★ (76)</span>
-                  </div>
-                  <button
-                    className="card-button"
-                    onClick={() => (window.location.href = '/custom-package')}
-                  >
-                    View Package
-                  </button>
-                </div>
-              </article>
-            ))}
-          </section>
-          <nav
-            className="pagination-container"
-            aria-label="Paginación de paquetes personalizables"
-          >
-            <button className="pagination-arrow">‹</button>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((page) => (
-              <button
-                key={page}
-                className={`pagination-item ${currentPage === page ? 'active' : ''}`}
-                onClick={() => setCurrentPage(page)}
+                  </article>
+                ))}
+              </section>
+              <nav
+                className="pagination-container"
+                aria-label="Paginación de paquetes estándar"
               >
-                {page}
-              </button>
-            ))}
-            <button className="pagination-next">Siguiente ›</button>
-          </nav>
+                <button className="pagination-arrow">‹</button>
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((page) => (
+                  <button
+                    key={page}
+                    className={`pagination-item ${currentPage === page ? 'active' : ''}`}
+                    onClick={() => setCurrentPage(page)}
+                  >
+                    {page}
+                  </button>
+                ))}
+                <button className="pagination-next">Siguiente ›</button>
+              </nav>
+            </>
+          )}
+          {selectedSubscriptionType === 'custom-package' && (
+            <>
+              {/*
+              <section
+                className="search-screen-content-section-container"
+                id="custom-packages-section"
+                aria-labelledby="custom-packages-title"
+              >
+                <h2 id="custom-packages-title">Paquetes Personalizables</h2>
+                <span>(300 resultados)</span>
+              </section>
+              */}
+              <section
+                className="search-screen-grid"
+                aria-label="Paquetes Personalizables"
+              >
+                {custom_packages.slice(0, 3).map((_, index) => (
+                  <article
+                    className="card-content custom-package-card-content"
+                    key={index}
+                  >
+                    <div className="card-content-information custom-package-card-content-information">
+                      <div className="card-content-information-description-container">
+                        <div className="card-tag">
+                          <span>Belleza y Care</span>
+                        </div>
+                        <div className="store-container">
+                          <div className="store-container-avatar"></div>
+                          <div className="store-container-data-content">
+                            <span className="store-container-name">
+                              Beauty Store
+                            </span>
+                            <span className="store-container-username">
+                              @beautystoreofficial
+                            </span>
+                          </div>
+                        </div>
+                        <div className="card-started-amount-content">
+                          <h4>Desde $4,500</h4>
+                          <p>Monto mínimo de suscripción</p>
+                        </div>
+                        <div className="card-features">
+                          <span>23 productos configurables</span>
+                          <span>Cantidades mínimas y máximas</span>
+                          <span>Envío a domicilio o retiro en tienda</span>
+                        </div>
+                        <span>3.5 ★★★★★ (76)</span>
+                      </div>
+                      <button
+                        className="card-button"
+                        onClick={() =>
+                          (window.location.href = '/custom-package')
+                        }
+                      >
+                        View Package
+                      </button>
+                    </div>
+                  </article>
+                ))}
+              </section>
+              <nav
+                className="pagination-container"
+                aria-label="Paginación de paquetes personalizables"
+              >
+                <button className="pagination-arrow">‹</button>
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((page) => (
+                  <button
+                    key={page}
+                    className={`pagination-item ${currentPage === page ? 'active' : ''}`}
+                    onClick={() => setCurrentPage(page)}
+                  >
+                    {page}
+                  </button>
+                ))}
+                <button className="pagination-next">Siguiente ›</button>
+              </nav>
+            </>
+          )}
         </div>
       </div>
     </>

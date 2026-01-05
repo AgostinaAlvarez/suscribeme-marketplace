@@ -249,3 +249,54 @@ header .navbar-container a:hover {
   object-fit: cover;
   object-position: center;
 }
+
+/**/
+
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Contenedor clickable */
+.radio-card {
+  cursor: pointer;
+}
+
+/* Ocultamos el radio real */
+.radio-card input {
+  display: none;
+}
+
+/* Botón visual */
+.radio-card span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 7px 15px;
+  min-width: 70px;
+
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+
+  font-size: 12px;
+  font-weight: 400;
+
+  background-color: #ffffff;
+  color: #111827;
+  color: #595959;
+  transition: all 0.2s ease;
+}
+
+/* Hover */
+.radio-card:hover span {
+  border-color: #6366f1;
+}
+
+/* Seleccionado */
+.radio-card input:checked + span {
+  border-color: #6366f1;
+  background-color: #eef2ff;
+  color: #4f46e5;
+}
