@@ -1,0 +1,99 @@
+.collection-main {
+  margin-top: 50px;
+  gap: 40px;
+}
+
+.collection-section-container {
+  max-width: 1200px;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+/* ================= HERO SECTION ================= */
+
+.collection-hero-section {
+  box-sizing: border-box;
+  background-color: #101827;
+  color: #bfbfbf;
+}
+
+.collection-hero-section-content {
+  padding: 100px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.collection-hero-section-content h1 {
+  margin: 0;
+  font-size: 40px;
+  color: #fff;
+}
+
+.collection-hero-section-content p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.4;
+  margin-bottom: 15px;
+  max-width: 950px;
+}
+
+/* ================= STICKY BAR ================= */
+
+.collection-sticky-bar-section {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  width: 100vw;
+  z-index: 1000;
+  background-color: red;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+}
+
+.collection-sticky-bar-section-content {
+  width: 1200px;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.collection-sticky-bar-section-banner {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  background-color: #1a0f35;
+  /* Degradado principal (degradado lineal de arriba a abajo) */
+  background-image: 
+    /* 1. Degradado Radial para el "brillo" púrpura/violeta (arriba a la derecha).
+      El tamaño 'circle 600px at 75% 20%' lo posiciona y define su forma.
+      '#4e047f' es el color de inicio, 'rgba(26, 15, 53, 0)' es el transparente.
+    */
+    radial-gradient(
+      circle 600px at 75% 20%,
+      #4e047f 0%,
+      rgba(26, 15, 53, 0) 70%
+    ),
+    /* 2. Degradado Radial para el "brillo" azul (abajo a la izquierda).
+      Posicionado en 'circle 800px at 15% 90%'.
+      '#050830' es un azul muy oscuro, 'rgba(26, 15, 53, 0)' es el transparente.
+    */
+    radial-gradient(
+        circle 800px at 15% 90%,
+        #050830 0%,
+        rgba(26, 15, 53, 0) 70%
+      );
+  color: white;
+}
+
+.collection-sticky-bar-section-filter {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px 30px;
+  background-color: #fff;
+  font-size: 14px;
+  color: #434343;
+  border-top: 1px solid #efefef;
+  border-bottom: 1px solid #efefef;
+}

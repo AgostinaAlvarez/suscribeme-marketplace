@@ -115,7 +115,9 @@ const SearchHeader: React.FC = () => {
           padding: '0px 50px',
           gap: 20,
           fontSize: '13px',
-          color: '#8c8c8c',
+          //color: '#8c8c8c',
+          backgroundColor: '#101827',
+          color: ' #ffffff',
         }}
       >
         <div
@@ -128,7 +130,7 @@ const SearchHeader: React.FC = () => {
           }}
         >
           <img
-            src="/assets/icons/menu.svg"
+            src="/assets/icons/white-menu.svg"
             alt="Menu icon"
             width="14"
             height="14"
