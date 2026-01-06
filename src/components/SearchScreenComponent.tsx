@@ -455,14 +455,16 @@ const SearchScreenComponent: React.FC = () => {
             left: 0,
             zIndex: 100,
             padding: '15px 20px',
-            paddingBottom: 35,
-            paddingRight: 70,
+            paddingRight: 50,
+            //paddingBottom: 35,
+            //paddingRight: 70,
             display: 'flex',
             flexDirection: 'column',
             gap: 20,
           }}
         >
           {/*Subscription Type*/}
+          {/*
           <div
             style={{
               width: '100%',
@@ -507,6 +509,7 @@ const SearchScreenComponent: React.FC = () => {
               </div>
             </div>
           </div>
+            */}
           {/*Results*/}
           <div
             style={{
@@ -527,7 +530,21 @@ const SearchScreenComponent: React.FC = () => {
                 "Zapatillas"
               </span>
             </span>
-            <span>Sort By:</span>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                width: 'fit-content',
+                boxSizing: 'border-box',
+                gap: 20,
+                fontSize: '13px',
+                color: '#8c8c8c',
+              }}
+            >
+              <span>Ready to ship</span>
+              <span>Personal Protective</span>
+              <span>Buyer Central</span>
+            </div>
           </div>
         </div>
         <div className="search-screen-content-container">

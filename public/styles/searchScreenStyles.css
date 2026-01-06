@@ -1,3 +1,7 @@
+.search-body {
+  background-color: #f9fafb;
+}
+
 .search-screen-container {
   width: 100%;
   min-height: 100vh;

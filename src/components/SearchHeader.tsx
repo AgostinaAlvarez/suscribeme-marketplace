@@ -108,47 +108,58 @@ const SearchHeader: React.FC = () => {
           width: '100%',
           height: '50px',
           boxSizing: 'border-box',
-          borderBottom: '1px solid #efefef',
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
           padding: '0px 50px',
           gap: 20,
           fontSize: '13px',
-          //color: '#8c8c8c',
-          backgroundColor: '#101827',
-          color: ' #ffffff',
+          color: '#8c8c8c',
+          //backgroundColor: '#f9fafb',
+          backgroundColor: 'red',
+          justifyContent: 'space-between',
         }}
       >
+        <span>co</span>
         <div
           style={{
+            width: 'fit-content',
             display: 'flex',
             alignItems: 'center',
-            width: 'fit-content',
-            boxSizing: 'border-box',
-            gap: 5,
+            gap: 20,
+            backgroundColor: 'green',
           }}
         >
-          <img
-            src="/assets/icons/white-menu.svg"
-            alt="Menu icon"
-            width="14"
-            height="14"
-            style={{ cursor: 'pointer' }}
-          />
-          <span>Categories</span>
-          <img
-            src="/assets/icons/arrow-down.svg"
-            alt="Arrow Down icon"
-            width="14"
-            height="14"
-            style={{ cursor: 'pointer' }}
-          />
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              width: 'fit-content',
+              boxSizing: 'border-box',
+              gap: 5,
+            }}
+          >
+            <img
+              src="/assets/icons/white-menu.svg"
+              alt="Menu icon"
+              width="14"
+              height="14"
+              style={{ cursor: 'pointer' }}
+            />
+            <span>Categories</span>
+            <img
+              src="/assets/icons/arrow-down.svg"
+              alt="Arrow Down icon"
+              width="14"
+              height="14"
+              style={{ cursor: 'pointer' }}
+            />
+          </div>
+          <span>|</span>
+          <span>Ready to ship</span>
+          <span>Personal Protective</span>
+          <span>Buyer Central</span>
         </div>
-        <span>|</span>
-        <span>Ready to ship</span>
-        <span>Personal Protective</span>
-        <span>Buyer Central</span>
       </div>
     </header>
   );

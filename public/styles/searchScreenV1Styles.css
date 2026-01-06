@@ -1,0 +1,338 @@
+.search-screen-body {
+  background-color: #f9fafb;
+}
+
+.search-screen-main {
+  margin-top: 110px;
+}
+
+.search-screen-section-container {
+  width: 1300px;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+/*---*/
+.search-screen-header {
+  width: 100%;
+  height: fit-content;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  background-color: #f9fafb;
+}
+
+.search-screen-header-nav-container {
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-search-bar-container {
+  width: 600px;
+  box-sizing: border-box;
+  height: 38px;
+  border: 1px solid #efefef;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 2px;
+  overflow: hidden;
+  border-radius: 60px;
+}
+
+.nav-search-bar-icon-container {
+  height: 100%;
+  width: fit-content;
+  padding: 0px 15px;
+  border-right: 1px solid #efefef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-search-bar-button {
+  min-width: 100px;
+  background-color: #fc6c01;
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  font-size: 13px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.nav-search-bar-button span {
+  margin: 0;
+  line-height: 1;
+}
+
+.search-screen-header-results-container {
+  height: 50px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  /*background-color: red;*/
+  font-size: 13px;
+  gap: 40px;
+  box-sizing: border-box;
+}
+
+.search-screen-header-results {
+  width: 100%;
+  height: fit-content;
+  box-sizing: border-box;
+  border-bottom: 1px solid #efefef;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.search-screen-header-result {
+  width: fit-content;
+  padding: 4px 10px;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+}
+
+.search-screen-header-result:hover {
+  color: #1890ff;
+}
+
+.search-screen-header-result-cta {
+  border-bottom: 2px solid #1890ff;
+  color: #1890ff;
+}
+
+/**/
+
+.search-screen-main-grid {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  position: relative;
+  /*background-color: red;*/
+}
+
+.search-screen-main-grid-search-container {
+  width: 320px;
+  height: 100%;
+  box-sizing: border-box;
+  /*background-color: green;*/
+  position: relative;
+  padding-right: 30px;
+  padding-bottom: 30px;
+}
+
+.search-screen-main-grid-search-box {
+  width: 100%;
+  background-color: white;
+  box-sizing: border-box;
+  border: 1px solid #efefef;
+  position: sticky;
+  top: 110px;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.search-screen-main-grid-search-box-header {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search-screen-main-grid-search-box-section {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #595959;
+}
+
+.search-screen-main-grid-search-box-section h3 {
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.search-screen-main-grid-search-box-price-container {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.search-screen-main-grid-search-box-price-container span {
+  font-size: 11px;
+  color: #8c8c8c;
+}
+
+.search-screen-main-grid-search-box-price-input-container {
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  border: 1px solid #efefef;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 13px;
+  align-items: center;
+}
+
+.search-screen-main-grid-search-box-price-input-container span {
+  font-size: 12px;
+  color: #434343;
+}
+
+.search-screen-main-grid-search-box-price-input-container
+  input[type='number']:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: #e0e0e0;
+}
+
+.search-screen-main-grid-content-container {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.search-screen-main-grid-content-header {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #8c8c8c;
+}
+
+.search-screen-main-grid-content-header-labels {
+  width: fit-content;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.search-screen-main-grid-content-cards-grid {
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  row-gap: 35px;
+}
+
+/**/
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  /*margin-bottom: 10px;*/
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Ocultamos el checkbox real */
+.checkbox input {
+  display: none;
+}
+
+/* Caja base */
+.custom-box {
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid #9ca3af;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+/* CHECKBOX CUADRADO */
+.checkbox.square .custom-box {
+  border-radius: 4px;
+}
+
+/* CHECKBOX CIRCULAR (radio visual) */
+.checkbox.circle .custom-box {
+  border-radius: 50%;
+}
+
+/* Estado activo */
+.checkbox input:checked + .custom-box {
+  border-color: #2563eb;
+}
+
+/* Punto interior (radio) */
+.checkbox.circle input:checked + .custom-box::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: #2563eb;
+  border-radius: 50%;
+}
+
+/* Check cuadrado */
+.checkbox.square input:checked + .custom-box::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: #2563eb;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 16px 0;
+}
+
+/*
+@media screen and (min-width: 1600px) {
+  .search-screen-section-container {
+    width: 1400px;
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+}
+*/
+.ant-loader {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #1677ff; /* azul Ant Design */
+  border-radius: 50%;
+  animation: ant-spin 0.8s linear infinite;
+}
+
+@keyframes ant-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

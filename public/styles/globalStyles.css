@@ -301,3 +301,47 @@ header .navbar-container a:hover {
   background-color: #eef2ff;
   color: #4f46e5;
 }
+
+/**/
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 60px;
+}
+
+.pagination-item,
+.pagination-arrow,
+.pagination-next {
+  min-width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: none;
+  background-color: transparent;
+  color: #6b7280;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination-item:hover,
+.pagination-arrow:hover,
+.pagination-next:hover {
+  background-color: #e5e7eb;
+}
+
+.pagination-item.active {
+  background-color: #ffffff;
+  border: 2px solid #3b82f6;
+  color: #111827;
+  font-weight: 500;
+}
+
+.pagination-arrow,
+.pagination-next {
+  font-weight: 500;
+}
