@@ -8,7 +8,7 @@
 }
 
 .index-section-container {
-  width: 1300px;
+  width: 1250px;
   box-sizing: border-box;
   margin: 0 auto;
 }
@@ -54,6 +54,7 @@
 }
 
 .index-tag-filter span {
+  color: violet;
   margin: 0;
   line-height: 1;
   font-size: 13px;
@@ -111,8 +112,9 @@
 }
 
 .item-content {
-  max-width: 1300px;
+  max-width: 1250px;
   margin: 0 auto;
+  border: 1px solid violet;
   height: 100%;
   box-sizing: border-box;
   padding: 20px 0px;
@@ -236,29 +238,162 @@ li {
   border-radius: 10px 0px 0px 10px;
 }
 
+/*================= HIGHLIGHTS SECTION =================*/
+
+/* Highlights Slider Styles - AJUSTADO PARA RESPETAR EL GRID Y SUPERPONER FLECHAS */
+.highlights-slider-container {
+  position: relative;
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+}
+.highlights-slider {
+  width: 100%;
+  min-height: 220px;
+}
+.highlights-slide {
+  width: 100%;
+  /* Usa el grid original de 6 columnas */
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+  transition: opacity 0.3s ease;
+}
+
+.highlights-slide[style*='display:none'] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.highlights-slider-nav {
+  position: absolute;
+  top: 50%;
+  left: -20px;
+  display: flex;
+  justify-content: space-between;
+  width: 1290px;
+  pointer-events: none;
+  z-index: 2;
+  /*background-color: pink;*/
+  padding: 0px;
+}
+
+.highlights-slider-arrow {
+  pointer-events: auto;
+  background: #fff;
+  border: 1px solid #e0e6f7;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  color: #2a4b8d;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.highlights-slider-arrow:disabled {
+  /*opacity: 0.5;*/
+  /*
+  cursor: not-allowed;
+  */
+  background-color: transparent;
+  border: none;
+  color: transparent;
+  box-shadow: none;
+}
+
 /*================= CATEGORIES SECTION =================*/
-.index-categories-grid {
+.index-highlight-grid {
   width: 100%;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: repeat(9, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 20px;
 }
 
-.index-categories-grid-item {
+.index-highlight-grid-item {
   width: 100%;
-  height: 155px;
+  height: 300px;
   box-sizing: border-box;
   border-radius: 10px;
-  border: 1px solid #000;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px 10px;
+  padding: 20px;
   font-size: 13px;
-  color: grey;
+  justify-content: space-between;
+  background-color: #f9fafb;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.index-highlight-grid-item-header {
+  height: 140px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  gap: 30px;
+  gap: 15px;
+  background-color: red;
+  background-color: transparent;
+}
+
+.index-highlight-grid-item-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.index-highlight-grid-item-bottom {
+  height: 100px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  background-color: green;
+  background-color: transparent;
+}
+
+.index-highlight-grid-item-bottom p {
+  margin: 0;
+  line-height: 1.5;
+  font-size: 12px;
+}
+
+.index-highlight-grid-item-bottom-tag {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
+  border: 1px solid #bfdbfe;
+  background-color: #f0f6ff;
+  color: #1f3a89;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11.5px;
+}
+
+.index-highlight-grid-item-bottom-tag span {
+  margin: 0;
+  line-height: 1;
+}
+
+.index-highlight-grid-item:hover {
+  background-color: #fff;
+  box-shadow:
+    20px 20px 60px #d9d9d9,
+    -20px -20px 60px #ffffff;
 }
 
 /*================= FEATURED PLANS SECTION =================*/
@@ -273,31 +408,65 @@ li {
   gap: 20px;
 }
 
+.banners-section-img {
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  object-fit: cover;
+}
+
 .banners-section-left-col {
+  width: 100%;
+  min-height: 400px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.banners-section-left-col-layer {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  border-radius: 10px;
-  padding: 50px 40px;
-  background: #1aba66;
+  position: absolute;
+  top: 0;
+  left: 0;
   background: linear-gradient(
     0deg,
-    rgba(26, 186, 102, 1) 0%,
-    rgba(15, 62, 40, 1) 100%
+    rgba(255, 255, 255, 0) 0%,
+    rgba(0, 0, 0, 0.862) 100%
   );
+  padding: 50px 40px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   align-items: center;
   text-align: center;
   color: white;
-  position: relative;
+  /*
+  background: #1aba66;
+  background: linear-gradient(
+    0deg,
+    rgba(26, 186, 102, 1) 0%,
+    rgba(15, 62, 40, 1) 100%
+  );
+  */
 }
-.banners-section-left-col h2 {
+
+.banners-section-left-col-img {
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  object-fit: cover;
+}
+
+.banners-section-left-col-layer h2 {
   font-size: 30px;
   margin: 0;
   font-weight: 450;
 }
+
+/**/
 
 .banners-section-right-col {
   width: 100%;
@@ -309,9 +478,61 @@ li {
 
 .banners-section-right-col-card {
   width: 100%;
-  height: fit-content;
-  padding: 40px;
+  height: 200px;
   box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 10px;
+  position: relative;
+}
+
+.banners-section-right-col-card-layout {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
+}
+
+.banners-section-right-col-card-layout h2 {
+  font-size: 30px;
+  margin: 0;
+  font-weight: 450;
+  max-width: 300px;
+}
+
+.banners-section-right-col-first-card-layout {
+  background: linear-gradient(
+    190deg,
+    rgb(0, 0, 0) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  align-items: flex-end;
+  text-align: end;
+}
+
+.banners-section-right-col-second-card-layout {
+  background: linear-gradient(
+    160deg,
+    rgb(0, 0, 0) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  align-items: flex-start;
+  text-align: start;
+}
+
+/*
+
+.banners-section-right-col-card {
+  width: 100%;
+  height: fit-content;
+  box-sizing: border-box;
+  padding: 40px;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -323,6 +544,14 @@ li {
     rgba(216, 74, 80, 1) 100%
   );
   position: relative;
+}
+
+.banners-section-right-col-layer {
+  width: 100%;
+  height: fit-content;
+  box-sizing: border-box;
+  padding: 40px;
+  background-color: red;
 }
 
 .banners-section-right-col-card-first {
@@ -349,6 +578,7 @@ li {
   margin: 0;
   font-weight: 450;
 }
+*/
 
 /*================= SELLERS SECTION =================*/
 

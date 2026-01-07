@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import '../../public/styles/planCarouselStyles.css';
+import '../../public/styles/globalStyles.css';
 
 interface CustomPackageData {
   _id: string;
@@ -122,9 +123,17 @@ const FeaturedCustomPackagesCarusel: React.FC = () => {
   return (
     <>
       <section className="carousel">
+        {/*
         <button className="arrow prev" onClick={goPrev}>
           {'<'}
         </button>
+          */}
+        <div
+          className="carousel-default-button carousel-default-left-button"
+          onClick={goPrev}
+        >
+          <span>{'<'}</span>
+        </div>
         <div className="viewport">
           <div className="track" ref={trackRef}>
             {packages.map((_, index) => (
@@ -170,9 +179,17 @@ const FeaturedCustomPackagesCarusel: React.FC = () => {
             ))}
           </div>
         </div>
+        <div
+          className="carousel-default-button carousel-default-right-button"
+          onClick={goNext}
+        >
+          <span>{'>'}</span>
+        </div>
+        {/*
         <button className="arrow next" onClick={goNext}>
           {'>'}
         </button>
+          */}
       </section>
     </>
   );

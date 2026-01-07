@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
-//import { Image } from 'astro:assets';
 import '../../public/styles/planCarouselStyles.css';
+import '../../public/styles/globalStyles.css';
 
 interface PackageData {
   _id: string;
@@ -16,7 +16,6 @@ interface PackageData {
 }
 
 const FeaturedPackagesCarousel: React.FC = () => {
-  //const [packages, setPackages] = useState<PackageData[]>([]);
   const packages: PackageData[] = [
     {
       _id: '1',
@@ -241,9 +240,17 @@ const FeaturedPackagesCarousel: React.FC = () => {
   return (
     <>
       <section className="carousel">
+        {/*
         <button className="arrow prev" onClick={goPrev}>
           {'<'}
         </button>
+        */}
+        <div
+          className="carousel-default-button carousel-default-left-button"
+          onClick={goPrev}
+        >
+          <span>{'<'}</span>
+        </div>
         <div className="viewport">
           <div className="track" ref={trackRef}>
             {packages.map((pckg) => (
@@ -290,9 +297,17 @@ const FeaturedPackagesCarousel: React.FC = () => {
             ))}
           </div>
         </div>
+        {/*
         <button className="arrow next" onClick={goNext}>
           {'>'}
         </button>
+        */}
+        <div
+          className="carousel-default-button carousel-default-right-button"
+          onClick={goNext}
+        >
+          <span>{'>'}</span>
+        </div>
       </section>
     </>
   );

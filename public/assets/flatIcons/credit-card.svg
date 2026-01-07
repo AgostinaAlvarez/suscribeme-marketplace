@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" fill="none" viewBox="0 0 128 128" id="credit-card">
+  <rect width="68.549" height="44.512" x="35.463" y="57.488" stroke="#000" stroke-width="5" rx="5"></rect>
+  <rect width="9" height="4" stroke="#000" stroke-linejoin="round" stroke-width="4" rx="2" transform="matrix(1 0 0 -1 43 94)"></rect>
+  <rect width="10" height="3" stroke="#000" stroke-linejoin="round" stroke-width="4" rx="1.5" transform="matrix(1 0 0 -1 58 93)"></rect>
+  <rect width="9" height="3" stroke="#000" stroke-linejoin="round" stroke-width="4" rx="1.5" transform="matrix(1 0 0 -1 73 93)"></rect>
+  <rect width="9" height="3" stroke="#000" stroke-linejoin="round" stroke-width="4" rx="1.5" transform="matrix(1 0 0 -1 87 93)"></rect>
+  <rect width="68.549" height="44.512" x="23" y="63.274" fill="#FFD84E" stroke="#000" stroke-width="5" rx="5" transform="rotate(-30 23 63.274)"></rect>
+  <path stroke="#000" stroke-linecap="round" stroke-width="5" d="M48.0696 88.8914L60.4052 81.7694M44.5085 82.7235L66.4813 70.0375"></path>
+  <rect width="66.768" height="10.683" x="28.667" y="71.31" fill="#000" transform="rotate(-30 28.667 71.31)"></rect>
+</svg>

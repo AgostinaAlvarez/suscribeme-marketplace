@@ -5,43 +5,86 @@ import BestSellersGrid from '../components/BestSellersGrid.tsx';
 import FeaturedCustomPackagesCarusel from '../components/FeaturedCustomPackagesCarusel.tsx';
 import CuratedCollectionsCarousel from '../components/CuratedCollectionsCarousel.tsx';
 import PrincipalHeader from '../components/StructureComponents/PrincipalHeader.tsx';
-
-const categories: { imageUrl: string; title: string }[] = [
+import IndexCataegorySection from '../components/IndexCataegorySection';
+const highlights: {
+  imageUrl: string;
+  title: string;
+  description: string;
+  briefDescription: string;
+  tagText: string;
+}[] = [
   {
-    imageUrl: '/assets/icons/gift-black.svg',
-    title: 'Bennefits',
+    imageUrl: '/assets/flatIcons/box.svg',
+    title: 'Suscripciones listas para vos',
+    description:
+      'Descubrí paquetes de suscripción creados por vendedores, con planes mensuales o anuales según tus necesidades.',
+    briefDescription: 'Paquetes de suscripción con planes mensuales o anuales.',
+    tagText: 'Ver paquetes',
   },
   {
-    imageUrl: '/assets/icons/fitness-black.svg',
-    title: 'Fitness',
+    imageUrl: '/assets/flatIcons/shopping-cart.svg',
+    title: 'Armá tu plan a medida',
+    description:
+      'Elegí productos, servicios o beneficios y creá tu propia suscripción personalizada desde un solo lugar.',
+    briefDescription:
+      'Combiná productos y servicios para crear tu suscripción.',
+    tagText: 'Crear mi plan',
   },
   {
-    imageUrl: '/assets/icons/health-black.svg',
-    title: 'Health And Beauty',
+    imageUrl: '/assets/flatIcons/quality.svg',
+    title: 'Vendedores verificados',
+    description:
+      'Trabajamos con marcas y comercios que cumplen estándares de calidad y servicio.',
+    briefDescription: 'Marcas y comercios verificados por la plataforma.',
+    tagText: 'Cómo validamos',
   },
   {
-    imageUrl: '/assets/icons/food-black.svg',
-    title: 'Food & Drink',
+    imageUrl: '/assets/flatIcons/credit-card.svg',
+    title: 'Pagos simples y recurrentes',
+    description:
+      'Pagá tu suscripción de forma automática, segura y sin preocupaciones todos los meses.',
+    briefDescription: 'Pagos automáticos y seguros todos los meses.',
+    tagText: 'Ver medios de pago',
   },
   {
-    imageUrl: '/assets/icons/box-black.svg',
-    title: 'Mistery Box',
+    imageUrl: '/assets/flatIcons/discount-tag.svg',
+    title: 'Beneficios por suscribirte',
+    description:
+      'Accedé a precios especiales, descuentos exclusivos y beneficios solo para suscriptores.',
+    briefDescription: 'Descuentos y beneficios exclusivos por suscribirte.',
+    tagText: 'Ver beneficios',
   },
   {
-    imageUrl: '/assets/icons/box-black.svg',
-    title: 'Discounts',
+    imageUrl: '/assets/flatIcons/coupon.svg',
+    title: 'Promos y cupones activos',
+    description:
+      'Aplicá cupones de descuento en paquetes seleccionados y aprovechá ofertas por tiempo limitado.',
+    briefDescription: 'Cupones y promociones disponibles por tiempo limitado.',
+    tagText: 'Ver promociones',
   },
   {
-    imageUrl: '/assets/icons/box-black.svg',
-    title: 'Services',
+    imageUrl: '/assets/flatIcons/transaction.svg',
+    title: 'Control total de tu gasto',
+    description:
+      'Conocé el total mensual de tu suscripción antes de pagar y ajustala cuando quieras.',
+    briefDescription: 'Visualizá y ajustá tu gasto mensual fácilmente.',
+    tagText: 'Gestionar suscripción',
   },
   {
-    imageUrl: '/assets/icons/box-black.svg',
-    title: 'Streaming',
+    imageUrl: '/assets/flatIcons/tracking.svg',
+    title: 'Envíos y retiros claros',
+    description:
+      'Cada paquete indica si el envío es a domicilio o retiro en tienda, con costos y tiempos transparentes.',
+    briefDescription: 'Opciones claras de envío a domicilio o retiro.',
+    tagText: 'Cómo funciona',
   },
   {
-    imageUrl: '/assets/icons/box-black.svg',
-    title: 'Trending',
+    imageUrl: '/assets/flatIcons/discount.svg',
+    title: 'Ahorrá más a largo plazo',
+    description:
+      'Los planes anuales y las suscripciones combinadas ofrecen mejores precios que las compras individuales.',
+    briefDescription: 'Mejores precios con planes anuales o combinados.',
+    tagText: 'Comparar planes',
   },
 ];
 ---
@@ -62,6 +105,7 @@ const categories: { imageUrl: string; title: string }[] = [
     <link rel="stylesheet" href="/styles/indexStyles.css" />
 
     <script src="/scripts/slider.js" is:inline></script>
+    <script src="/scripts/highlightsSlider.js" is:inline></script>
 
     <!-- ===== Link Swiper's CSS ===== -->
     <link
@@ -135,6 +179,79 @@ const categories: { imageUrl: string; title: string }[] = [
           <li></li>
         </ul>
       </section>
+      <!-- ================= HIGHLIGHTS ================= -->
+      <section
+        aria-labelledby="highlights-section"
+        class="index-section-container index-default-section highlights-section"
+      >
+        <div class="highlights-slider-container">
+          <div class="highlights-slider" id="highlights-slider">
+            <div class="highlights-slide highlights-slide-1" data-slide="1">
+              {
+                highlights.slice(0, 6).map((item) => (
+                  <div class="index-highlight-grid-item">
+                    <div class="index-highlight-grid-item-header">
+                      <h3>{item.title}</h3>
+                      <img
+                        src={item.imageUrl}
+                        alt={item.title}
+                        width="73"
+                        height="73"
+                      />
+                    </div>
+                    <div class="index-highlight-grid-item-bottom">
+                      <p>{item.briefDescription}</p>
+                      <div class="index-highlight-grid-item-bottom-tag">
+                        <span>{item.tagText}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+            <div
+              class="highlights-slide highlights-slide-2"
+              data-slide="2"
+              style="display:none;"
+            >
+              {
+                highlights.slice(6, 9).map((item) => (
+                  <div class="index-highlight-grid-item">
+                    <div class="index-highlight-grid-item-header">
+                      <h3>{item.title}</h3>
+                      <img
+                        src={item.imageUrl}
+                        alt={item.title}
+                        width="73"
+                        height="73"
+                      />
+                    </div>
+                    <div class="index-highlight-grid-item-bottom">
+                      <p>{item.briefDescription}</p>
+                      <div class="index-highlight-grid-item-bottom-tag">
+                        <span>{item.tagText}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+          <div class="highlights-slider-nav">
+            <button
+              class="highlights-slider-arrow highlights-slider-arrow-left"
+              id="highlights-prev"
+              aria-label="Anterior"
+              disabled>&lt;</button
+            >
+            <button
+              class="highlights-slider-arrow highlights-slider-arrow-right"
+              id="highlights-next"
+              aria-label="Siguiente">&gt;</button
+            >
+          </div>
+        </div>
+      </section>
       <!-- ================= CATEGORIES ================= -->
       <section
         aria-labelledby="categories-section"
@@ -146,21 +263,7 @@ const categories: { imageUrl: string; title: string }[] = [
           </h2>
           <a href="/">Explore Categories</a>
         </div>
-        <div class="index-categories-grid">
-          {
-            categories.map((item) => (
-              <div class="index-categories-grid-item ">
-                <img
-                  src={item.imageUrl}
-                  alt="Fitness icon"
-                  width="33"
-                  height="33"
-                />
-                <span>{item.title}</span>
-              </div>
-            ))
-          }
-        </div>
+        <IndexCataegorySection client:load />
       </section>
       <!-- ================= FEATURED STANDAR PACKAGES ================= -->
       <section
@@ -198,10 +301,66 @@ const categories: { imageUrl: string; title: string }[] = [
       >
         <div class="banners-section">
           <article class="banners-section-left-col">
-            <h2>Freshness Begins with Quality Vegetables</h2>
-            <a href="/">Shop Now</a>
+            <!--
+              <img
+                src="https://mockuptree.com/wp-content/uploads/edd/2018/03/Tuck-Lid-Window-Box-Packaging-Mockup.jpg"
+                class="banners-section-left-col-img"
+              />
+             -->
+            <img
+              src="https://mockuptree.com/wp-content/uploads/edd/2021/01/Free-Moving-Box-Mockup-e1612211641852.jpg"
+              class="banners-section-img"
+            />
+            <div class="banners-section-left-col-layer">
+              <h2>Freshness Begins with Quality Vegetables</h2>
+              <a href="/">Shop Now</a>
+            </div>
           </article>
           <div class="banners-section-right-col">
+            <article class="banners-section-right-col-card">
+              {
+                /*
+                src="https://mockuptree.com/wp-content/uploads/edd/2025/06/Free_Book_Mockup_psd.jpg"
+                src="https://mockuptree.com/wp-content/uploads/edd/2020/07/free-Book-Mockup.jpg"
+                src="https://mockuptree.com/wp-content/uploads/edd/2018/02/psd-a5-hardcover-book.jpg"
+                src="https://mockuptree.com/wp-content/uploads/edd/2018/04/paperback-psd-book-mockup.jpg"
+                src="https://mockuptree.com/wp-content/uploads/edd/2025/09/hard-cover-book-mockup-3.jpg"
+                src="https://mockuptree.com/wp-content/uploads/edd/2025/07/book-mockups-.jpg"
+                src="https://mockuptree.com/wp-content/uploads/edd/2022/07/Free-Book-Mockups-PSD.jpg"
+                src="https://mockuptree.com/wp-content/uploads/edd/2021/08/free-book-psd-mockup.jpg"
+                src="https://mockuptree.com/wp-content/uploads/edd/2023/04/Two-Hardcover-Books-Mockup.jpg"
+                src="https://mockuptree.com/wp-content/uploads/edd/2022/06/notebook-set-psd-scene-mockup.jpg"
+                
+                */
+              }
+              <img
+                src="https://mockuptree.com/wp-content/uploads/edd/2025/04/Spiral_Book_Mockup.jpg"
+                class="banners-section-img"
+              />
+              <div
+                class="banners-section-right-col-card-layout banners-section-right-col-first-card-layout"
+              >
+                <h2>Your favorite phone at Crazy Offers</h2>
+              </div>
+            </article>
+            <article class="banners-section-right-col-card">
+              {
+                /*
+                src="https://mockuptree.com/wp-content/uploads/edd/2021/08/free-book-psd-mockup.jpg"
+                */
+              }
+              <img
+                src="https://mockuptree.com/wp-content/uploads/edd/2025/02/A4_Flyer_Mockup.jpg"
+                class="banners-section-img"
+              />
+              <div
+                class="banners-section-right-col-card-layout banners-section-right-col-second-card-layout"
+              >
+                <h2>Trendy Styles Flat 30% Off</h2>
+              </div>
+            </article>
+
+            <!---
             <article
               class="banners-section-right-col-card banners-section-right-col-card-first"
             >
@@ -216,6 +375,8 @@ const categories: { imageUrl: string; title: string }[] = [
                 <a href="/">Shop Now</a>
               </div>
             </article>
+            
+            -->
           </div>
         </div>
       </section>

@@ -414,3 +414,21 @@ header .navbar-container a:hover {
 .pagination-next {
   font-weight: 500;
 }
+
+.carousel-default-button {
+  width: 45px;
+  height: 40px;
+  box-sizing: border-box;
+  background-color: #efefef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: 'pointer';
+  border: 1px solid black;
+}
+.carousel-default-left-button {
+  border-radius: 10px 0 0 10px;
+}
+.carousel-default-right-button {
+  border-radius: 0 10px 10px 0;
+}

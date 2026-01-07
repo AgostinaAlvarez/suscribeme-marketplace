@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" fill="none" viewBox="0 0 128 128" id="delivery-truck">
+  <path fill="#FFD84E" stroke="#000" stroke-width="5" d="M26 52C26 49.2386 28.2386 47 31 47H74C76.7614 47 79 49.2386 79 52V95H31C28.2386 95 26 92.7614 26 90V52Z"></path>
+  <path fill="#FFD84E" stroke="#000" stroke-linejoin="round" stroke-width="5" d="M79 79H102V90C102 92.7614 99.7614 95 97 95H79V79Z"></path>
+  <path stroke="#000" stroke-linejoin="round" stroke-width="5" d="M79 59.5C79 58.1193 80.1193 57 81.5 57H88.9859C89.9166 57 90.7703 57.517 91.2014 58.3419L102 79H81.5C80.1193 79 79 77.8807 79 76.5V59.5Z"></path>
+  <circle cx="44.5" cy="94.5" r="6" fill="#FFD84E" stroke="#000" stroke-width="5"></circle>
+  <circle cx="90.5" cy="94.5" r="6" fill="#FFD84E" stroke="#000" stroke-width="5"></circle>
+  <path stroke="#000" stroke-linecap="round" stroke-width="5" d="M22 79H26"></path>
+  <circle cx="52.5" cy="41.5" r="18" fill="#FFD84E" stroke="#000" stroke-width="5"></circle>
+  <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" d="M46 41.8125L49.4407 45.0382C50.0177 45.5791 50.9156 45.5791 51.4926 45.0382L59 38"></path>
+  <path stroke="#000" stroke-linecap="round" stroke-width="5" d="M35 79H69M35 69H54"></path>
+</svg>
