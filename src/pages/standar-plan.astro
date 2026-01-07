@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PlanDetailsComponent from '../components/PlanDetailsComponent.tsx';
+import PrincipalHeader from '../components/StructureComponents/PrincipalHeader';
 ---
 
 <html lang="en">
@@ -22,7 +23,7 @@ import PlanDetailsComponent from '../components/PlanDetailsComponent.tsx';
   </head>
   <body>
     <!-- ================= HEADER ================= -->
-    <Header />
+    <PrincipalHeader customClassName="plan-detail-header" client:load />
     <main class="main plan-detail-main">
       <!-- ================= SCREEN CONTENT ================= -->
       <PlanDetailsComponent client:load />

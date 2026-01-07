@@ -1,7 +1,7 @@
 ---
-import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PackageDetailsContent from '../components/PackageDetailsContent.tsx';
+import PrincipalHeader from '../components/StructureComponents/PrincipalHeader.tsx';
 ---
 
 <html lang="en">
@@ -21,9 +21,9 @@ import PackageDetailsContent from '../components/PackageDetailsContent.tsx';
   </head>
   <body>
     <!-- ================= HEADER ================= -->
-    <Header />
+    <PrincipalHeader client:load />
     <!-- ================= MAIN ================= -->
-    <main class="main">
+    <main class="main package-detail-main">
       <!-- ================= SCREEN CONTENT ================= -->
       <PackageDetailsContent client:load />
     </main>

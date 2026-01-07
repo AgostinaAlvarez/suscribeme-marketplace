@@ -58,7 +58,7 @@ const PlanDetailsComponent: React.FC = () => {
           pointerEvents: showStickyBar ? 'auto' : 'none',
           transition: 'opacity 0.3s',
           position: 'fixed',
-          top: '50px',
+          top: '60px',
           left: 0,
           width: '100%',
           zIndex: 1000,
@@ -121,7 +121,7 @@ const PlanDetailsComponent: React.FC = () => {
               opacity: hideAside ? 0 : 1,
               pointerEvents: hideAside ? 'none' : 'auto',
               transition: 'opacity 0.3s',
-              ...(showStickyBar ? { top: 15, zIndex: 1200 } : { zIndex: 140 }),
+              ...(showStickyBar ? { top: 20, zIndex: 1200 } : { zIndex: 140 }),
             }}
           >
             <div

@@ -185,7 +185,7 @@ const StoreDetailsComponent: React.FC = () => {
           pointerEvents: showStickyBar ? 'auto' : 'none',
           transition: 'opacity 0.3s',
           position: 'fixed',
-          top: '50px',
+          top: '60px',
           left: 0,
           width: '100%',
           zIndex: 1000,

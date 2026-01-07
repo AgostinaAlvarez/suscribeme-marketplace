@@ -25,11 +25,12 @@ li {
 h2 {
   margin: 0;
 }
-
+/*
 .main-container {
   padding-top: 50px;
   padding-bottom: 50px;
 }
+*/
 
 .main-container-ttl {
   font-size: 30px;
@@ -46,18 +47,36 @@ h2 {
 
 /*================= NAVBAR =================*/
 
+.header {
+  width: 100%;
+  height: fit-content;
+  box-sizing: border-box;
+  /*background-color: red;*/
+  background-color: #fff;
+  border-bottom: 1px solid #efefef;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.header a,
+.navbar-container a {
+  text-decoration: none !important;
+  color: #000 !important;
+  font-size: 13px !important;
+  font-weight: 300 !important;
+}
+
 .navbar-container {
-  height: 50px;
-  background-color: white;
+  width: 1300px;
+  margin: auto;
+  height: 60px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 200;
-  border-bottom: 1px solid #efefef;
+  padding: 0;
 }
 
 /* Reset styles for navbar */
@@ -74,15 +93,65 @@ header .navbar-container li {
   padding: 0;
 }
 
+/*
 header .navbar-container a {
   text-decoration: none;
   color: inherit;
   padding: 0.25em 0.5em;
   transition: color 0.2s;
 }
+*/
 
 header .navbar-container a:hover {
   color: #0070f3;
+}
+
+.nav-search-bar-container {
+  width: 600px;
+  box-sizing: border-box;
+  height: 38px;
+  border: 1px solid #efefef;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 2px;
+  overflow: hidden;
+  border-radius: 60px;
+}
+
+.nav-search-bar-container-principal-structure {
+  width: 400px;
+}
+
+.nav-search-bar-icon-container {
+  height: 100%;
+  width: fit-content;
+  padding: 0px 15px;
+  border-right: 1px solid #efefef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-search-bar-button {
+  min-width: 100px;
+  background-color: #fc6c01;
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  font-size: 13px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.nav-search-bar-button span {
+  margin: 0;
+  line-height: 1;
 }
 
 /*================= H1 =================*/
@@ -102,7 +171,7 @@ header .navbar-container a:hover {
 /*================= MAIN =================*/
 
 .main {
-  margin-top: 50px;
+  margin-top: 60px;
   min-height: 100vh;
 }
 

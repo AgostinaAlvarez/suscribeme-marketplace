@@ -48,7 +48,26 @@ const HeaderSearchScreen: React.FC<ComponentProps> = ({
               <span>Search</span>
             </div>
           </div>
-          <span>nav</span>
+          <nav aria-label="Navegación principal">
+            <ul>
+              <li>
+                <a href="/search">Search</a>
+              </li>
+              <li>
+                <a href="/categories">Categorías</a>
+              </li>
+              <li>
+                <a href="/subscriptions">Explorar planes</a>
+              </li>
+
+              <li>
+                <a href="/sellers">Vendedores</a>
+              </li>
+              <li>
+                <a href="/login">Ingresar</a>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
       <div className="search-screen-section-container search-screen-header-results-container">

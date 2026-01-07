@@ -1,10 +1,49 @@
 ---
-import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FeaturedPackagesCarousel from '../components/FeaturedPackagesCarousel.tsx';
 import BestSellersGrid from '../components/BestSellersGrid.tsx';
 import FeaturedCustomPackagesCarusel from '../components/FeaturedCustomPackagesCarusel.tsx';
 import CuratedCollectionsCarousel from '../components/CuratedCollectionsCarousel.tsx';
+import PrincipalHeader from '../components/StructureComponents/PrincipalHeader.tsx';
+
+const categories: { imageUrl: string; title: string }[] = [
+  {
+    imageUrl: '/assets/icons/gift-black.svg',
+    title: 'Bennefits',
+  },
+  {
+    imageUrl: '/assets/icons/fitness-black.svg',
+    title: 'Fitness',
+  },
+  {
+    imageUrl: '/assets/icons/health-black.svg',
+    title: 'Health And Beauty',
+  },
+  {
+    imageUrl: '/assets/icons/food-black.svg',
+    title: 'Food & Drink',
+  },
+  {
+    imageUrl: '/assets/icons/box-black.svg',
+    title: 'Mistery Box',
+  },
+  {
+    imageUrl: '/assets/icons/box-black.svg',
+    title: 'Discounts',
+  },
+  {
+    imageUrl: '/assets/icons/box-black.svg',
+    title: 'Services',
+  },
+  {
+    imageUrl: '/assets/icons/box-black.svg',
+    title: 'Streaming',
+  },
+  {
+    imageUrl: '/assets/icons/box-black.svg',
+    title: 'Trending',
+  },
+];
 ---
 
 <html lang="en">
@@ -32,9 +71,9 @@ import CuratedCollectionsCarousel from '../components/CuratedCollectionsCarousel
   </head>
   <body>
     <!-- ================= HEADER ================= -->
-    <Header />
+    <PrincipalHeader client:load />
     <!-- ================= MAIN ================= -->
-    <main class="main">
+    <main class="main index-main">
       <h1 class="visually-hidden">
         Marketplace de suscripciones para descubrir, combinar y gestionar planes
         desde un solo lugar
@@ -98,169 +137,105 @@ import CuratedCollectionsCarousel from '../components/CuratedCollectionsCarousel
       </section>
       <!-- ================= CATEGORIES ================= -->
       <section
-        aria-labelledby="categories-title"
-        class="categories-section default-continer main-container"
+        aria-labelledby="categories-section"
+        class="index-section-container index-default-section"
       >
-        <div class="main-container-row-title-container">
-          <h2 id="categories-title" class="main-container-ttl">
+        <div class="index-section-header">
+          <h2 id="categories-section" class="main-container-ttl">
             Explorar por categoría
           </h2>
-          <a href="https://www.google.com/">View More</a>
+          <a href="/">Explore Categories</a>
         </div>
-
-        <ul class="categories-section-grid">
-          <li>
-            <article class="categories-section-grid-item">
-              <div class="categories-section-grid-item-avatar">
+        <div class="index-categories-grid">
+          {
+            categories.map((item) => (
+              <div class="index-categories-grid-item ">
                 <img
-                  src="/assets/icons/gift-black.svg"
+                  src={item.imageUrl}
                   alt="Fitness icon"
-                  width="30"
-                  height="30"
+                  width="33"
+                  height="33"
                 />
+                <span>{item.title}</span>
               </div>
-              <h3>Bennefits</h3>
-            </article>
-          </li>
-
-          <li>
-            <article class="categories-section-grid-item">
-              <div class="categories-section-grid-item-avatar">
-                <img
-                  src="/assets/icons/fitness-black.svg"
-                  alt="Fitness icon"
-                  width="30"
-                  height="30"
-                />
-              </div>
-              <h3>Fitness</h3>
-            </article>
-          </li>
-
-          <li>
-            <article class="categories-section-grid-item">
-              <div class="categories-section-grid-item-avatar">
-                <img
-                  src="/assets/icons/health-black.svg"
-                  alt="Fitness icon"
-                  width="30"
-                  height="30"
-                />
-              </div>
-              <h3>Health And Beauty</h3>
-            </article>
-          </li>
-
-          <li>
-            <article class="categories-section-grid-item">
-              <div class="categories-section-grid-item-avatar">
-                <img
-                  src="/assets/icons/food-black.svg"
-                  alt="Fitness icon"
-                  width="30"
-                  height="30"
-                />
-              </div>
-              <h3>Food & Drink</h3>
-            </article>
-          </li>
-
-          <li>
-            <article class="categories-section-grid-item">
-              <div class="categories-section-grid-item-avatar">
-                <img
-                  src="/assets/icons/box-black.svg"
-                  alt="Fitness icon"
-                  width="30"
-                  height="30"
-                />
-              </div>
-              <h3>Mistery Box</h3>
-            </article>
-          </li>
-          <li>
-            <article class="categories-section-grid-item">
-              <div class="categories-section-grid-item-avatar">
-                <img
-                  src="/assets/icons/box-black.svg"
-                  alt="Fitness icon"
-                  width="30"
-                  height="30"
-                />
-              </div>
-              <h3>Mistery Box</h3>
-            </article>
-          </li>
-        </ul>
+            ))
+          }
+        </div>
       </section>
-      <!-- ================= FEATURED PACKAGES ================= -->
+      <!-- ================= FEATURED STANDAR PACKAGES ================= -->
       <section
-        aria-labelledby="featured-plans-title"
-        class="featured-plans-section default-continer main-container"
+        aria-labelledby="featured-standar-packages-section"
+        class="index-section-container index-default-section"
       >
-        <div class="main-container-row-title-container">
-          <h2 id="featured-plans-title" class="main-container-ttl">
-            Planes destacados
-          </h2>
-          <a href="https://www.google.com/">View More</a>
-        </div>
-        <div class="featured-plans-section-categories-container">
-          <div class="featured-plans-section-categorie-tag">
-            <span>All</span>
+        <div class="index-filters-container">
+          <div class="index-section-header">
+            <h2
+              id="featured-standar-packages-section"
+              class="main-container-ttl"
+            >
+              Paquetes Destacados
+            </h2>
+            <a href="/">View More</a>
           </div>
-          <div class="featured-plans-section-categorie-tag">
-            <span>Newest</span>
-          </div>
-          <div class="featured-plans-section-categorie-tag">
-            <span>Best</span>
+          <div class="index-tag-filters-container">
+            <div class="index-tag-filter">
+              <span>All</span>
+            </div>
+            <div class="index-tag-filter">
+              <span>Newest</span>
+            </div>
+            <div class="index-tag-filter">
+              <span>Best</span>
+            </div>
           </div>
         </div>
         <FeaturedPackagesCarousel client:load />
       </section>
       <!-- ================= BANNERS SECTION ================= -->
       <section
-        aria-labelledby="banners-title"
-        class="banners-section default-continer main-container"
+        aria-labelledby="banners-section"
+        class="index-section-container index-default-section"
       >
-        <article class="banners-section-left-col">
-          <h2>Freshness Begins with Quality Vegetables</h2>
-          <a href="/">Shop Now</a>
-        </article>
-        <div class="banners-section-right-col">
-          <article
-            class="banners-section-right-col-card banners-section-right-col-card-first"
-          >
-            <div class="banners-section-right-col-card-content">
-              <h2>Your favorite phone at Crazy Offers</h2>
-              <a href="/">Shop Now</a>
-            </div>
+        <div class="banners-section">
+          <article class="banners-section-left-col">
+            <h2>Freshness Begins with Quality Vegetables</h2>
+            <a href="/">Shop Now</a>
           </article>
-          <article class="banners-section-right-col-card">
-            <div class="banners-section-right-col-card-content">
-              <h2>Trendy Styles Flat 30% Off</h2>
-              <a href="/">Shop Now</a>
-            </div>
-          </article>
+          <div class="banners-section-right-col">
+            <article
+              class="banners-section-right-col-card banners-section-right-col-card-first"
+            >
+              <div class="banners-section-right-col-card-content">
+                <h2>Your favorite phone at Crazy Offers</h2>
+                <a href="/">Shop Now</a>
+              </div>
+            </article>
+            <article class="banners-section-right-col-card">
+              <div class="banners-section-right-col-card-content">
+                <h2>Trendy Styles Flat 30% Off</h2>
+                <a href="/">Shop Now</a>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
       <!-- ================= SELLERS ================= -->
       <section
-        aria-labelledby="sellers-title"
-        class="sellers-section default-continer main-container"
+        aria-labelledby="sellers-section"
+        class="index-section-container index-default-section"
       >
-        <div class="main-container-row-title-container">
-          <h2 id="sellers-title" class="main-container-ttl">
-            Vendedores destacados
+        <div class="index-section-header">
+          <h2 id="sellers-section" class="main-container-ttl">
+            Paquetes Destacados
           </h2>
-          <a href="https://www.google.com/">View More</a>
+          <a href="/">View More</a>
         </div>
-
         <BestSellersGrid client:load />
       </section>
       <!-- ================= CUSTOM PACKAGES INFO ================= -->
       <section
-        aria-labelledby="custom-packages-info"
-        class="custom-packages-info-section default-continer main-container"
+        aria-labelledby="sellers-section"
+        class="index-section-container index-default-section"
       >
         <div class="custom-packages-info-section-grid">
           <div class="custom-packages-info-section-left-col">
@@ -323,53 +298,59 @@ import CuratedCollectionsCarousel from '../components/CuratedCollectionsCarousel
           </div>
         </div>
       </section>
-      <!-- ================= CUSTOM PACKAGE ================= -->
+      <!-- ================= FEATURED CUSTOM PACKAGE ================= -->
       <section
-        aria-labelledby="featured-custom-packages-title"
-        class="featured-plans-section default-continer main-container"
+        aria-labelledby="featured-custom-packages-section"
+        class="index-section-container index-default-section"
       >
-        <div class="main-container-row-title-container">
-          <h2 id="featured-custom-packages-title" class="main-container-ttl">
-            Paquetes personalizables Destacados
-          </h2>
-          <a href="https://www.google.com/">View More</a>
-        </div>
-        <div class="featured-plans-section-categories-container">
-          <div class="featured-plans-section-categorie-tag">
-            <span>All</span>
+        <div class="index-filters-container">
+          <div class="index-section-header">
+            <h2
+              id="featured-custom-packages-section"
+              class="main-container-ttl"
+            >
+              Paquetes Personalizados Destacados
+            </h2>
+            <a href="/">View More</a>
           </div>
-          <div class="featured-plans-section-categorie-tag">
-            <span>Newest</span>
-          </div>
-          <div class="featured-plans-section-categorie-tag">
-            <span>Best</span>
+          <div class="index-tag-filters-container">
+            <div class="index-tag-filter">
+              <span>All</span>
+            </div>
+            <div class="index-tag-filter">
+              <span>Newest</span>
+            </div>
+            <div class="index-tag-filter">
+              <span>Best</span>
+            </div>
           </div>
         </div>
         <FeaturedCustomPackagesCarusel client:load />
       </section>
       <!-- ================= CURATED COLLECTIONS ================= -->
       <section
-        aria-labelledby="curated-collections-title"
-        class="curated-collections-section default-continer main-container"
+        aria-labelledby="curated-collections-section"
+        class="index-section-container index-default-section"
       >
-        <div class="main-container-row-title-container">
-          <h2 id="curated-collections-title" class="main-container-ttl">
+        <div class="index-section-header">
+          <h2 id="curated-collections-section" class="main-container-ttl">
             Curated Collections
           </h2>
-          <a href="/collections">View More</a>
+          <a href="/">Explore Categories</a>
         </div>
         <CuratedCollectionsCarousel client:load />
       </section>
+
       <!-- ================= PLATFORM PROPS ================= -->
       <section
-        aria-labelledby="platform-features-title"
-        class="platform-features-section default-continer main-container"
+        aria-labelledby="features-section"
+        class="index-section-container index-default-section"
       >
-        <div class="main-container-row-title-container">
-          <h2 id="platform-features-title" class="main-container-ttl">
+        <div class="index-section-header">
+          <h2 id="features-section" class="main-container-ttl">
             Why Shop With Us?
           </h2>
-          <a href="https://www.google.com/">View More</a>
+          <a href="/">Explore Categories</a>
         </div>
         <div class="platform-features-grid">
           <article class="platform-features-card platform-features-card-1">
@@ -420,6 +401,7 @@ import CuratedCollectionsCarousel from '../components/CuratedCollectionsCarousel
           </article>
         </div>
       </section>
+
       <!-- ================= TESTIMONIALS ================= -->
       <!--
 		<section aria-labelledby="testimonials-title">

@@ -34,48 +34,25 @@
   justify-content: space-between;
 }
 
-.nav-search-bar-container {
-  width: 600px;
-  box-sizing: border-box;
-  height: 38px;
-  border: 1px solid #efefef;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 10px;
-  padding: 2px;
-  overflow: hidden;
-  border-radius: 60px;
-}
-
-.nav-search-bar-icon-container {
-  height: 100%;
-  width: fit-content;
-  padding: 0px 15px;
-  border-right: 1px solid #efefef;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.nav-search-bar-button {
-  min-width: 100px;
-  background-color: #fc6c01;
-  height: 100%;
-  box-sizing: border-box;
-  border-radius: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 10px;
-  font-size: 13px;
-  color: #fff;
-  cursor: pointer;
-}
-
-.nav-search-bar-button span {
+.search-screen-header-nav-container ul {
+  list-style: none;
   margin: 0;
-  line-height: 1;
+  padding: 0;
+  display: flex;
+  gap: 18px;
+}
+
+.search-screen-header-nav-container li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.search-screen-section-container.search-screen-header-nav-container a {
+  text-decoration: none !important;
+  color: #000 !important;
+  font-size: 13px !important;
+  font-weight: 300 !important;
 }
 
 .search-screen-header-results-container {

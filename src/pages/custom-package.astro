@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CustomPackageDetailsContent from '../components/CustomPackageDetailsContent.tsx';
+import PrincipalHeader from '../components/StructureComponents/PrincipalHeader';
 
 //background-color: #f9fafb;
 ---
@@ -25,7 +26,7 @@ import CustomPackageDetailsContent from '../components/CustomPackageDetailsConte
   </head>
   <body>
     <!-- ================= HEADER ================= -->
-    <Header />
+    <PrincipalHeader customClassName="custom-package-header" client:load />
     <!-- ================= MAIN ================= -->
     <main class="main detail-screen-standar-main">
       <!-- ================= SCREEN CONTENT ================= -->

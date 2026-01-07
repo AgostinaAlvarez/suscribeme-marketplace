@@ -1,3 +1,70 @@
+.index-main {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 66px;
+  padding-bottom: 100px;
+}
+
+.index-section-container {
+  width: 1300px;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.index-default-section {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+
+.index-section-header {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.index-section-header a {
+  font-size: 14px;
+}
+
+.index-tag-filters-container {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.index-tag-filter {
+  width: fit-content;
+  height: fit-content;
+  box-sizing: border-box;
+  padding: 3px 30px;
+  font-size: 11px;
+  border: 1px solid green;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.index-tag-filter span {
+  margin: 0;
+  line-height: 1;
+  font-size: 13px;
+}
+
+.index-filters-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 /*================= HERO =================*/
 
 .hero-banner {
@@ -41,15 +108,14 @@
   min-width: 100%;
   height: 100%;
   box-sizing: border-box;
-  padding: 0px 130px;
 }
 
 .item-content {
-  max-width: 670px;
+  max-width: 1300px;
+  margin: 0 auto;
   height: 100%;
   box-sizing: border-box;
   padding: 20px 0px;
-  /*border: 1px solid black;*/
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -171,157 +237,31 @@ li {
 }
 
 /*================= CATEGORIES SECTION =================*/
+.index-categories-grid {
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 20px;
+}
 
-.categories-section {
+.index-categories-grid-item {
+  width: 100%;
+  height: 155px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 1px solid #000;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  padding: 30px 10px;
+  font-size: 13px;
+  color: grey;
+  text-align: center;
   gap: 30px;
 }
 
-.categories-section-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  /*
-  gap: 10px;
-  */
-}
-
-.categories-section-grid li {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.categories-section-grid-item {
-  background: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  text-align: center;
-  /*
-  border: 1px solid black;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  transition: box-shadow 0.2s;
-  */
-}
-
-/*
-.categories-section-grid-item:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-}
-  */
-
-.categories-section-grid-item h3 {
-  margin: 0;
-  font-weight: 300;
-  font-size: 12px;
-}
-
-.categories-section-grid-item-avatar {
-  width: 70px;
-  height: 70px;
-  background-color: #efefef;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 /*================= FEATURED PLANS SECTION =================*/
-
-.featured-plans-section {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.featured-plans-section-categories-container {
-  width: 100%;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.featured-plans-section-categorie-tag {
-  width: fit-content;
-  height: fit-content;
-  box-sizing: border-box;
-  padding: 5px 20px;
-  font-size: 11px;
-  border: 1px solid black;
-  border-radius: 30px;
-}
-
-/*================= SELLERS SECTION =================*/
-
-.sellers-section {
-  display: flex;
-  flex-direction: column;
-  gap: 35px;
-}
-
-.sellers-section-grid {
-  width: 100%;
-  box-sizing: border-box;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 15px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 20px;
-}
-
-.sellers-section-grid li {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.sellers-section-grid-item {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 10px;
-  border: 1px solid #efefef;
-  border-radius: 5px;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-}
-
-.sellers-section-grid-item-avatar {
-  width: 52px;
-  height: 52px;
-  border-radius: 5px;
-  background-color: #efefef;
-}
-
-.sellers-section-grid-item-content {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.sellers-section-grid-item-content h3 {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 400;
-}
-
-.sellers-section-grid-item-content span {
-  margin: 0;
-  font-size: 12px;
-  font-weight: 300;
-}
 
 /*================= BANNERS SECTION =================*/
 
@@ -408,6 +348,65 @@ li {
   font-size: 30px;
   margin: 0;
   font-weight: 450;
+}
+
+/*================= SELLERS SECTION =================*/
+
+.sellers-section-grid {
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 15px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 20px;
+}
+
+.sellers-section-grid li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sellers-section-grid-item {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid #efefef;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.sellers-section-grid-item-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 5px;
+  background-color: #efefef;
+}
+
+.sellers-section-grid-item-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.sellers-section-grid-item-content h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.sellers-section-grid-item-content span {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 300;
 }
 
 /*================= CUSTOM PACKAGES INFO =================*/

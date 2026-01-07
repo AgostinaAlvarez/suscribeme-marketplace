@@ -612,7 +612,7 @@ const CustomPackageDetailsContent: React.FC = () => {
           pointerEvents: showStickyBar ? 'auto' : 'none',
           transition: 'opacity 0.3s',
           position: 'fixed',
-          top: '50px',
+          top: '60px',
           left: 0,
           width: '100%',
           zIndex: 1000,
@@ -638,7 +638,7 @@ const CustomPackageDetailsContent: React.FC = () => {
             transition: 'opacity 0.3s',
             pointerEvents: showSecondaryStickyBar ? 'auto' : 'none',
             position: 'fixed',
-            top: 115, // debajo del sticky bar principal
+            top: 125, // debajo del sticky bar principal
             left: 0,
             width: '930px',
             zIndex: 999,
