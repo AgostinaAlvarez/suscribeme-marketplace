@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import '../../public/styles/collectionsCarouselStyles.css';
 
 interface CollectionData {
@@ -41,6 +41,7 @@ const CuratedCollectionsCarousel: React.FC = () => {
   const startX = useRef(0);
   const prevTranslate = useRef(0);
   const currentTranslate = useRef(0);
+  const [_, setRerender] = useState(0);
 
   const cardWidth = () => {
     const track = trackRef.current;
@@ -54,18 +55,31 @@ const CuratedCollectionsCarousel: React.FC = () => {
     if (trackRef.current) {
       trackRef.current.style.transform = `translateX(-${indexRef.current * cardWidth()}px)`;
       prevTranslate.current = -indexRef.current * cardWidth();
+      setRerender((x) => x + 1); // fuerza re-render
     }
   };
 
+  // Cambia goNext y goPrev para avanzar/retroceder de a grupos (3 en 3)
   const goNext = () => {
-    indexRef.current++;
+    indexRef.current += groupSize;
     if (indexRef.current > collections.length - 1) indexRef.current = 0;
     update();
   };
 
   const goPrev = () => {
-    indexRef.current--;
-    if (indexRef.current < 0) indexRef.current = collections.length - 1;
+    indexRef.current -= groupSize;
+    if (indexRef.current < 0) indexRef.current = (groupsCount - 1) * groupSize;
+    update();
+  };
+
+  // Agrupación para dots
+  const groupSize = 3;
+  const groupsCount = Math.ceil(collections.length / groupSize);
+  const getActiveDot = () => Math.floor(indexRef.current / groupSize);
+  const goToGroup = (groupIdx: number) => {
+    indexRef.current = groupIdx * groupSize;
+    if (indexRef.current > collections.length - 1)
+      indexRef.current = collections.length - 1;
     update();
   };
 
@@ -129,12 +143,35 @@ const CuratedCollectionsCarousel: React.FC = () => {
       track.removeEventListener('touchend', dragEnd as any);
     };
   }, [collections.length]);
+
   return (
     <>
-      <section className="carousel">
+      <section className="carousel" style={{ position: 'relative' }}>
+        {/*
         <button className="arrow prev" onClick={goPrev}>
           {'<'}
         </button>
+          */}
+        <div
+          onClick={goPrev}
+          style={{
+            height: '50px',
+            width: '45px',
+            position: 'absolute',
+            zIndex: 200,
+            left: -20,
+            borderRadius: '10px 5px 5px 10px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            backgroundColor: '#fff',
+            boxShadow: '0 4px 24px rgba(0,0,0,0.18)', // box-shadow más prominente
+            userSelect: 'none',
+          }}
+        >
+          <span>{'<'}</span>
+        </div>
         <div className="viewport">
           <div className="track" ref={trackRef}>
             {collections.map((collection) => (
@@ -157,10 +194,64 @@ const CuratedCollectionsCarousel: React.FC = () => {
             ))}
           </div>
         </div>
+        <div
+          onClick={goNext}
+          style={{
+            height: '50px',
+            width: '45px',
+            position: 'absolute',
+            zIndex: 200,
+            right: -20,
+            borderRadius: '5px 10px 10px 5px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            backgroundColor: '#fff',
+            boxShadow: '0 4px 24px rgba(0,0,0,0.18)', // box-shadow más prominente
+            userSelect: 'none',
+          }}
+        >
+          <span>{'>'}</span>
+        </div>
+        {/*
         <button className="arrow next" onClick={goNext}>
           {'>'}
         </button>
+          */}
       </section>
+      <ul
+        className="dots"
+        style={{
+          position: 'relative',
+          bottom: 10,
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          gap: 8,
+          padding: 0,
+          margin: 0,
+          listStyle: 'none',
+        }}
+      >
+        {Array.from({ length: groupsCount }).map((_, groupIdx) => (
+          <li
+            key={groupIdx}
+            onClick={() => goToGroup(groupIdx)}
+            style={{
+              width: 10,
+              height: 10,
+              background: getActiveDot() === groupIdx ? 'red' : '#ccc',
+              borderRadius: '50%',
+              cursor: 'pointer',
+              transition: 'background 0.2s',
+              border: 'none',
+              margin: 0,
+              padding: 0,
+            }}
+          ></li>
+        ))}
+      </ul>
     </>
   );
 };

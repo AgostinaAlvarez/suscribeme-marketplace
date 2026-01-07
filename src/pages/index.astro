@@ -280,17 +280,54 @@ const highlights: {
             </h2>
             <a href="/">View More</a>
           </div>
-          <div class="index-tag-filters-container">
-            <div class="index-tag-filter">
-              <span>All</span>
-            </div>
-            <div class="index-tag-filter">
-              <span>Newest</span>
-            </div>
-            <div class="index-tag-filter">
-              <span>Best</span>
-            </div>
+          {
+            /*
+           <div class="index-tag-filters-container">
+             <div class="index-tag-filter">
+               <span>All</span>
+             </div>
+             <div class="index-tag-filter">
+               <span>Newest</span>
+             </div>
+             <div class="index-tag-filter">
+               <span>Best</span>
+             </div>
+           </div>
+            */
+          }
+        </div>
+        <FeaturedPackagesCarousel client:load />
+      </section>
+      <!-- ================= POPULAT STANDAR PACKAGES ================= -->
+      <section
+        aria-labelledby="popular-standar-packages-section"
+        class="index-section-container index-default-section"
+      >
+        <div class="index-filters-container">
+          <div class="index-section-header">
+            <h2
+              id="popular-standar-packages-section"
+              class="main-container-ttl"
+            >
+              Paquetes Populares
+            </h2>
+            <a href="/">View More</a>
           </div>
+          {
+            /*
+           <div class="index-tag-filters-container">
+             <div class="index-tag-filter">
+               <span>All</span>
+             </div>
+             <div class="index-tag-filter">
+               <span>Newest</span>
+             </div>
+             <div class="index-tag-filter">
+               <span>Best</span>
+             </div>
+           </div>
+            */
+          }
         </div>
         <FeaturedPackagesCarousel client:load />
       </section>
@@ -380,19 +417,7 @@ const highlights: {
           </div>
         </div>
       </section>
-      <!-- ================= SELLERS ================= -->
-      <section
-        aria-labelledby="sellers-section"
-        class="index-section-container index-default-section"
-      >
-        <div class="index-section-header">
-          <h2 id="sellers-section" class="main-container-ttl">
-            Paquetes Destacados
-          </h2>
-          <a href="/">View More</a>
-        </div>
-        <BestSellersGrid client:load />
-      </section>
+
       <!-- ================= CUSTOM PACKAGES INFO ================= -->
       <section
         aria-labelledby="sellers-section"
@@ -439,21 +464,49 @@ const highlights: {
           </div>
 
           <div class="custom-packages-info-section-right-col">
-            <div class="container">
-              <div class="cube-1">
-                <div class="isometric-cube-top"></div>
-                <div class="isometric-cube-right"></div>
-                <div class="isometric-cube-left"></div>
-              </div>
-              <div class="cube-2">
-                <div class="isometric-cube-top"></div>
-                <div class="isometric-cube-right"></div>
-                <div class="isometric-cube-left"></div>
-              </div>
-              <div class="cube-3">
-                <div class="isometric-cube-top"></div>
-                <div class="isometric-cube-right"></div>
-                <div class="isometric-cube-left"></div>
+            {
+              /*
+             <div class="container">
+               <div class="cube-1">
+                 <div class="isometric-cube-top"></div>
+                 <div class="isometric-cube-right"></div>
+                 <div class="isometric-cube-left"></div>
+               </div>
+               <div class="cube-2">
+                 <div class="isometric-cube-top"></div>
+                 <div class="isometric-cube-right"></div>
+                 <div class="isometric-cube-left"></div>
+               </div>
+               <div class="cube-3">
+                 <div class="isometric-cube-top"></div>
+                 <div class="isometric-cube-right"></div>
+                 <div class="isometric-cube-left"></div>
+               </div>
+             </div>
+              */
+            }
+            <img
+              class="custom-packages-info-section-right-col-img"
+              src="https://images.unsplash.com/photo-1687360441027-27e70655b27e?q=80&w=1883&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            />
+            <div class="custom-packages-info-section-right-col-layer">
+              <div class="custom-packages-info-notification-container">
+                <div class="custom-packages-info-notification">
+                  <div class="custom-packages-info-notification-icon">💳</div>
+                  <div class="custom-packages-info-notification-content">
+                    <strong>¡Pago realizado!</strong>
+                    <span>Tu suscripción fue creada con éxito</span>
+                  </div>
+                </div>
+                <div
+                  class="custom-packages-info-notification custom-packages-info-notification-previous"
+                >
+                  <div class="custom-packages-info-notification-icon">📦</div>
+                  <div class="custom-packages-info-notification-content">
+                    <strong>Paquete creado</strong>
+                    <span>Tu paquete personalizado está listo</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -474,17 +527,51 @@ const highlights: {
             </h2>
             <a href="/">View More</a>
           </div>
-          <div class="index-tag-filters-container">
-            <div class="index-tag-filter">
-              <span>All</span>
-            </div>
-            <div class="index-tag-filter">
-              <span>Newest</span>
-            </div>
-            <div class="index-tag-filter">
-              <span>Best</span>
-            </div>
+          {
+            /*
+           <div class="index-tag-filters-container">
+             <div class="index-tag-filter">
+               <span>All</span>
+             </div>
+             <div class="index-tag-filter">
+               <span>Newest</span>
+             </div>
+             <div class="index-tag-filter">
+               <span>Best</span>
+             </div>
+           </div>
+            */
+          }
+        </div>
+        <FeaturedCustomPackagesCarusel client:load />
+      </section>
+      <!-- ================= FEATURED CUSTOM PACKAGE ================= -->
+      <section
+        aria-labelledby="popular-custom-packages-section"
+        class="index-section-container index-default-section"
+      >
+        <div class="index-filters-container">
+          <div class="index-section-header">
+            <h2 id="popular-custom-packages-section" class="main-container-ttl">
+              Paquetes Personalizados Populares
+            </h2>
+            <a href="/">View More</a>
           </div>
+          {
+            /*
+           <div class="index-tag-filters-container">
+             <div class="index-tag-filter">
+               <span>All</span>
+             </div>
+             <div class="index-tag-filter">
+               <span>Newest</span>
+             </div>
+             <div class="index-tag-filter">
+               <span>Best</span>
+             </div>
+           </div>
+            */
+          }
         </div>
         <FeaturedCustomPackagesCarusel client:load />
       </section>
@@ -501,7 +588,19 @@ const highlights: {
         </div>
         <CuratedCollectionsCarousel client:load />
       </section>
-
+      <!-- ================= SELLERS ================= -->
+      <section
+        aria-labelledby="sellers-section"
+        class="index-section-container index-default-section"
+      >
+        <div class="index-section-header">
+          <h2 id="sellers-section" class="main-container-ttl">
+            Highlight Sellers
+          </h2>
+          <a href="/">View More</a>
+        </div>
+        <BestSellersGrid client:load />
+      </section>
       <!-- ================= PLATFORM PROPS ================= -->
       <section
         aria-labelledby="features-section"

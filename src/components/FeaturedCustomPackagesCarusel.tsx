@@ -23,7 +23,23 @@ const FeaturedCustomPackagesCarusel: React.FC = () => {
     {
       _id: '5',
     },
+    {
+      _id: '6',
+    },
   ];
+
+  // Simulación de petición GET a una API
+  //useEffect(() => {
+  //  setTimeout(() => {
+  //    // Simulamos datos que llegan de una API
+  //    setCards([
+  //      { _id: '1', title: 'Card 1 desde API' },
+  //      { _id: '2', title: 'Card 2 desde API' },
+  //      { _id: '3', title: 'Card 3 desde API' },
+  //      { _id: '4', title: 'Card 4 desde API' },
+  //    ]);
+  //  }, 1200); // 1.2 segundos de delay
+  //}, []);
 
   const trackRef = useRef<HTMLDivElement>(null);
   const indexRef = useRef(0);
@@ -47,15 +63,19 @@ const FeaturedCustomPackagesCarusel: React.FC = () => {
     }
   };
 
+  // Agrupación para flechas: mover de 4 en 4
+  const groupSize = 4;
+  const groupsCount = Math.ceil(packages.length / groupSize);
+
   const goNext = () => {
-    indexRef.current++;
+    indexRef.current += groupSize;
     if (indexRef.current > packages.length - 1) indexRef.current = 0;
     update();
   };
 
   const goPrev = () => {
-    indexRef.current--;
-    if (indexRef.current < 0) indexRef.current = packages.length - 1;
+    indexRef.current -= groupSize;
+    if (indexRef.current < 0) indexRef.current = (groupsCount - 1) * groupSize;
     update();
   };
 
@@ -119,7 +139,6 @@ const FeaturedCustomPackagesCarusel: React.FC = () => {
       track.removeEventListener('touchend', dragEnd as any);
     };
   }, [packages.length]);
-
   return (
     <>
       <section className="carousel">
@@ -127,9 +146,29 @@ const FeaturedCustomPackagesCarusel: React.FC = () => {
         <button className="arrow prev" onClick={goPrev}>
           {'<'}
         </button>
-          */}
         <div
           className="carousel-default-button carousel-default-left-button"
+          onClick={goPrev}
+        >
+          <span>{'<'}</span>
+        </div>
+          */}
+        <div
+          style={{
+            width: '40px',
+            height: '40px',
+            boxSizing: 'border-box',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'absolute',
+            left: -10,
+            zIndex: 200,
+            borderRadius: '50%',
+            cursor: 'pointer',
+            backgroundColor: '#fff',
+            boxShadow: '0 4px 24px rgba(0,0,0,0.18)', // box-shadow más prominente
+          }}
           onClick={goPrev}
         >
           <span>{'<'}</span>
@@ -138,7 +177,10 @@ const FeaturedCustomPackagesCarusel: React.FC = () => {
           <div className="track" ref={trackRef}>
             {packages.map((_, index) => (
               <article className="card" key={index}>
-                <div className="card-content custom-package-card-content">
+                <div
+                  className="card-content custom-package-card-content"
+                  style={{ boxShadow: 'none', border: '1px solid #efefef' }}
+                >
                   <div className="card-content-information custom-package-card-content-information">
                     <div className="card-content-information-description-container">
                       {/*STORE*/}
@@ -180,12 +222,32 @@ const FeaturedCustomPackagesCarusel: React.FC = () => {
           </div>
         </div>
         <div
-          className="carousel-default-button carousel-default-right-button"
+          style={{
+            width: '40px',
+            height: '40px',
+            boxSizing: 'border-box',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'absolute',
+            right: -10,
+            zIndex: 200,
+            borderRadius: '50%',
+            cursor: 'pointer',
+            backgroundColor: '#fff',
+            boxShadow: '0 4px 24px rgba(0,0,0,0.18)', // box-shadow más prominente
+          }}
           onClick={goNext}
         >
           <span>{'>'}</span>
         </div>
         {/*
+        <div
+          className="carousel-default-button carousel-default-right-button"
+          onClick={goNext}
+        >
+          <span>{'>'}</span>
+        </div>
         <button className="arrow next" onClick={goNext}>
           {'>'}
         </button>

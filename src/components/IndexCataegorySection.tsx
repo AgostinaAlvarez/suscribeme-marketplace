@@ -95,19 +95,20 @@ const IndexCataegorySection: React.FC = () => {
     if (trackRef.current) {
       trackRef.current.style.transform = `translateX(-${indexRef.current * cardWidth()}px)`;
       prevTranslate.current = -indexRef.current * cardWidth();
-      setRerender(x => x + 1); // fuerza re-render
+      setRerender((x) => x + 1); // fuerza re-render
     }
   };
 
+  // Cambia goNext y goPrev para avanzar/retroceder de a grupos (3 en 3)
   const goNext = () => {
-    indexRef.current++;
+    indexRef.current += groupSize;
     if (indexRef.current > categories.length - 1) indexRef.current = 0;
     update();
   };
 
   const goPrev = () => {
-    indexRef.current--;
-    if (indexRef.current < 0) indexRef.current = categories.length - 1;
+    indexRef.current -= groupSize;
+    if (indexRef.current < 0) indexRef.current = (groupsCount - 1) * groupSize;
     update();
   };
 
@@ -117,7 +118,8 @@ const IndexCataegorySection: React.FC = () => {
   const getActiveDot = () => Math.floor(indexRef.current / groupSize);
   const goToGroup = (groupIdx: number) => {
     indexRef.current = groupIdx * groupSize;
-    if (indexRef.current > categories.length - 1) indexRef.current = categories.length - 1;
+    if (indexRef.current > categories.length - 1)
+      indexRef.current = categories.length - 1;
     update();
   };
 

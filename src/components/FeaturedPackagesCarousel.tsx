@@ -127,6 +127,31 @@ const FeaturedPackagesCarousel: React.FC = () => {
         { _id: '10a', title: 'Plan Mensual', price: 35, currencyId: 'USD' },
       ],
     },
+    {
+      _id: '11',
+      title: 'Membresía Club de Libros',
+      coverImage: {
+        url: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/a8108f24d1-728091adf659377fe686.png',
+      },
+      briefDescription:
+        'Un libro nuevo cada mes, acceso a foros exclusivos y encuentros virtuales con autores.',
+      plans: [
+        { _id: '5a', title: 'Plan Mensual', price: 10, currencyId: 'USD' },
+        { _id: '5b', title: 'Plan Anual', price: 100, currencyId: 'USD' },
+      ],
+    },
+    {
+      _id: '12',
+      title: 'Suscripción a Box de Snacks',
+      coverImage: {
+        url: 'https://vegancuts.com/cdn/shop/files/VC_August_SB.png?v=1741279200&width=1080',
+      },
+      briefDescription:
+        'Recibe una caja sorpresa de snacks internacionales cada mes. Descubre nuevos sabores.',
+      plans: [
+        { _id: '4a', title: 'Plan Mensual', price: 18, currencyId: 'USD' },
+      ],
+    },
   ];
 
   // Simulación de petición GET a una API
@@ -164,15 +189,19 @@ const FeaturedPackagesCarousel: React.FC = () => {
     }
   };
 
+  // Agrupación para flechas: mover de 4 en 4
+  const groupSize = 4;
+  const groupsCount = Math.ceil(packages.length / groupSize);
+
   const goNext = () => {
-    indexRef.current++;
+    indexRef.current += groupSize;
     if (indexRef.current > packages.length - 1) indexRef.current = 0;
     update();
   };
 
   const goPrev = () => {
-    indexRef.current--;
-    if (indexRef.current < 0) indexRef.current = packages.length - 1;
+    indexRef.current -= groupSize;
+    if (indexRef.current < 0) indexRef.current = (groupsCount - 1) * groupSize;
     update();
   };
 
@@ -239,14 +268,23 @@ const FeaturedPackagesCarousel: React.FC = () => {
 
   return (
     <>
-      <section className="carousel">
-        {/*
-        <button className="arrow prev" onClick={goPrev}>
-          {'<'}
-        </button>
-        */}
+      <section className="carousel" style={{ padding: '0px 10px' }}>
         <div
-          className="carousel-default-button carousel-default-left-button"
+          style={{
+            width: '40px',
+            height: '40px',
+            boxSizing: 'border-box',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'absolute',
+            left: -10,
+            zIndex: 200,
+            borderRadius: '50%',
+            cursor: 'pointer',
+            backgroundColor: '#fff',
+            boxShadow: '0 4px 24px rgba(0,0,0,0.18)', // box-shadow más prominente
+          }}
           onClick={goPrev}
         >
           <span>{'<'}</span>
@@ -255,7 +293,10 @@ const FeaturedPackagesCarousel: React.FC = () => {
           <div className="track" ref={trackRef}>
             {packages.map((pckg) => (
               <article className="card" key={pckg._id}>
-                <div className="card-content">
+                <div
+                  className="card-content"
+                  style={{ boxShadow: 'none', border: '1px solid #efefef' }}
+                >
                   {pckg.coverImage ? (
                     <div className="card-image-container">
                       <img
@@ -297,13 +338,22 @@ const FeaturedPackagesCarousel: React.FC = () => {
             ))}
           </div>
         </div>
-        {/*
-        <button className="arrow next" onClick={goNext}>
-          {'>'}
-        </button>
-        */}
         <div
-          className="carousel-default-button carousel-default-right-button"
+          style={{
+            width: '40px',
+            height: '40px',
+            boxSizing: 'border-box',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'absolute',
+            right: -10,
+            zIndex: 200,
+            borderRadius: '50%',
+            cursor: 'pointer',
+            backgroundColor: '#fff',
+            boxShadow: '0 4px 24px rgba(0,0,0,0.18)', // box-shadow más prominente
+          }}
           onClick={goNext}
         >
           <span>{'>'}</span>
