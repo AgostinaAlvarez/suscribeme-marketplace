@@ -883,3 +883,12 @@ li {
       'card5';
   }
 }
+
+/***/
+
+.index-featured-packages-section {
+  border: 1px solid #efefef;
+  padding: 40px;
+  border-radius: 10px;
+  background-color: #f9fafb;
+}
