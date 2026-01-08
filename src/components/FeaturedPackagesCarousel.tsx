@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
-import '../../public/styles/planCarouselStyles.css';
 import '../../public/styles/globalStyles.css';
+import '../../public/styles/planCarouselStyles.css';
 
 interface PackageData {
   _id: string;
@@ -316,7 +316,7 @@ const FeaturedPackagesCarousel: React.FC = () => {
                   )}
                   <div className="card-content-information">
                     <div className="card-content-information-description-container">
-                      <h3>{pckg.title}</h3>
+                      <h3>{pckg.title} hg</h3>
                       <p>{pckg.briefDescription}</p>
                       <span>3.5 ★★★★★ (76)</span>
                       {pckg.plans.slice(0, 2).map((plan, index) => (

@@ -432,3 +432,23 @@ header .navbar-container a:hover {
 .carousel-default-right-button {
   border-radius: 0 10px 10px 0;
 }
+
+.card-button {
+  border: none;
+  border: 1px solid #7d2ae8;
+  background: #7d2ae8;
+  color: #fff;
+  border-radius: 6px;
+  padding: 8px 22px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 25px;
+  margin-bottom: 5px;
+}
+
+.card-button:hover {
+  color: #fff;
+  background: #5a1bb0;
+  border: 1px solid #7d2ae8;
+}

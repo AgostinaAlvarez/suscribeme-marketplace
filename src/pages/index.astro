@@ -7,7 +7,7 @@ import CuratedCollectionsCarousel from '../components/CuratedCollectionsCarousel
 import PrincipalHeader from '../components/StructureComponents/PrincipalHeader.tsx';
 import IndexCataegorySection from '../components/IndexCataegorySection';
 import FeaturedStandarPackagesCarousel from '../components/FeaturedStandarPackagesCarousel.tsx';
-
+import FeaturedStandarPlansCarousel from '../components/FeaturedStandarPlansCarousel.tsx';
 const highlights: {
   imageUrl: string;
   title: string;
@@ -316,28 +316,47 @@ const highlights: {
               id="popular-standar-packages-section"
               class="main-container-ttl"
             >
-              Paquetes Populares
+              Planes Populares
             </h2>
             <a href="/">View More</a>
           </div>
-          {
-            /*
-           <div class="index-tag-filters-container">
-             <div class="index-tag-filter">
-               <span>All</span>
-             </div>
-             <div class="index-tag-filter">
-               <span>Newest</span>
-             </div>
-             <div class="index-tag-filter">
-               <span>Best</span>
-             </div>
-           </div>
-            */
-          }
         </div>
-        <FeaturedPackagesCarousel client:load />
+        <FeaturedStandarPlansCarousel client:load />
       </section>
+      <!--
+        <section
+          aria-labelledby="popular-standar-packages-section"
+          class="index-section-container index-default-section index-featured-packages-section"
+        >
+          <div class="index-filters-container">
+            <div class="index-section-header">
+              <h2
+                id="popular-standar-packages-section"
+                class="main-container-ttl"
+              >
+                Paquetes Populares
+              </h2>
+              <a href="/">View More</a>
+            </div>
+            {
+              /*
+             <div class="index-tag-filters-container">
+               <div class="index-tag-filter">
+                 <span>All</span>
+               </div>
+               <div class="index-tag-filter">
+                 <span>Newest</span>
+               </div>
+               <div class="index-tag-filter">
+                 <span>Best</span>
+               </div>
+             </div>
+              */
+            }
+          </div>
+          <FeaturedPackagesCarousel client:load />
+        </section>
+       -->
       <!-- ================= BANNERS SECTION ================= -->
       <section
         aria-labelledby="banners-section"
@@ -570,7 +589,7 @@ const highlights: {
       <!-- ================= CURATED COLLECTIONS ================= -->
       <section
         aria-labelledby="curated-collections-section"
-        class="index-section-container index-default-section index-featured-packages-section"
+        class="index-section-container index-default-section"
       >
         <div class="index-section-header">
           <h2 id="curated-collections-section" class="main-container-ttl">

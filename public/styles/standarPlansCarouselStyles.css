@@ -1,0 +1,140 @@
+.carousel {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
+
+.viewport {
+  overflow: hidden;
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+/* CARD SIZE REAL */
+.standar-plan-card {
+  flex: 0 0 25%;
+  max-width: 25%;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.standar-plan-card-content {
+  background: white;
+  min-height: 350px;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  border: 1px solid #efefef;
+  display: flex;
+  flex-direction: column;
+}
+
+.standar-plan-card-info-content {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /*background-color: pink;*/
+  flex: 1 1 auto;
+  min-height: 0;
+  gap: 20px;
+}
+
+.standar-plan-card-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  font-size: 10px;
+  color: #595959;
+  gap: 10px;
+  background-color: red;
+  background-color: #fff;
+  /*border: 1px solid black;*/
+  height: 135px;
+}
+
+.standar-plan-card-info h3 {
+  font-size: 22px;
+  margin: 0;
+  font-weight: 400;
+  color: #000;
+}
+
+.standar-plan-card-info h4 {
+  font-size: 11px;
+  margin: 0;
+  font-weight: 420;
+  color: #000;
+}
+
+.standar-plan-card-info p {
+  margin: 0;
+  line-height: 1.3;
+  font-size: 11.3px;
+}
+
+.standar-plan-card-price {
+  font-size: 28px;
+  font-weight: 430;
+}
+
+.standar-plan-card-items-list {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  /*background-color: green;*/
+  margin-top: 18px;
+}
+
+.standar-plan-card-items-list li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.standar-plan-card-items-list-item {
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  /*background-color: violet;*/
+  font-size: 11px;
+  color: #4d4d4d;
+  gap: 5px;
+}
+
+.standar-plan-card-items-list-item span {
+  line-height: 1;
+  margin: 0;
+}
+
+.standar-plan-card-info-tag {
+  width: fit-content;
+  box-sizing: border-box;
+  padding: 3px 10px;
+  background-color: #f2ebff;
+  font-size: 10px;
+  color: #6d16fa;
+  display: flex;
+  gap: 4px;
+  border-radius: 20px;
+}
