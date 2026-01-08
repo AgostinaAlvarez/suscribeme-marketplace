@@ -234,7 +234,10 @@ const FeaturedCustomPackagesCarusel: React.FC = () => {
                         </span>
                       </span>
 
-                      <div className="custom-package-card-info-items">
+                      <div
+                        className="custom-package-card-info-items"
+                        style={{ marginBottom: 5 }}
+                      >
                         {products.map((item, index) => (
                           <img
                             className="custom-package-card-info-product-icon"
@@ -256,6 +259,9 @@ const FeaturedCustomPackagesCarusel: React.FC = () => {
                           <span>Online Classes</span>
                         </div>
                       </div>
+                        */}
+
+                      {/*
                       <div className="custom-package-card-info-items">
                         <div className="custom-package-card-info-tag">
                           <span>Member discounts</span>

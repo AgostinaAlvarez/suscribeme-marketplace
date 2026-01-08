@@ -28,7 +28,7 @@
 
 .custom-package-card-content {
   background: white;
-  min-height: 320px;
+  min-height: 360px;
   border-radius: 10px;
   position: relative;
   overflow: hidden;
@@ -64,7 +64,7 @@
   /*background-color: pink;*/
   flex: 1 1 auto;
   min-height: 0;
-  gap: 30px;
+  gap: 20px;
 }
 
 .custom-package-card-info {

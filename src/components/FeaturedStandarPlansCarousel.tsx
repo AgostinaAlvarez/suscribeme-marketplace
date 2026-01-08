@@ -296,6 +296,7 @@ const FeaturedStandarPlansCarousel: React.FC = () => {
                               alt="Check Icon"
                               decoding="async"
                               referrerPolicy="no-referrer"
+                              loading="lazy"
                             />
                             <span>19 instruments and effects</span>
                           </div>
@@ -306,7 +307,7 @@ const FeaturedStandarPlansCarousel: React.FC = () => {
                   <button
                     style={{ margin: 0 }}
                     className="card-button"
-                    onClick={() => (window.location.href = '/package')}
+                    onClick={() => (window.location.href = '/standar-plan')}
                   >
                     View Plan
                   </button>
