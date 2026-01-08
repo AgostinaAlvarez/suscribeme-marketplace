@@ -212,6 +212,10 @@ const FeaturedCustomPackagesCarusel: React.FC = () => {
                     <img
                       src="https://storage.googleapis.com/uxpilot-auth.appspot.com/254c6dc983-b74c8b6733c5eb980631.png"
                       className="custom-package-card-image"
+                      alt={`Custom ${index}`}
+                      loading="lazy"
+                      decoding="async"
+                      referrerPolicy="no-referrer"
                     />
                     <div className="custom-package-card-image-layer">
                       <div className="custom-package-card-info-tag">
@@ -236,6 +240,10 @@ const FeaturedCustomPackagesCarusel: React.FC = () => {
                             className="custom-package-card-info-product-icon"
                             key={index}
                             src={item.imageUrl}
+                            alt={`Img ${index}`}
+                            loading="lazy"
+                            decoding="async"
+                            referrerPolicy="no-referrer"
                           />
                         ))}
                         <span className="custom-package-card-info-items-more-label">

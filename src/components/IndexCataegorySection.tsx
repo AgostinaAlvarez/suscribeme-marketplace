@@ -217,6 +217,10 @@ const IndexCataegorySection: React.FC = () => {
                   <img
                     src={category.imageUrl}
                     className="category-carousel-card-img"
+                    alt={`${category.title}`}
+                    loading="lazy"
+                    decoding="async"
+                    referrerPolicy="no-referrer"
                   />
                   <div className="category-carousel-card-layer">
                     <h3>{category.title}</h3>

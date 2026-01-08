@@ -27,7 +27,7 @@ const PrincipalHeader: React.FC<ComponentProps> = ({
           <a href="/" aria-label="Inicio Suscribeme">
             <span>Suscribeme</span>
           </a>
-          <a>Explore</a>
+          <a href="/">Explore</a>
           <div className="nav-search-bar-container nav-search-bar-container-principal-structure">
             <div
               className="nav-search-bar-icon-container"

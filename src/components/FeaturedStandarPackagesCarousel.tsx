@@ -283,6 +283,10 @@ const FeaturedStandarPackagesCarousel: React.FC = () => {
                       <img
                         src={pckg.coverImage.url}
                         className="standar-package-card-image"
+                        alt={`${pckg.title}`}
+                        loading="lazy"
+                        decoding="async"
+                        referrerPolicy="no-referrer"
                       />
                     ) : (
                       <></>
