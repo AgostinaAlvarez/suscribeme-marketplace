@@ -220,8 +220,8 @@
   box-sizing: border-box;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
-  row-gap: 35px;
+  column-gap: 15px;
+  row-gap: 20px;
 }
 
 /**/

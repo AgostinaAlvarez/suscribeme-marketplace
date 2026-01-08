@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import HeaderSearchScreen from '../components/HeaderSearchScreen';
+import StandarPackagesSection from '../components/SearchScreen/StandarPackagesSection';
+import CustomPackagesSection from '../components/SearchScreen/CustomPackagesSection';
 
-interface PackageData {
+interface StandarPackageData {
   _id: string;
   coverImage?: { url: string } | null;
   title: string;
@@ -12,6 +14,10 @@ interface PackageData {
     price: number;
     currencyId: string;
   }[];
+}
+
+interface CustomPackageData {
+  _id: string;
 }
 
 const SearchScreen: React.FC = () => {
@@ -36,7 +42,7 @@ const SearchScreen: React.FC = () => {
     }, 1500);
   };
 
-  const packages: PackageData[] = [
+  const standarPackages: StandarPackageData[] = [
     {
       _id: '1',
       title: 'Suscripción a Café Mensual',
@@ -175,7 +181,32 @@ const SearchScreen: React.FC = () => {
     },
   ];
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const customPackages: CustomPackageData[] = [
+    {
+      _id: '1',
+    },
+    {
+      _id: '2',
+    },
+    {
+      _id: '3',
+    },
+    {
+      _id: '4',
+    },
+    {
+      _id: '5',
+    },
+    {
+      _id: '6',
+    },
+    {
+      _id: '7',
+    },
+    {
+      _id: '8',
+    },
+  ];
 
   const subscriptionTypeOptions = [
     'Productos',
@@ -406,67 +437,12 @@ const SearchScreen: React.FC = () => {
                 </div>
                 */}
                 </div>
-                <div className="search-screen-main-grid-content-cards-grid">
-                  {packages.map((pckg, index) => (
-                    <article
-                      className="card-content"
-                      key={index}
-                      style={{ boxShadow: 'none', border: '1px solid #efefef' }}
-                    >
-                      {pckg.coverImage ? (
-                        <img
-                          className="card-image"
-                          src={pckg.coverImage.url}
-                          alt={`${pckg.title}`}
-                          loading="lazy"
-                          decoding="async"
-                          referrerPolicy="no-referrer"
-                        />
-                      ) : (
-                        <div
-                          className="card-image-default"
-                          aria-hidden="true"
-                        ></div>
-                      )}
-                      <div className="card-content-information">
-                        <div className="card-content-information-description-container">
-                          <h3>{pckg.title}</h3>
-                          <p>{pckg.briefDescription}</p>
-                          <span>3.5 ★★★★★ (76)</span>
-                          {pckg.plans.slice(0, 2).map((plan, index) => (
-                            <h4 key={index}>
-                              {plan.title} ${plan.price} {plan.currencyId}{' '}
-                              <span>/mo</span>
-                            </h4>
-                          ))}
-                        </div>
-                        <button
-                          className="card-button"
-                          onClick={() => (window.location.href = '/package')}
-                        >
-                          View Package
-                        </button>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-                <nav
-                  style={{ marginTop: 30 }}
-                  className="pagination-container"
-                  aria-label="Paginación de paquetes estándar"
-                >
-                  <button className="pagination-arrow">‹</button>
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((page) => (
-                    <button
-                      key={page}
-                      className={`pagination-item ${currentPage === page ? 'active' : ''}`}
-                      onClick={() => setCurrentPage(page)}
-                    >
-                      {page}
-                    </button>
-                  ))}
-                  <button className="pagination-next">Siguiente ›</button>
-                </nav>
+                {subscritpionType === 'standar-packages' && (
+                  <StandarPackagesSection packages={standarPackages} />
+                )}
+                {subscritpionType === 'custom-packages' && (
+                  <CustomPackagesSection packages={customPackages} />
+                )}
               </>
             )}
           </div>

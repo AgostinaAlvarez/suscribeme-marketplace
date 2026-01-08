@@ -91,6 +91,7 @@
 /*================= SLIDER SECTION =================*/
 
 .slider {
+  margin-top: 15px;
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -153,6 +154,132 @@ background-image: linear-gradient(to top, #cc208e 0%, #6713d2 100%);
       #050830 0%,
       rgba(26, 15, 53, 0) 70%
     );
+  background-color: #fff;
+  background-image: unset;
+  color: #000;
+}
+
+.item-content-1 {
+  box-sizing: border-box;
+  position: relative;
+  padding: 0px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.item-content-1-layer {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: #0000007b;
+  padding: 20px 80px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  color: #fff;
+}
+
+.item-content-1-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.slide-general {
+  min-width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+  background-image: unset;
+  color: #000;
+}
+
+.item-general-content {
+  max-width: 1250px;
+  margin: 0 auto;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  color: white;
+
+  box-sizing: border-box;
+  position: relative;
+  padding: 0px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.item-general-content-layer {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: #0000007b;
+  padding: 20px 80px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  color: #fff;
+}
+
+.item-general-content-layer h2 {
+  font-size: 47px;
+  max-width: 650px;
+  margin: 0;
+  font-weight: 430;
+}
+
+.item-general-content-layer p {
+  margin: 0;
+  font-size: 16px;
+  max-width: 550px;
+  line-height: 1.5;
+  color: #d9d9d9;
+}
+
+.item-general-content-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.slider-layer-button {
+  border: none;
+  border: 1px solid #fff;
+  background: #fff;
+  color: #000;
+  border-radius: 40px;
+  padding: 8px 22px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: fit-content;
+}
+
+.slider-layer-button a {
+  text-decoration: none !important;
+  color: #000 !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+}
+
+.slider-layer-button:hover {
+  color: #000;
+  background: #efefef;
+  border: 1px solid #efefef;
 }
 
 .slide-2 {
