@@ -299,12 +299,16 @@ const highlights: {
         aria-labelledby="categories-section"
         class="index-section-container index-default-section"
       >
-        <div class="index-section-header">
-          <h2 id="categories-section" class="main-container-ttl">
-            Explorar por categoría
-          </h2>
-          <a href="/">Explore Categories</a>
-        </div>
+        <h2 id="categories-section" class="main-container-ttl">
+          Explorar por categoría
+        </h2>
+        {
+          /*
+            <div class="index-section-header">
+            <a href="/">Explore Categories</a>
+            </div>
+            */
+        }
         <IndexCataegorySection client:load />
       </section>
       <!-- ================= FEATURED STANDAR PACKAGES ================= -->
@@ -643,7 +647,7 @@ const highlights: {
           <h2 id="sellers-section" class="main-container-ttl">
             Highlight Sellers
           </h2>
-          <a href="/">View More</a>
+          <a href="/stores">View More</a>
         </div>
         <BestSellersGrid client:load />
       </section>
@@ -652,12 +656,16 @@ const highlights: {
         aria-labelledby="features-section"
         class="index-section-container index-default-section"
       >
-        <div class="index-section-header">
-          <h2 id="features-section" class="main-container-ttl">
-            Why Shop With Us?
-          </h2>
-          <a href="/">Explore Categories</a>
-        </div>
+        {
+          /*
+       <div class="index-section-header">
+         <a href="/">Explore Categories</a>
+       </div>
+        */
+        }
+        <h2 id="features-section" class="main-container-ttl">
+          Why Shop With Us?
+        </h2>
         <div class="platform-features-grid">
           <article class="platform-features-card platform-features-card-1">
             <div>Ic</div>

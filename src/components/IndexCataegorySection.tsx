@@ -224,7 +224,7 @@ const IndexCataegorySection: React.FC = () => {
                   />
                   <div className="category-carousel-card-layer">
                     <h3>{category.title}</h3>
-                    <a href="/">View Category</a>
+                    <a href="/categories">View Category</a>
                   </div>
                 </div>
               </article>
@@ -272,7 +272,7 @@ const IndexCataegorySection: React.FC = () => {
             style={{
               width: 10,
               height: 10,
-              background: getActiveDot() === groupIdx ? 'red' : '#ccc',
+              background: getActiveDot() === groupIdx ? '#595959' : '#d9d9d9',
               borderRadius: '50%',
               cursor: 'pointer',
               transition: 'background 0.2s',
