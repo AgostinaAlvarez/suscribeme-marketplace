@@ -1,10 +1,7 @@
 ---
-// Página de listado de colecciones
-import PrincipalHeader from '../../components/StructureComponents/PrincipalHeader';
-import Header from '../../components/Header.astro';
-import CollectionHeader from '../../components/CollectionHeader';
-import Footer from '../../components/Footer.astro';
-import CollectionMainComponent from '../../components/CollectionMainComponent.tsx';
+import Footer from '../components/Footer.astro';
+import PrincipalHeader from '../components/StructureComponents/PrincipalHeader';
+import FeaturedPlansScreen from '../componentsPages/FeaturedPlansScreen';
 ---
 
 <html lang="en">
@@ -20,17 +17,15 @@ import CollectionMainComponent from '../../components/CollectionMainComponent.ts
     />
     <link rel="stylesheet" href="/styles/normalize.css" />
     <link rel="stylesheet" href="/styles/globalStyles.css" />
-    <link rel="stylesheet" href="/styles/collectionMainStyles.css" />
+    <link rel="stylesheet" href="/styles/featuredScreenStyles.css" />
+    <link rel="stylesheet" href="/styles/standarPlansCarouselStyles.css" />
   </head>
   <body>
     <!-- ================= HEADER ================= -->
-    <!--
-        <CollectionHeader client:load />
-     -->
     <PrincipalHeader client:load />
     <!-- ================= MAIN ================= -->
-    <main class="main detail-screen-standar-main collection-main">
-      <CollectionMainComponent client:load />
+    <main class="main detail-screen-standar-main">
+      <FeaturedPlansScreen client:load />
     </main>
     <!-- ================= FOOTER ================= -->
     <Footer />

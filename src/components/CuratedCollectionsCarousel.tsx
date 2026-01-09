@@ -187,7 +187,7 @@ const CuratedCollectionsCarousel: React.FC = () => {
                   <div className="collection-card-content-layer">
                     <h3>Work From Home Essentials</h3>
                     <p>12 subscriptions perfect for remote workers</p>
-                    <a href="/">Explore collection</a>
+                    <a href="/collections/collection">Explore collection</a>
                   </div>
                 </div>
               </article>
