@@ -452,3 +452,18 @@ header .navbar-container a:hover {
   background: #5a1bb0;
   border: 1px solid #7d2ae8;
 }
+
+.ant-loader {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #1677ff; /* azul Ant Design */
+  border-radius: 50%;
+  animation: ant-spin 0.8s linear infinite;
+}
+
+@keyframes ant-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

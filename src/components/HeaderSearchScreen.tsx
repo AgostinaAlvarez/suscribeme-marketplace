@@ -50,6 +50,7 @@ const HeaderSearchScreen: React.FC<ComponentProps> = ({
           </div>
           <nav aria-label="Navegación principal">
             <ul>
+              {/*
               <li>
                 <a href="/search">Search</a>
               </li>
@@ -59,6 +60,7 @@ const HeaderSearchScreen: React.FC<ComponentProps> = ({
               <li>
                 <a href="/subscriptions">Explorar planes</a>
               </li>
+                */}
 
               <li>
                 <a href="/sellers">Vendedores</a>
