@@ -176,6 +176,7 @@
   margin: 0;
   color: red;
   color: #595959;
+  color: #8c8c8c;
 }
 
 @media screen and (max-width: 640px) {
@@ -189,7 +190,7 @@
   }
 
   .standar-plan-card-description {
-    font-size: 10px;
+    font-size: 11px;
   }
 
   .standar-plan-card-price {
