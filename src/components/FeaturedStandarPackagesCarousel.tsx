@@ -291,45 +291,25 @@ const FeaturedStandarPackagesCarousel: React.FC = () => {
                   </div>
                   <div className="standar-package-card-info-content">
                     <div className="standar-package-card-info">
-                      <span>BEAUTY AND CARE</span>
+                      <span className="standar-package-card-info-span">
+                        BEAUTY AND CARE
+                      </span>
                       <h3>{pckg.title}</h3>
-                      <span>
+                      <span className="standar-package-card-info-span">
                         By{' '}
                         <span style={{ color: '#1890ff', marginLeft: 3 }}>
                           Pure Essence Studio
                         </span>
                       </span>
-                      <p
-                        style={{
-                          margin: 0,
-                          lineHeight: 1.4,
-                          marginBottom: 10,
-                          fontSize: 12.5,
-                          color: '#8c8c8c',
-                          fontWeight: 400,
-                        }}
-                      >
-                        {pckg.briefDescription}
-                      </p>
+                      <p>{pckg.briefDescription}</p>
                       {pckg.plans.map((plan, index) => (
                         <div
                           key={index}
                           className="standar-package-card-plan-container"
                         >
-                          {/*
-                        <div className="standar-package-card-plan-icon">
-                          <img
-                            src="/assets/icons/rocket-white.svg"
-                            alt="Menu icon"
-                            width="12"
-                            height="12"
-                          />
-                        </div>
-                          */}
-
                           <h3>{plan.title}</h3>
                           <div className="standar-package-card-plan-price-tag">
-                            <span>
+                            <span className="standar-package-card-plan-price">
                               ${plan.price} <span>/mo</span>
                             </span>
                           </div>
@@ -408,14 +388,14 @@ const FeaturedStandarPackagesCarousel: React.FC = () => {
                             </span>
                           </span>
                           <p
-                            style={{
-                              margin: 0,
-                              lineHeight: 1.4,
-                              marginBottom: 10,
-                              fontSize: 12.5,
-                              color: '#8c8c8c',
-                              fontWeight: 400,
-                            }}
+                          //style={{
+                          //  margin: 0,
+                          //  lineHeight: 1.4,
+                          //  marginBottom: 10,
+                          //  fontSize: 12.5,
+                          //  color: '#8c8c8c',
+                          //  fontWeight: 400,
+                          //}}
                           >
                             {pckg.briefDescription}
                           </p>

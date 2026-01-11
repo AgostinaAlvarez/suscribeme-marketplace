@@ -103,3 +103,22 @@
   display: flex;
   flex-direction: column;
 }
+
+@media screen and (max-width: 640px) {
+  .response-collection-card {
+    width: 280px;
+    height: 390px;
+  }
+
+  .collection-card-content-layer {
+    padding: 25px 20px;
+  }
+
+  .collection-card-content-layer h3 {
+    font-size: 20px;
+  }
+
+  .collection-card-content-layer p {
+    font-size: 12px;
+  }
+}

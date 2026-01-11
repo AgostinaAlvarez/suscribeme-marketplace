@@ -1218,6 +1218,60 @@ li {
   }
 }
 
+@media screen and (max-width: 720px) {
+  .item-general-content-layer h2 {
+    width: 100%;
+    font-size: 38px;
+  }
+
+  .item-general-content-layer p {
+    width: 100%;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .index-section-container {
+    /* background-color: red;*/
+    box-sizing: border-box;
+    padding: 0px 20px;
+
+    width: 100%;
+    border-radius: 0px;
+  }
+
+  .index-featured-packages-section {
+    padding: 40px 20px;
+  }
+
+  .highlights-responsive-carousel {
+    width: calc(100% - 40px);
+  }
+
+  .highlights-responsive-group {
+    gap: 15px;
+  }
+
+  .index-highlight-grid-item-bottom p {
+    font-size: 11px;
+  }
+
+  /**/
+
+  .item-general-content {
+    border-radius: 0px;
+  }
+
+  .item-general-content-layer h2 {
+    font-size: 32px;
+  }
+
+  .item-general-content-layer p {
+    width: 100%;
+    font-size: 12px;
+  }
+}
+
 @media screen and (max-width: 620px) {
   .sellers-section-grid {
     grid-template-columns: 1fr;

@@ -497,3 +497,13 @@ header .navbar-container a:hover {
     display: none;
   }
 }
+
+@media screen and (max-width: 640px) {
+  .responsive-group {
+    gap: 10px;
+  }
+
+  .main-container-ttl {
+    font-size: 18px;
+  }
+}

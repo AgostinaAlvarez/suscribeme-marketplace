@@ -79,3 +79,27 @@
   box-sizing: border-box;
   border-radius: 10px;
 }
+
+@media screen and (max-width: 640px) {
+  .category-responsive-group {
+    gap: 15px;
+  }
+
+  .category-responsive-card {
+    width: 280px;
+    height: 350px;
+  }
+
+  .category-carousel-card-layer {
+    gap: 10px;
+    padding: 25px 20px;
+  }
+
+  .category-carousel-card-layer h3 {
+    font-size: 20px;
+  }
+
+  .category-carousel-card-layer a {
+    font-size: 12px !important;
+  }
+}

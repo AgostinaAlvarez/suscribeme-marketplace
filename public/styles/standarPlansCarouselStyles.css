@@ -169,3 +169,40 @@
   display: flex;
   flex-direction: column;
 }
+
+.standar-plan-card-description {
+  font-size: 11.3px;
+  line-height: 1.4;
+  margin: 0;
+  color: red;
+  color: #595959;
+}
+
+@media screen and (max-width: 640px) {
+  .responsive-plan-card {
+    width: 240px;
+    min-height: 340px;
+  }
+
+  .standar-plan-card-info h3 {
+    font-size: 13px;
+  }
+
+  .standar-plan-card-description {
+    font-size: 10px;
+  }
+
+  .standar-plan-card-price {
+    font-size: 18px;
+  }
+
+  .standar-plan-card-info {
+    background-color: red;
+    background-color: #fff;
+    /*border: 1px solid black;*/
+    height: 120px;
+  }
+  .standar-plan-card-items-list-item {
+    font-size: 10px;
+  }
+}

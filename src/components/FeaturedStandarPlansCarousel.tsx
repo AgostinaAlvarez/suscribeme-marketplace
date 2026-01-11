@@ -280,18 +280,8 @@ const FeaturedStandarPlansCarousel: React.FC = () => {
                           $45,00
                           <span style={{ fontSize: '15px' }}>/month</span>{' '}
                         </span>
-                        {/*
-                        <p>{plan.package.briefDescription}</p>
-                        */}
                       </div>
-                      <p
-                        style={{
-                          fontSize: '11.3px',
-                          lineHeight: 1.4,
-                          margin: 0,
-                          color: '#595959',
-                        }}
-                      >
+                      <p className="standar-plan-card-description">
                         {plan.package.briefDescription}
                       </p>
                       <ul className="standar-plan-card-items-list">
@@ -404,14 +394,7 @@ const FeaturedStandarPlansCarousel: React.FC = () => {
                         <p>{plan.package.briefDescription}</p>
                         */}
                           </div>
-                          <p
-                            style={{
-                              fontSize: '11.3px',
-                              lineHeight: 1.4,
-                              margin: 0,
-                              color: '#595959',
-                            }}
-                          >
+                          <p className="standar-plan-card-description">
                             {plan.package.briefDescription}
                           </p>
                           <ul className="standar-plan-card-items-list">
