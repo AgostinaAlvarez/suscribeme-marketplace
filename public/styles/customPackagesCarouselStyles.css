@@ -138,3 +138,23 @@
   font-size: 11px;
   padding: 20px;
 }
+
+.responsive-custom-package-card {
+  width: 330px;
+  min-height: 380px;
+  flex-direction: 0 0 5em;
+  border-radius: 10px;
+  background-color: #fff;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #efefef;
+  display: flex;
+  flex-direction: column;
+}
+
+.responsive-custom-package-card-info-product-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #efefef;
+}

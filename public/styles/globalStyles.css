@@ -462,8 +462,38 @@ header .navbar-container a:hover {
   animation: ant-spin 0.8s linear infinite;
 }
 
+.responsive-carousel {
+  width: 100%;
+  display: flex;
+  overflow-x: auto;
+  box-sizing: border-box;
+  padding-bottom: 20px;
+}
+
+.responsive-group {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+}
+
 @keyframes ant-spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 1380px) {
+  .footer-content {
+    display: none;
+  }
+  .footer-bottom-container {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 910px) {
+  .navbar-container {
+    display: none;
   }
 }

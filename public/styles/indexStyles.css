@@ -373,6 +373,7 @@ li {
   width: 100%;
   max-width: 1250px;
   margin: 0 auto;
+  min-height: 300px;
 }
 .highlights-slider {
   width: 100%;
@@ -432,6 +433,88 @@ li {
   border: none;
   color: transparent;
   box-shadow: none;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes slideOutLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+}
+@keyframes slideOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+}
+
+.highlights-slide--in {
+  z-index: 2;
+}
+.highlights-slide--out {
+  z-index: 1;
+  pointer-events: none;
+}
+
+.highlights-responsive-carousel {
+  width: calc(100% - 80px);
+  margin: 0px auto;
+  display: flex;
+  overflow-x: auto;
+  box-sizing: border-box;
+  padding-bottom: 20px;
+}
+
+.highlights-responsive-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.highlights-responsive-card {
+  width: 200px;
+  height: 300px;
+  flex-direction: 0 0 5em;
+  padding: 1em;
+  box-sizing: border-box;
+  border: 1px solid #efefef;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  font-size: 13px;
+  justify-content: space-between;
+  background-color: #f9fafb;
 }
 
 /*================= CATEGORIES SECTION =================*/
@@ -533,6 +616,10 @@ li {
   display: grid;
   grid-template-columns: 470px 1fr;
   gap: 20px;
+}
+
+.banners-section-responsive {
+  display: none;
 }
 
 .banners-section-img {
@@ -713,7 +800,7 @@ li {
   width: 100%;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   gap: 15px;
   list-style: none;
   margin: 0;
@@ -786,6 +873,10 @@ li {
   border-radius: 15px;
   overflow: hidden;
   position: relative;
+}
+
+.custom-packages-info-section-responsive {
+  display: none;
 }
 
 .custom-packages-info-section-left-col {
@@ -1029,4 +1120,106 @@ li {
   padding: 40px;
   border-radius: 10px;
   background-color: #f9fafb;
+}
+
+@media screen and (max-width: 1380px) {
+  .index-section-container {
+    /* background-color: red;*/
+    box-sizing: border-box;
+    padding: 0px 40px;
+
+    width: 100%;
+    border-radius: 0px;
+  }
+
+  .index-featured-packages-section {
+    padding: 40px;
+  }
+
+  .item-general-content {
+    max-width: none;
+    width: 100%;
+  }
+
+  .highlights-slider-container {
+    background-color: green;
+    max-width: none;
+    box-sizing: border-box;
+  }
+
+  .highlights-slider-nav {
+    background-color: pink;
+    width: 100%;
+    left: 0;
+  }
+
+  .footer {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .highlights-slide {
+    background-color: pink;
+    grid-template-columns: repeat(5, 1fr);
+    height: 300px;
+  }
+
+  .sellers-section-grid-item {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .banners-section {
+    display: none;
+  }
+
+  .banners-section-responsive {
+    display: block;
+    background-color: green;
+    height: 300px;
+  }
+
+  .custom-packages-info-section-grid {
+    display: none;
+  }
+
+  .custom-packages-info-section-responsive {
+    display: block;
+    background-color: pink;
+    height: 300px;
+  }
+
+  .platform-features-grid {
+    display: none;
+  }
+
+  .platform-features-section-responsive {
+    display: block;
+    background-color: violet;
+    height: 300px;
+  }
+}
+
+@media screen and (max-width: 910px) {
+  .sellers-section-grid-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .sellers-section-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .sellers-section-grid {
+    grid-template-columns: 1fr;
+  }
 }

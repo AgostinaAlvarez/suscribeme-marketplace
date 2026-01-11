@@ -197,3 +197,16 @@
   align-items: center;
   justify-content: center;
 }
+
+.responsive-package-card {
+  width: 320px;
+  min-height: 490px;
+  flex-direction: 0 0 5em;
+  border-radius: 10px;
+  background-color: #fff;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #efefef;
+  display: flex;
+  flex-direction: column;
+}

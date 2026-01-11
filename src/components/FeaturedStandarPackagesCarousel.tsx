@@ -141,6 +141,18 @@ const FeaturedStandarPackagesCarousel: React.FC = () => {
   //  }, 1200); // 1.2 segundos de delay
   //}, []);
 
+  const [mobileComponent, setMobileComponent] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Solo ejecuta en cliente
+    const checkMobile = () => {
+      setMobileComponent(window.innerWidth < 910);
+    };
+    checkMobile(); // Inicializa al montar
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const trackRef = useRef<HTMLDivElement>(null);
   const indexRef = useRef(0);
   const isDragging = useRef(false);
@@ -252,32 +264,12 @@ const FeaturedStandarPackagesCarousel: React.FC = () => {
 
   return (
     <>
-      <section className="carousel" style={{ position: 'relative' }}>
-        <div
-          style={{
-            width: '40px',
-            height: '40px',
-            boxSizing: 'border-box',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            position: 'absolute',
-            left: -10,
-            zIndex: 200,
-            borderRadius: '50%',
-            cursor: 'pointer',
-            backgroundColor: '#fff',
-            boxShadow: '0 4px 24px rgba(0,0,0,0.18)', // box-shadow más prominente
-          }}
-          onClick={goPrev}
-        >
-          <span>{'<'}</span>
-        </div>
-        <div className="viewport">
-          <div className="track" ref={trackRef}>
-            {packages.map((pckg, index) => (
-              <article className="standar-package-card" key={index}>
-                <div className="standar-package-card-content">
+      {mobileComponent ? (
+        <>
+          <div className="responsive-carousel">
+            <div className="responsive-group">
+              {packages.map((pckg, index) => (
+                <div key={index} className="responsive-package-card">
                   <div className="standar-package-card-image-container">
                     {pckg.coverImage ? (
                       <img
@@ -354,31 +346,141 @@ const FeaturedStandarPackagesCarousel: React.FC = () => {
                     </button>
                   </div>
                 </div>
-              </article>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-        <div
-          style={{
-            width: '40px',
-            height: '40px',
-            boxSizing: 'border-box',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            position: 'absolute',
-            right: -10,
-            zIndex: 200,
-            borderRadius: '50%',
-            cursor: 'pointer',
-            backgroundColor: '#fff',
-            boxShadow: '0 4px 24px rgba(0,0,0,0.18)', // box-shadow más prominente
-          }}
-          onClick={goNext}
-        >
-          <span>{'>'}</span>
-        </div>
-      </section>
+        </>
+      ) : (
+        <>
+          <section className="carousel" style={{ position: 'relative' }}>
+            <div
+              style={{
+                width: '40px',
+                height: '40px',
+                boxSizing: 'border-box',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                position: 'absolute',
+                left: -10,
+                zIndex: 200,
+                borderRadius: '50%',
+                cursor: 'pointer',
+                backgroundColor: '#fff',
+                boxShadow: '0 4px 24px rgba(0,0,0,0.18)', // box-shadow más prominente
+              }}
+              onClick={goPrev}
+            >
+              <span>{'<'}</span>
+            </div>
+            <div className="viewport">
+              <div className="track" ref={trackRef}>
+                {packages.map((pckg, index) => (
+                  <article className="standar-package-card" key={index}>
+                    <div className="standar-package-card-content">
+                      <div className="standar-package-card-image-container">
+                        {pckg.coverImage ? (
+                          <img
+                            src={pckg.coverImage.url}
+                            className="standar-package-card-image"
+                            alt={`${pckg.title}`}
+                            loading="lazy"
+                            decoding="async"
+                            referrerPolicy="no-referrer"
+                          />
+                        ) : (
+                          <></>
+                        )}
+                        <div className="standar-package-card-image-layer">
+                          <div className="standar-package-card-info-tag">
+                            <span>3.5 ★ (1,500)</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="standar-package-card-info-content">
+                        <div className="standar-package-card-info">
+                          <span>BEAUTY AND CARE</span>
+                          <h3>{pckg.title}</h3>
+                          <span>
+                            By{' '}
+                            <span style={{ color: '#1890ff', marginLeft: 3 }}>
+                              Pure Essence Studio
+                            </span>
+                          </span>
+                          <p
+                            style={{
+                              margin: 0,
+                              lineHeight: 1.4,
+                              marginBottom: 10,
+                              fontSize: 12.5,
+                              color: '#8c8c8c',
+                              fontWeight: 400,
+                            }}
+                          >
+                            {pckg.briefDescription}
+                          </p>
+                          {pckg.plans.map((plan, index) => (
+                            <div
+                              key={index}
+                              className="standar-package-card-plan-container"
+                            >
+                              {/*
+                        <div className="standar-package-card-plan-icon">
+                          <img
+                            src="/assets/icons/rocket-white.svg"
+                            alt="Menu icon"
+                            width="12"
+                            height="12"
+                          />
+                        </div>
+                          */}
+
+                              <h3>{plan.title}</h3>
+                              <div className="standar-package-card-plan-price-tag">
+                                <span>
+                                  ${plan.price} <span>/mo</span>
+                                </span>
+                              </div>
+                            </div>
+                          ))}
+                          {pckg.plans.length > 1 && <span>+ 2 more Plans</span>}
+                        </div>
+                        <button
+                          className="card-button"
+                          style={{ margin: 0 }}
+                          onClick={() => (window.location.href = '/package')}
+                        >
+                          View Package
+                        </button>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+            <div
+              style={{
+                width: '40px',
+                height: '40px',
+                boxSizing: 'border-box',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                position: 'absolute',
+                right: -10,
+                zIndex: 200,
+                borderRadius: '50%',
+                cursor: 'pointer',
+                backgroundColor: '#fff',
+                boxShadow: '0 4px 24px rgba(0,0,0,0.18)', // box-shadow más prominente
+              }}
+              onClick={goNext}
+            >
+              <span>{'>'}</span>
+            </div>
+          </section>
+        </>
+      )}
     </>
   );
 };

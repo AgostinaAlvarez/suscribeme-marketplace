@@ -75,6 +75,18 @@ const IndexCataegorySection: React.FC = () => {
     },
   ];
 
+  const [mobileComponent, setMobileComponent] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Solo ejecuta en cliente
+    const checkMobile = () => {
+      setMobileComponent(window.innerWidth < 910);
+    };
+    checkMobile(); // Inicializa al montar
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const trackRef = useRef<HTMLDivElement>(null);
   const indexRef = useRef(0);
   const isDragging = useRef(false);
@@ -186,34 +198,12 @@ const IndexCataegorySection: React.FC = () => {
 
   return (
     <>
-      <section
-        className="carousel category-carousel"
-        style={{ position: 'relative' }}
-      >
-        <div
-          onClick={goPrev}
-          style={{
-            height: '50px',
-            width: '45px',
-            position: 'absolute',
-            zIndex: 200,
-            left: -20,
-            borderRadius: '10px 5px 5px 10px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            backgroundColor: '#fff',
-            boxShadow: '0 4px 24px rgba(0,0,0,0.18)', // box-shadow más prominente
-          }}
-        >
-          <span>{'<'}</span>
-        </div>
-        <div className="viewport category-carousel-viewport">
-          <div className="track" ref={trackRef}>
-            {categories.map((category) => (
-              <article className="collection-card" key={category._id}>
-                <div className="category-carousel-card-content">
+      {mobileComponent ? (
+        <>
+          <div className="category-responsive-carousel">
+            <div className="category-responsive-group">
+              {categories.map((category, index) => (
+                <div key={index} className="category-responsive-card">
                   <img
                     src={category.imageUrl}
                     className="category-carousel-card-img"
@@ -227,62 +217,112 @@ const IndexCataegorySection: React.FC = () => {
                     <a href="/categories">View Category</a>
                   </div>
                 </div>
-              </article>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-        <div
-          onClick={goNext}
-          style={{
-            height: '50px',
-            width: '45px',
-            position: 'absolute',
-            zIndex: 200,
-            right: -20,
-            borderRadius: '5px 10px 10px 5px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            backgroundColor: '#fff',
-            boxShadow: '0 4px 24px rgba(0,0,0,0.18)', // box-shadow más prominente
-          }}
-        >
-          <span>{'>'}</span>
-        </div>
-      </section>
-      <ul
-        className="dots"
-        style={{
-          position: 'relative',
-          bottom: 10,
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          gap: 8,
-          padding: 0,
-          margin: 0,
-          listStyle: 'none',
-        }}
-      >
-        {Array.from({ length: groupsCount }).map((_, groupIdx) => (
-          <li
-            key={groupIdx}
-            onClick={() => goToGroup(groupIdx)}
+        </>
+      ) : (
+        <>
+          <section
+            className="carousel category-carousel"
+            style={{ position: 'relative' }}
+          >
+            <div
+              onClick={goPrev}
+              style={{
+                height: '50px',
+                width: '45px',
+                position: 'absolute',
+                zIndex: 200,
+                left: -20,
+                borderRadius: '10px 5px 5px 10px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                backgroundColor: '#fff',
+                boxShadow: '0 4px 24px rgba(0,0,0,0.18)', // box-shadow más prominente
+              }}
+            >
+              <span>{'<'}</span>
+            </div>
+            <div className="viewport category-carousel-viewport">
+              <div className="track" ref={trackRef}>
+                {categories.map((category) => (
+                  <article className="collection-card" key={category._id}>
+                    <div className="category-carousel-card-content">
+                      <img
+                        src={category.imageUrl}
+                        className="category-carousel-card-img"
+                        alt={`${category.title}`}
+                        loading="lazy"
+                        decoding="async"
+                        referrerPolicy="no-referrer"
+                      />
+                      <div className="category-carousel-card-layer">
+                        <h3>{category.title}</h3>
+                        <a href="/categories">View Category</a>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+            <div
+              onClick={goNext}
+              style={{
+                height: '50px',
+                width: '45px',
+                position: 'absolute',
+                zIndex: 200,
+                right: -20,
+                borderRadius: '5px 10px 10px 5px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                backgroundColor: '#fff',
+                boxShadow: '0 4px 24px rgba(0,0,0,0.18)', // box-shadow más prominente
+              }}
+            >
+              <span>{'>'}</span>
+            </div>
+          </section>
+          <ul
+            className="dots"
             style={{
-              width: 10,
-              height: 10,
-              background: getActiveDot() === groupIdx ? '#595959' : '#d9d9d9',
-              borderRadius: '50%',
-              cursor: 'pointer',
-              transition: 'background 0.2s',
-              border: 'none',
-              margin: 0,
+              position: 'relative',
+              bottom: 10,
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              gap: 8,
               padding: 0,
+              margin: 0,
+              listStyle: 'none',
             }}
-          ></li>
-        ))}
-      </ul>
+          >
+            {Array.from({ length: groupsCount }).map((_, groupIdx) => (
+              <li
+                key={groupIdx}
+                onClick={() => goToGroup(groupIdx)}
+                style={{
+                  width: 10,
+                  height: 10,
+                  background:
+                    getActiveDot() === groupIdx ? '#595959' : '#d9d9d9',
+                  borderRadius: '50%',
+                  cursor: 'pointer',
+                  transition: 'background 0.2s',
+                  border: 'none',
+                  margin: 0,
+                  padding: 0,
+                }}
+              ></li>
+            ))}
+          </ul>
+        </>
+      )}
     </>
   );
 };

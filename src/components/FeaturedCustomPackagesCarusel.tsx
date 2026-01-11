@@ -71,6 +71,18 @@ const FeaturedCustomPackagesCarusel: React.FC = () => {
   //  }, 1200); // 1.2 segundos de delay
   //}, []);
 
+  const [mobileComponent, setMobileComponent] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Solo ejecuta en cliente
+    const checkMobile = () => {
+      setMobileComponent(window.innerWidth < 910);
+    };
+    checkMobile(); // Inicializa al montar
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const trackRef = useRef<HTMLDivElement>(null);
   const indexRef = useRef(0);
   const isDragging = useRef(false);
@@ -182,32 +194,12 @@ const FeaturedCustomPackagesCarusel: React.FC = () => {
 
   return (
     <>
-      <section className="carousel" style={{ position: 'relative' }}>
-        <div
-          style={{
-            width: '40px',
-            height: '40px',
-            boxSizing: 'border-box',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            position: 'absolute',
-            left: -10,
-            zIndex: 200,
-            borderRadius: '50%',
-            cursor: 'pointer',
-            backgroundColor: '#fff',
-            boxShadow: '0 4px 24px rgba(0,0,0,0.18)', // box-shadow más prominente
-          }}
-          onClick={goPrev}
-        >
-          <span>{'<'}</span>
-        </div>
-        <div className="viewport">
-          <div className="track" ref={trackRef}>
-            {packages.map((_, index) => (
-              <article className="custom-package-card" key={index}>
-                <div className="custom-package-card-content">
+      {mobileComponent ? (
+        <>
+          <div className="responsive-carousel">
+            <div className="responsive-group">
+              {packages.map((_, index) => (
+                <article className="responsive-custom-package-card" key={index}>
                   <div className="custom-package-card-image-container">
                     <img
                       src="https://storage.googleapis.com/uxpilot-auth.appspot.com/254c6dc983-b74c8b6733c5eb980631.png"
@@ -238,9 +230,9 @@ const FeaturedCustomPackagesCarusel: React.FC = () => {
                         className="custom-package-card-info-items"
                         style={{ marginBottom: 5 }}
                       >
-                        {products.map((item, index) => (
+                        {products.slice(0, 5).map((item, index) => (
                           <img
-                            className="custom-package-card-info-product-icon"
+                            className="responsive-custom-package-card-info-product-icon"
                             key={index}
                             src={item.imageUrl}
                             alt={`Img ${index}`}
@@ -283,32 +275,144 @@ const FeaturedCustomPackagesCarusel: React.FC = () => {
                       View Package
                     </button>
                   </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              ))}
+            </div>
           </div>
-        </div>
-        <div
-          style={{
-            width: '40px',
-            height: '40px',
-            boxSizing: 'border-box',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            position: 'absolute',
-            right: -10,
-            zIndex: 200,
-            borderRadius: '50%',
-            cursor: 'pointer',
-            backgroundColor: '#fff',
-            boxShadow: '0 4px 24px rgba(0,0,0,0.18)', // box-shadow más prominente
-          }}
-          onClick={goNext}
-        >
-          <span>{'>'}</span>
-        </div>
-      </section>
+        </>
+      ) : (
+        <>
+          <section className="carousel" style={{ position: 'relative' }}>
+            <div
+              style={{
+                width: '40px',
+                height: '40px',
+                boxSizing: 'border-box',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                position: 'absolute',
+                left: -10,
+                zIndex: 200,
+                borderRadius: '50%',
+                cursor: 'pointer',
+                backgroundColor: '#fff',
+                boxShadow: '0 4px 24px rgba(0,0,0,0.18)', // box-shadow más prominente
+              }}
+              onClick={goPrev}
+            >
+              <span>{'<'}</span>
+            </div>
+            <div className="viewport">
+              <div className="track" ref={trackRef}>
+                {packages.map((_, index) => (
+                  <article className="custom-package-card" key={index}>
+                    <div className="custom-package-card-content">
+                      <div className="custom-package-card-image-container">
+                        <img
+                          src="https://storage.googleapis.com/uxpilot-auth.appspot.com/254c6dc983-b74c8b6733c5eb980631.png"
+                          className="custom-package-card-image"
+                          alt={`Custom ${index}`}
+                          loading="lazy"
+                          decoding="async"
+                          referrerPolicy="no-referrer"
+                        />
+                        <div className="custom-package-card-image-layer">
+                          <div className="custom-package-card-info-tag">
+                            <span>3.5 ★ (1,500)</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="custom-package-card-info-content">
+                        <div className="custom-package-card-info">
+                          <span>BEAUTY AND CARE</span>
+                          <h3>Wellness Ritual Collection</h3>
+                          <span style={{ marginBottom: 10 }}>
+                            By{' '}
+                            <span style={{ color: '#1890ff', marginLeft: 3 }}>
+                              Pure Essence Studio
+                            </span>
+                          </span>
+
+                          <div
+                            className="custom-package-card-info-items"
+                            style={{ marginBottom: 5 }}
+                          >
+                            {products.map((item, index) => (
+                              <img
+                                className="custom-package-card-info-product-icon"
+                                key={index}
+                                src={item.imageUrl}
+                                alt={`Img ${index}`}
+                                loading="lazy"
+                                decoding="async"
+                                referrerPolicy="no-referrer"
+                              />
+                            ))}
+                            <span className="custom-package-card-info-items-more-label">
+                              +3 more
+                            </span>
+                          </div>
+                          {/*
+                      <div className="custom-package-card-info-items">
+                        <div className="custom-package-card-info-tag">
+                          <span>Online Classes</span>
+                        </div>
+                      </div>
+                        */}
+
+                          {/*
+                      <div className="custom-package-card-info-items">
+                        <div className="custom-package-card-info-tag">
+                          <span>Member discounts</span>
+                        </div>
+                      </div>
+                      <div className="custom-package-card-info-items">
+                        <div className="custom-package-card-info-tag">
+                          <span>Member discounts</span>
+                        </div>
+                      </div>
+                      
+                        */}
+                        </div>
+                        <button
+                          className="card-button"
+                          style={{ margin: 0 }}
+                          onClick={() =>
+                            (window.location.href = '/custom-package')
+                          }
+                        >
+                          View Package
+                        </button>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+            <div
+              style={{
+                width: '40px',
+                height: '40px',
+                boxSizing: 'border-box',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                position: 'absolute',
+                right: -10,
+                zIndex: 200,
+                borderRadius: '50%',
+                cursor: 'pointer',
+                backgroundColor: '#fff',
+                boxShadow: '0 4px 24px rgba(0,0,0,0.18)', // box-shadow más prominente
+              }}
+              onClick={goNext}
+            >
+              <span>{'>'}</span>
+            </div>
+          </section>
+        </>
+      )}
     </>
   );
 };

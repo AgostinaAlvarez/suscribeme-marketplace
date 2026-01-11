@@ -8,87 +8,7 @@ import PrincipalHeader from '../components/StructureComponents/PrincipalHeader.t
 import IndexCataegorySection from '../components/IndexCataegorySection';
 import FeaturedStandarPackagesCarousel from '../components/FeaturedStandarPackagesCarousel.tsx';
 import FeaturedStandarPlansCarousel from '../components/FeaturedStandarPlansCarousel.tsx';
-const highlights: {
-  imageUrl: string;
-  title: string;
-  description: string;
-  briefDescription: string;
-  tagText: string;
-}[] = [
-  {
-    imageUrl: '/assets/flatIcons/box.svg',
-    title: 'Suscripciones listas para vos',
-    description:
-      'Descubrí paquetes de suscripción creados por vendedores, con planes mensuales o anuales según tus necesidades.',
-    briefDescription: 'Paquetes de suscripción con planes mensuales o anuales.',
-    tagText: 'Ver paquetes',
-  },
-  {
-    imageUrl: '/assets/flatIcons/shopping-cart.svg',
-    title: 'Armá tu plan a medida',
-    description:
-      'Elegí productos, servicios o beneficios y creá tu propia suscripción personalizada desde un solo lugar.',
-    briefDescription:
-      'Combiná productos y servicios para crear tu suscripción.',
-    tagText: 'Crear mi plan',
-  },
-  {
-    imageUrl: '/assets/flatIcons/quality.svg',
-    title: 'Vendedores verificados',
-    description:
-      'Trabajamos con marcas y comercios que cumplen estándares de calidad y servicio.',
-    briefDescription: 'Marcas y comercios verificados por la plataforma.',
-    tagText: 'Cómo validamos',
-  },
-  {
-    imageUrl: '/assets/flatIcons/credit-card.svg',
-    title: 'Pagos simples y recurrentes',
-    description:
-      'Pagá tu suscripción de forma automática, segura y sin preocupaciones todos los meses.',
-    briefDescription: 'Pagos automáticos y seguros todos los meses.',
-    tagText: 'Ver medios de pago',
-  },
-  {
-    imageUrl: '/assets/flatIcons/discount-tag.svg',
-    title: 'Beneficios por suscribirte',
-    description:
-      'Accedé a precios especiales, descuentos exclusivos y beneficios solo para suscriptores.',
-    briefDescription: 'Descuentos y beneficios exclusivos por suscribirte.',
-    tagText: 'Ver beneficios',
-  },
-  {
-    imageUrl: '/assets/flatIcons/coupon.svg',
-    title: 'Promos y cupones activos',
-    description:
-      'Aplicá cupones de descuento en paquetes seleccionados y aprovechá ofertas por tiempo limitado.',
-    briefDescription: 'Cupones y promociones disponibles por tiempo limitado.',
-    tagText: 'Ver promociones',
-  },
-  {
-    imageUrl: '/assets/flatIcons/transaction.svg',
-    title: 'Control total de tu gasto',
-    description:
-      'Conocé el total mensual de tu suscripción antes de pagar y ajustala cuando quieras.',
-    briefDescription: 'Visualizá y ajustá tu gasto mensual fácilmente.',
-    tagText: 'Gestionar suscripción',
-  },
-  {
-    imageUrl: '/assets/flatIcons/tracking.svg',
-    title: 'Envíos y retiros claros',
-    description:
-      'Cada paquete indica si el envío es a domicilio o retiro en tienda, con costos y tiempos transparentes.',
-    briefDescription: 'Opciones claras de envío a domicilio o retiro.',
-    tagText: 'Cómo funciona',
-  },
-  {
-    imageUrl: '/assets/flatIcons/discount.svg',
-    title: 'Ahorrá más a largo plazo',
-    description:
-      'Los planes anuales y las suscripciones combinadas ofrecen mejores precios que las compras individuales.',
-    briefDescription: 'Mejores precios con planes anuales o combinados.',
-    tagText: 'Comparar planes',
-  },
-];
+import IndexPlatformHighlights from '../components/IndexPlatformHighlights.tsx';
 ---
 
 <html lang="en">
@@ -217,83 +137,7 @@ const highlights: {
         </ul>
       </section>
       <!-- ================= HIGHLIGHTS ================= -->
-      <section
-        aria-labelledby="highlights-section"
-        class="index-section-container index-default-section highlights-section"
-      >
-        <div class="highlights-slider-container">
-          <div class="highlights-slider" id="highlights-slider">
-            <div class="highlights-slide highlights-slide-1" data-slide="1">
-              {
-                highlights.slice(0, 6).map((item) => (
-                  <div class="index-highlight-grid-item">
-                    <div class="index-highlight-grid-item-header">
-                      <h3>{item.title}</h3>
-                      <img
-                        src={item.imageUrl}
-                        width="73"
-                        height="73"
-                        alt={item.title}
-                        decoding="async"
-                        referrerpolicy="no-referrer"
-                      />
-                    </div>
-                    <div class="index-highlight-grid-item-bottom">
-                      <p>{item.briefDescription}</p>
-                      <div class="index-highlight-grid-item-bottom-tag">
-                        <span>{item.tagText}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))
-              }
-            </div>
-            <div
-              class="highlights-slide highlights-slide-2"
-              data-slide="2"
-              style="display:none;"
-            >
-              {
-                highlights.slice(6, 9).map((item) => (
-                  <div class="index-highlight-grid-item">
-                    <div class="index-highlight-grid-item-header">
-                      <h3>{item.title}</h3>
-                      <img
-                        src={item.imageUrl}
-                        width="73"
-                        height="73"
-                        alt={`${item.title}`}
-                        loading="lazy"
-                        decoding="async"
-                        referrerpolicy="no-referrer"
-                      />
-                    </div>
-                    <div class="index-highlight-grid-item-bottom">
-                      <p>{item.briefDescription}</p>
-                      <div class="index-highlight-grid-item-bottom-tag">
-                        <span>{item.tagText}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))
-              }
-            </div>
-          </div>
-          <div class="highlights-slider-nav">
-            <button
-              class="highlights-slider-arrow highlights-slider-arrow-left"
-              id="highlights-prev"
-              aria-label="Anterior"
-              disabled>&lt;</button
-            >
-            <button
-              class="highlights-slider-arrow highlights-slider-arrow-right"
-              id="highlights-next"
-              aria-label="Siguiente">&gt;</button
-            >
-          </div>
-        </div>
-      </section>
+      <IndexPlatformHighlights client:load />
       <!-- ================= CATEGORIES ================= -->
       <section
         aria-labelledby="categories-section"
@@ -344,7 +188,7 @@ const highlights: {
         </div>
         <FeaturedStandarPackagesCarousel client:load />
       </section>
-      <!-- ================= POPULAT STANDAR PACKAGES ================= -->
+      <!-- ================= POPULAR STANDAR PLANS ================= -->
       <section
         aria-labelledby="popular-standar-packages-section"
         class="index-section-container index-default-section index-featured-packages-section"
@@ -493,8 +337,11 @@ const highlights: {
             -->
           </div>
         </div>
+        <div class="banners-section-responsive">
+          <div>des</div>
+        </div>
       </section>
-      <!-- ================= CUSTOM PACKAGES INFO ================= -->
+      <!-- ================= CUSTOM PACKAGES BANNER ================= -->
       <section
         aria-labelledby="sellers-section"
         class="index-section-container index-default-section"
@@ -591,6 +438,7 @@ const highlights: {
             </div>
           </div>
         </div>
+        <div class="custom-packages-info-section-responsive"></div>
       </section>
       <!-- ================= FEATURED CUSTOM PACKAGE ================= -->
       <section
@@ -656,13 +504,6 @@ const highlights: {
         aria-labelledby="features-section"
         class="index-section-container index-default-section"
       >
-        {
-          /*
-       <div class="index-section-header">
-         <a href="/">Explore Categories</a>
-       </div>
-        */
-        }
         <h2 id="features-section" class="main-container-ttl">
           Why Shop With Us?
         </h2>
@@ -714,6 +555,7 @@ const highlights: {
             </div>
           </article>
         </div>
+        <div class="platform-features-section-responsive"></div>
       </section>
 
       <!-- ================= TESTIMONIALS ================= -->

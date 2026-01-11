@@ -35,6 +35,18 @@ const CuratedCollectionsCarousel: React.FC = () => {
     },
   ];
 
+  const [mobileComponent, setMobileComponent] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Solo ejecuta en cliente
+    const checkMobile = () => {
+      setMobileComponent(window.innerWidth < 910);
+    };
+    checkMobile(); // Inicializa al montar
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const trackRef = useRef<HTMLDivElement>(null);
   const indexRef = useRef(0);
   const isDragging = useRef(false);
@@ -146,37 +158,12 @@ const CuratedCollectionsCarousel: React.FC = () => {
 
   return (
     <>
-      <section className="carousel" style={{ position: 'relative' }}>
-        {/*
-        <button className="arrow prev" onClick={goPrev}>
-          {'<'}
-        </button>
-          */}
-        <div
-          onClick={goPrev}
-          style={{
-            height: '50px',
-            width: '45px',
-            position: 'absolute',
-            zIndex: 200,
-            left: -20,
-            borderRadius: '10px 5px 5px 10px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            backgroundColor: '#fff',
-            boxShadow: '0 4px 24px rgba(0,0,0,0.18)', // box-shadow más prominente
-            userSelect: 'none',
-          }}
-        >
-          <span>{'<'}</span>
-        </div>
-        <div className="viewport">
-          <div className="track" ref={trackRef}>
-            {collections.map((collection) => (
-              <article className="collection-card" key={collection._id}>
-                <div className="collection-card-content">
+      {mobileComponent ? (
+        <>
+          <div className="responsive-carousel">
+            <div className="responsive-group">
+              {collections.map((collection, index) => (
+                <div className="response-collection-card" key={index}>
                   <div
                     className="collection-card-content-img"
                     style={{
@@ -190,68 +177,120 @@ const CuratedCollectionsCarousel: React.FC = () => {
                     <a href="/collections/collection">Explore collection</a>
                   </div>
                 </div>
-              </article>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-        <div
-          onClick={goNext}
-          style={{
-            height: '50px',
-            width: '45px',
-            position: 'absolute',
-            zIndex: 200,
-            right: -20,
-            borderRadius: '5px 10px 10px 5px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            backgroundColor: '#fff',
-            boxShadow: '0 4px 24px rgba(0,0,0,0.18)', // box-shadow más prominente
-            userSelect: 'none',
-          }}
-        >
-          <span>{'>'}</span>
-        </div>
-        {/*
+        </>
+      ) : (
+        <>
+          <section className="carousel" style={{ position: 'relative' }}>
+            {/*
+        <button className="arrow prev" onClick={goPrev}>
+          {'<'}
+        </button>
+          */}
+            <div
+              onClick={goPrev}
+              style={{
+                height: '50px',
+                width: '45px',
+                position: 'absolute',
+                zIndex: 200,
+                left: -20,
+                borderRadius: '10px 5px 5px 10px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                backgroundColor: '#fff',
+                boxShadow: '0 4px 24px rgba(0,0,0,0.18)', // box-shadow más prominente
+                userSelect: 'none',
+              }}
+            >
+              <span>{'<'}</span>
+            </div>
+            <div className="viewport">
+              <div className="track" ref={trackRef}>
+                {collections.map((collection) => (
+                  <article className="collection-card" key={collection._id}>
+                    <div className="collection-card-content">
+                      <div
+                        className="collection-card-content-img"
+                        style={{
+                          //backgroundImage: collection.backgroundImage,
+                          backgroundImage: `url('${collection.backgroundImage}')`,
+                        }}
+                      ></div>
+                      <div className="collection-card-content-layer">
+                        <h3>Work From Home Essentials</h3>
+                        <p>12 subscriptions perfect for remote workers</p>
+                        <a href="/collections/collection">Explore collection</a>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+            <div
+              onClick={goNext}
+              style={{
+                height: '50px',
+                width: '45px',
+                position: 'absolute',
+                zIndex: 200,
+                right: -20,
+                borderRadius: '5px 10px 10px 5px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                backgroundColor: '#fff',
+                boxShadow: '0 4px 24px rgba(0,0,0,0.18)', // box-shadow más prominente
+                userSelect: 'none',
+              }}
+            >
+              <span>{'>'}</span>
+            </div>
+            {/*
         <button className="arrow next" onClick={goNext}>
           {'>'}
         </button>
           */}
-      </section>
-      <ul
-        className="dots"
-        style={{
-          position: 'relative',
-          bottom: 10,
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          gap: 8,
-          padding: 0,
-          margin: 0,
-          listStyle: 'none',
-        }}
-      >
-        {Array.from({ length: groupsCount }).map((_, groupIdx) => (
-          <li
-            key={groupIdx}
-            onClick={() => goToGroup(groupIdx)}
+          </section>
+          <ul
+            className="dots"
             style={{
-              width: 10,
-              height: 10,
-              background: getActiveDot() === groupIdx ? 'red' : '#ccc',
-              borderRadius: '50%',
-              cursor: 'pointer',
-              transition: 'background 0.2s',
-              border: 'none',
-              margin: 0,
+              position: 'relative',
+              bottom: 10,
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              gap: 8,
               padding: 0,
+              margin: 0,
+              listStyle: 'none',
             }}
-          ></li>
-        ))}
-      </ul>
+          >
+            {Array.from({ length: groupsCount }).map((_, groupIdx) => (
+              <li
+                key={groupIdx}
+                onClick={() => goToGroup(groupIdx)}
+                style={{
+                  width: 10,
+                  height: 10,
+                  background: getActiveDot() === groupIdx ? 'red' : '#ccc',
+                  borderRadius: '50%',
+                  cursor: 'pointer',
+                  transition: 'background 0.2s',
+                  border: 'none',
+                  margin: 0,
+                  padding: 0,
+                }}
+              ></li>
+            ))}
+          </ul>
+        </>
+      )}
     </>
   );
 };
