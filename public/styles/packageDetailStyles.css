@@ -804,6 +804,12 @@
   .package-detail-how-it-works-grid {
     grid-template-columns: 1fr;
   }
+
+  .package-detail-plans-section-plan-card {
+    padding: 35px 32px;
+
+    gap: 25px;
+  }
 }
 
 @media screen and (max-width: 540px) {
