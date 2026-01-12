@@ -718,3 +718,9 @@
   color: #7c3aed;
   color: #6366f1;
 }
+
+@media screen and (max-width: 770px) {
+  .package-detail-reviews-list {
+    grid-template-columns: 1fr;
+  }
+}

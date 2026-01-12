@@ -74,6 +74,10 @@
   color: #facb15;
 }
 
+.plan-detail-hero-rating-responsive {
+  display: none;
+}
+
 .plan-detail-hero-content-row h3 {
   margin: 0;
   font-size: 14px;
@@ -213,6 +217,10 @@
   align-items: center;
 }
 
+.plan-detail-articles-section-item-responsive-content {
+  display: none;
+}
+
 .plan-detail-articles-section-item-avatar {
   width: 90px;
   height: 100px;
@@ -302,11 +310,190 @@
   font-size: 14px;
 }
 
-@media screen and (max-width: 1380px) {
+@media screen and (max-width: 1430px) {
   .plan-detail-header {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0px 20px;
-    background-color: lightblue;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    background-color: lightblue !important;
+    padding: 0px 20px !important;
   }
 }
+
+@media screen and (max-width: 1190px) {
+  .plan-detail-aside-card {
+    display: none;
+  }
+
+  .plan-detail-section-container {
+    width: 100%;
+    padding-right: 0px;
+    padding: 0px 40px;
+  }
+}
+
+@media screen and (max-width: 690px) {
+  /*.plan-detail-articles-section-item-avatar {
+    width: 120px;
+    height: 140px;
+    box-sizing: border-box;
+    background-color: grey;
+    border-radius: 5px;
+  }*/
+
+  .plan-detail-articles-section-item {
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .plan-detail-section-container {
+    padding: 0px 20px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .plan-detail-section-container {
+    padding: 0px 20px;
+  }
+  .plan-detail-articles-section-container {
+    padding: 0px;
+    border: none;
+  }
+  .plan-detail-reviews-section-container {
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+  }
+  .plan-detail-articles-section-list {
+    gap: 15px;
+  }
+  .plan-detail-articles-section-item-avatar {
+    display: none;
+  }
+  .plan-detail-articles-section-item-info {
+    display: none;
+  }
+  .plan-detail-articles-section-item-type-container {
+    display: none;
+  }
+
+  .plan-detail-articles-section-item {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #d9d9d9;
+  }
+
+  .plan-detail-articles-section-item-responsive-content {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .plan-detail-articles-section-item-responsive-details {
+    width: 100%;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px;
+    padding-bottom: 0px;
+    font-size: 11px;
+    gap: 15px;
+    color: #8c8c8c;
+  }
+  .plan-detail-articles-section-item-responsive-image {
+    width: 70px;
+    height: 85px;
+    background-color: grey;
+    border-radius: 5px;
+  }
+  .plan-detail-articles-section-item-responsive-details-info {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .plan-detail-articles-section-item-responsive-details-info h3 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 400;
+    color: #000;
+  }
+
+  .plan-detail-articles-section-item-responsive-details-info p {
+    margin: 0;
+    line-height: 1.4;
+    font-size: 11.5px;
+    color: #8c8c8c;
+  }
+
+  .plan-detail-articles-section-item-responsive-configs-container {
+    display: flex;
+    flex-direction: column;
+    font-size: 11px;
+    gap: 10px;
+    color: #8c8c8c;
+    padding: 15px;
+    padding-top: 0px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .plan-detail-seller-section-container {
+    border: 1px solid #d9d9d9;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .plan-detail-hero-content h1 {
+    margin: 0;
+    font-size: 40px;
+    font-size: 30px;
+    color: red;
+    font-weight: 500;
+    color: white;
+  }
+
+  .plan-detail-hero-content-row h3 {
+    margin: 0;
+    font-size: 14px;
+    font-size: 12px;
+    font-weight: 400;
+    color: violet;
+  }
+
+  .plan-detail-hero-content p {
+    margin: 0;
+    font-size: 18px;
+    font-size: 13px;
+  }
+
+  .plan-detail-hero-content .plan-detail-hero-content-row span {
+    font-size: 11px;
+  }
+
+  .plan-details-hero-props {
+    display: grid;
+    grid-template-columns: auto auto auto;
+  }
+
+  .plan-detail-hero-rating {
+    display: none;
+  }
+
+  .plan-detail-hero-rating-responsive {
+    color: #facb15;
+    display: block;
+  }
+}
+
+/*
+
+*/
