@@ -280,6 +280,26 @@
   height: 100%;
 }
 
+.plan-detail-articles-section-item-propeties-container {
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 5px;
+  align-items: flex-start;
+}
+
+.plan-detail-articles-section-item-propeties-label {
+  width: fit-content;
+  box-sizing: border-box;
+  padding-top: 3px;
+}
+
+.plan-detail-articles-section-item-propeties-values-container {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 /* ================= REVIEWS SECTION ================= */
 
 .plan-detail-reviews-section-container {

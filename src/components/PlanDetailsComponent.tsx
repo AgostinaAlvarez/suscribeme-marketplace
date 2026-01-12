@@ -201,14 +201,18 @@ const PlanDetailsComponent: React.FC = () => {
                       </svg>
                       <span>Envio a domicilio</span>
                     </div>
-                    <div className="plan-detail-articles-section-item-info-row">
-                      <span>Propiedades:</span>
-                      <div className="plan-detail-articles-section-item-info-tag">
-                        <span>Color</span>
-                      </div>
-                      <div className="plan-detail-articles-section-item-info-tag">
-                        <span>Color</span>
-                      </div>
+                    <div className="plan-detail-articles-section-item-propeties-values-container plan-detail-articles-section-item-info-row">
+                      <span className="plan-detail-articles-section-item-propeties-label">
+                        Propiedades:
+                      </span>
+                      {Array.from({ length: 5 }).map((_, index) => (
+                        <div
+                          key={index}
+                          className="plan-detail-articles-section-item-info-tag"
+                        >
+                          <span>Prop {index}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
                   <div className="plan-detail-articles-section-item-type-container">
@@ -226,14 +230,19 @@ const PlanDetailsComponent: React.FC = () => {
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit, sed do eiusmod tempor.
                         </p>
-                        <div className="plan-detail-articles-section-item-info-row">
-                          <span>Propiedades:</span>
-                          <div className="plan-detail-articles-section-item-info-tag">
-                            <span>Color</span>
-                          </div>
-                          <div className="plan-detail-articles-section-item-info-tag">
-                            <span>Color</span>
-                          </div>
+
+                        <div className="plan-detail-articles-section-item-propeties-values-container plan-detail-articles-section-item-info-row">
+                          <span className="plan-detail-articles-section-item-propeties-label">
+                            Propiedades:
+                          </span>
+                          {Array.from({ length: 5 }).map((_, index) => (
+                            <div
+                              key={index}
+                              className="plan-detail-articles-section-item-info-tag"
+                            >
+                              <span>Prop {index}</span>
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </div>
