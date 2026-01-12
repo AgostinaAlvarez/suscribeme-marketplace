@@ -8,10 +8,13 @@ const PlanDetailsComponent: React.FC = () => {
   const [hideAside, setHideAside] = useState(false);
   const asideRef = useRef<HTMLDivElement>(null);
 
+  // Nuevo estado para ocultar el sticky bar inferior
+  const [hideBottomStickyBar, setHideBottomStickyBar] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     let ticking = false;
-    const handleScroll = () => {
+    const handleScrollOrResize = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           // Sticky bar
@@ -29,22 +32,43 @@ const PlanDetailsComponent: React.FC = () => {
           const footer = document.querySelector('footer');
           if (footer) {
             const footerRect = footer.getBoundingClientRect();
-            // Ajusta el margen de seguridad para que el aside desaparezca antes de tocar el footer
-            const asideBottom = 15 + 450 + 30; // top + height + margen extra (40px)
+            // aside
+            const asideBottom = 15 + 450 + 30;
             if (footerRect.top < asideBottom) {
               setHideAside(true);
             } else {
               setHideAside(false);
             }
+            // Sticky bottom bar: ocultar si el footer está a la vista (100px de alto)
+            // Mejor: ocultar si cualquier parte del sticky bar colisiona con el footer
+            const stickyBarHeight = 100;
+            const overlap = window.innerHeight - footerRect.top;
+            if (overlap > 0 && overlap < stickyBarHeight + 20) {
+              setHideBottomStickyBar(true);
+            } else if (
+              footerRect.top < window.innerHeight &&
+              overlap > stickyBarHeight
+            ) {
+              setHideBottomStickyBar(true);
+            } else {
+              setHideBottomStickyBar(false);
+            }
+          } else {
+            setHideBottomStickyBar(false);
           }
-
           ticking = false;
         });
         ticking = true;
       }
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScrollOrResize);
+    window.addEventListener('resize', handleScrollOrResize);
+    // Trigger once on mount
+    handleScrollOrResize();
+    return () => {
+      window.removeEventListener('scroll', handleScrollOrResize);
+      window.removeEventListener('resize', handleScrollOrResize);
+    };
   }, []);
 
   return (
@@ -406,6 +430,21 @@ const PlanDetailsComponent: React.FC = () => {
             valuation case study, CFA, ACCA, and CPA
           </p>
         </div>
+      </section>
+      <section
+        className="plan-detail-bottom-sticky-bar"
+        style={{
+          opacity: hideBottomStickyBar ? 0 : 1,
+          pointerEvents: hideBottomStickyBar ? 'none' : 'auto',
+          transition: 'opacity 0.4s',
+        }}
+      >
+        <span style={{ fontSize: 30, fontWeight: 600 }}>
+          $45<span style={{ fontSize: 13, color: '#bfbfbf' }}>/month</span>
+        </span>
+        <button className="card-button" style={{ margin: 0 }}>
+          Subscribe Now
+        </button>
       </section>
     </>
   );
