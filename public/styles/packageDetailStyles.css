@@ -747,6 +747,11 @@
   .package-detail-reviews-list {
     grid-template-columns: 1fr;
   }
+
+  .package-detail-plans-section-grid {
+    width: calc(100% - 60px);
+    margin: 0 auto;
+  }
 }
 
 @media screen and (max-width: 640px) {
@@ -806,7 +811,7 @@
   }
 
   .package-detail-plans-section-plan-card {
-    padding: 35px 32px;
+    padding: 35px 25px;
 
     gap: 25px;
   }
