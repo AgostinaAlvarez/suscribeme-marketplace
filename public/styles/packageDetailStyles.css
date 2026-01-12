@@ -719,8 +719,98 @@
   color: #6366f1;
 }
 
+@media screen and (max-width: 1000px) {
+  /**/
+
+  .package-detail-content-container {
+    width: 100%;
+    padding: 0px 40px;
+  }
+
+  .package-detail-card {
+    width: calc(100% - 80px);
+    height: fit-content;
+    margin: 0px auto;
+    box-sizing: border-box;
+    padding: 25px 30px;
+    border: 1px solid #efefef;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .package-detail-how-it-works-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media screen and (max-width: 770px) {
   .package-detail-reviews-list {
     grid-template-columns: 1fr;
   }
 }
+
+@media screen and (max-width: 640px) {
+  .package-detail-content-container {
+    padding: 0px 20px;
+  }
+  .package-detail-card {
+    padding: 25px 30px;
+  }
+
+  .package-detail-card {
+    width: calc(100% - 40px);
+  }
+
+  .package-detail-hero-section-content h1 {
+    margin: 0;
+    font-size: 45px;
+    font-size: 30px;
+    font-weight: 500;
+  }
+
+  .package-detail-hero-section-content p {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.4;
+    margin-bottom: 15px;
+    font-size: 13px;
+  }
+
+  .package-detail-hero-section-tag {
+    padding: 6px 15px;
+    gap: 8px;
+  }
+
+  .package-detail-hero-section-tag span {
+    font-size: 12px;
+  }
+
+  .package-detail-hero-section-content-row {
+    font-size: 12px;
+  }
+
+  .package-detail-hero-section-store-information h3 {
+    margin: 0;
+    font-size: 13px;
+  }
+
+  .package-detail-hero-section-store-avatar {
+    height: 35px;
+    width: 35px;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .package-detail-how-it-works-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .package-detail-seller-container {
+    display: none;
+  }
+}
+
+/*
+*/

@@ -261,15 +261,18 @@
   width: fit-content;
   height: fit-content;
   box-sizing: border-box;
-  border: 1px solid #f97315;
-  color: white;
   padding: 2px 10px;
   display: flex;
   gap: 8px;
   align-items: center;
   justify-content: center;
   border-radius: 5px;
+  color: white;
+  border: 1px solid #f97315;
   color: #f97315;
+  border: 1px solid #bfdbfe;
+  background-color: #f0f6ff;
+  color: #1f3a89;
 }
 
 .plan-detail-articles-section-item-info-tag span {

@@ -468,6 +468,7 @@ const PackageDetailsContent: React.FC = () => {
           <h2 className="package-detail-seller-section-h2">
             Other packages from store
           </h2>
+          {/*
           <ul>
             <li>
               <article
@@ -513,6 +514,7 @@ const PackageDetailsContent: React.FC = () => {
               </article>
             </li>
           </ul>
+            */}
         </div>
       </section>
     </>

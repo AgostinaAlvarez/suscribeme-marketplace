@@ -640,34 +640,93 @@ const CustomPackageDetailsContent: React.FC = () => {
             position: 'fixed',
             top: 125, // debajo del sticky bar principal
             left: 0,
-            width: '930px',
-            zIndex: 999,
-            background: '#fff',
-            boxSizing: 'border-box',
-            paddingTop: '10px',
-            paddingLeft: '45px',
-            paddingBottom: '20px',
+            width: '100%',
+            zIndex: 900, // <--- BAJA el zIndex para que el aside (4000) quede por encima
+
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: '#f9fafb',
           }}
           aria-hidden={!showSecondaryStickyBar}
         >
-          <div className="custom-package-categories-section">
-            {categories.map((cat) => (
+          <div
+            style={{
+              width: '1300px',
+              margin: '0 auto',
+
+              display: 'grid',
+              gridTemplateColumns: '1fr auto',
+              gap: 40,
+              height: 'fit-content',
+            }}
+          >
+            <div
+              style={{
+                width: '100%',
+                height: '100%',
+                boxSizing: 'border-box',
+                background: '#fff',
+                backgroundColor: '#f9fafb',
+                padding: '15px 0px',
+              }}
+            >
               <div
-                key={cat.name}
-                className={`custom-package-categories-item${activeCategory === cat.name ? ' custom-package-categories-item-cta' : ''}`}
-                onClick={() => handleCategoryClick(cat.ref, cat.name)}
-                style={{ cursor: 'pointer' }}
+                className="custom-package-categories-section"
+                style={{
+                  boxSizing: 'border-box',
+                }}
               >
-                <span>
-                  {cat.name} ({cat.count})
-                </span>
+                {categories.map((cat) => (
+                  <div
+                    key={cat.name}
+                    className={`custom-package-categories-item${activeCategory === cat.name ? ' custom-package-categories-item-cta' : ''}`}
+                    onClick={() => handleCategoryClick(cat.ref, cat.name)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <span>
+                      {cat.name} ({cat.count})
+                    </span>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+            <div style={{ width: '400px' }}></div>
           </div>
+          {/*
+          <div
+            style={{
+              width: '100%',
+              boxSizing: 'border-box',
+              backgroundColor: 'red',
+              display: 'grid',
+              gridTemplateColumns: '1fr auto',
+            }}
+          >
+            <div
+              className="custom-package-categories-section"
+              style={{
+                boxSizing: 'border-box',
+                paddingTop: '10px',
+                paddingLeft: '45px',
+                paddingBottom: '20px',
+              }}
+            >
+              {categories.map((cat) => (
+                <div
+                  key={cat.name}
+                  className={`custom-package-categories-item${activeCategory === cat.name ? ' custom-package-categories-item-cta' : ''}`}
+                  onClick={() => handleCategoryClick(cat.ref, cat.name)}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <span>
+                    {cat.name} ({cat.count})
+                  </span>
+                </div>
+              ))}
+            </div>
+            
+          </div>
+            */}
         </section>
       )}
       {/* ================= HERO ================= */}
@@ -919,9 +978,14 @@ const CustomPackageDetailsContent: React.FC = () => {
               opacity: hideAside ? 0 : 1,
               pointerEvents: hideAside ? 'none' : 'auto',
               transition: 'opacity 0.3s',
-              position: showStickyBar ? 'fixed' : 'relative',
-              top: showStickyBar ? '145px' : 0,
+              position:
+                showStickyBar || showSecondaryStickyBar ? 'fixed' : 'relative',
+              top: showStickyBar || showSecondaryStickyBar ? '145px' : 0,
               zIndex: 4000,
+              boxShadow:
+                showStickyBar || showSecondaryStickyBar
+                  ? '0 8px 32px rgba(0,0,0,0.18)'
+                  : undefined,
             }}
           >
             <div className="custom-package-aside-total-card">
