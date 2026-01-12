@@ -1142,13 +1142,13 @@ li {
   }
 
   .highlights-slider-container {
-    background-color: green;
+    /*background-color: green;*/
     max-width: none;
     box-sizing: border-box;
   }
 
   .highlights-slider-nav {
-    background-color: pink;
+    /*background-color: pink;*/
     width: 100%;
     left: 0;
   }
@@ -1160,7 +1160,7 @@ li {
 
 @media screen and (max-width: 1200px) {
   .highlights-slide {
-    background-color: pink;
+    /*background-color: pink;*/
     grid-template-columns: repeat(5, 1fr);
     height: 300px;
   }
@@ -1247,7 +1247,7 @@ li {
 
   .platform-features-section-responsive {
     display: block;
-    background-color: violet;
+    /*background-color: violet;*/
     height: 300px;
   }
 }

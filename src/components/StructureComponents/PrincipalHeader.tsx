@@ -12,7 +12,7 @@ const PrincipalHeader: React.FC<ComponentProps> = ({
   return (
     <header className="header">
       <div
-        className={`navbar-container default-continer ${customClassName ? customClassName : ''}`}
+        className={`navbar-container ${customClassName ? customClassName : ''}`}
         style={containerStyles}
       >
         <div
@@ -73,6 +73,39 @@ const PrincipalHeader: React.FC<ComponentProps> = ({
             </li>
           </ul>
         </nav>
+      </div>
+      <div className="navbar-responsive-container">
+        <a href="/" aria-label="Inicio Suscribeme">
+          <span>Suscribeme</span>
+        </a>
+        <img
+          className="navbar-responsive-logo"
+          src="/assets/icons/bag-icon.svg"
+          alt="Menu icon"
+          width="14"
+          height="14"
+        />
+        <div className="nav-search-bar-container nav-search-bar-container-principal-structure nav-search-bar-responsive-container">
+          <div
+            className="nav-search-bar-icon-container"
+            style={{ border: 'none' }}
+          >
+            <img
+              src="/assets/icons/search.svg"
+              alt="Search icon"
+              width="14"
+              height="14"
+              style={{ cursor: 'pointer' }}
+            />
+          </div>
+          <span>Search for anything</span>
+        </div>
+        <img
+          src="/assets/icons/menu.svg"
+          alt="Menu icon"
+          width="14"
+          height="14"
+        />
       </div>
     </header>
   );

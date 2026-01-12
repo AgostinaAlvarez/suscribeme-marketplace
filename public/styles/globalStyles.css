@@ -79,6 +79,10 @@ h2 {
   padding: 0;
 }
 
+.navbar-responsive-container {
+  display: none;
+}
+
 /* Reset styles for navbar */
 header .navbar-container ul {
   list-style: none;
@@ -118,6 +122,14 @@ header .navbar-container a:hover {
   padding: 2px;
   overflow: hidden;
   border-radius: 60px;
+}
+
+.nav-search-bar-container span {
+  font-size: 13px;
+  font-weight: 300px;
+  margin: 0;
+  line-height: 1;
+  color: #8c8c8c;
 }
 
 .nav-search-bar-container-principal-structure {
@@ -484,6 +496,13 @@ header .navbar-container a:hover {
 }
 
 @media screen and (max-width: 1380px) {
+  .navbar-container {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0px 20px;
+    /*background-color: yellow;*/
+  }
+
   .footer-content {
     display: none;
   }
@@ -492,9 +511,46 @@ header .navbar-container a:hover {
   }
 }
 
-@media screen and (max-width: 910px) {
+@media screen and (max-width: 1060px) {
   .navbar-container {
     display: none;
+  }
+
+  .navbar-responsive-logo {
+    display: none;
+  }
+
+  .navbar-responsive-container {
+    display: block;
+    width: 100%;
+    height: 60px;
+    box-sizing: border-box;
+    padding: 0px 20px;
+    /*
+    background-color: yellow;
+    */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header a,
+  .navbar-responsive-container a {
+    text-decoration: none !important;
+    color: #000 !important;
+    font-size: 13px !important;
+    font-weight: 300 !important;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .navbar-responsive-container {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 20px;
+  }
+  .nav-search-bar-responsive-container {
+    width: 100%;
+    /*border: 1px solid red;*/
   }
 }
 
@@ -505,5 +561,21 @@ header .navbar-container a:hover {
 
   .main-container-ttl {
     font-size: 18px;
+  }
+
+  .header a,
+  .navbar-responsive-container a {
+    display: none;
+  }
+  .navbar-responsive-logo {
+    display: block;
+  }
+
+  .nav-search-bar-responsive-container {
+    height: 30px;
+  }
+
+  .nav-search-bar-container span {
+    font-size: 12px;
   }
 }

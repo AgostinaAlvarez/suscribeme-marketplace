@@ -519,3 +519,19 @@
   background-color: #2c1a47;
   color: #fff;
 }
+
+@media screen and (max-width: 1380px) {
+  .custom-package-header {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0px 20px;
+    background-color: green;
+  }
+}
+
+/*
+
+.custom-package-header {
+  width: 1400px;
+}
+*/
