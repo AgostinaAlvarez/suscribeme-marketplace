@@ -520,6 +520,14 @@ header .navbar-container a:hover {
     display: none;
   }
 
+  .navbar-responsive-menu {
+    display: block;
+  }
+
+  .navbar-mobile-menu {
+    display: none;
+  }
+
   .navbar-responsive-container {
     display: block;
     width: 100%;
@@ -567,15 +575,34 @@ header .navbar-container a:hover {
   .navbar-responsive-container a {
     display: none;
   }
+
+  .header {
+    border-bottom: 1px solid #101827;
+  }
+
+  .navbar-responsive-container {
+    background-color: #101827;
+  }
+
   .navbar-responsive-logo {
     display: block;
   }
 
   .nav-search-bar-responsive-container {
     height: 30px;
+    background-color: #232f3e;
+    border: 1px solid #232f3e;
   }
 
   .nav-search-bar-container span {
     font-size: 12px;
+  }
+
+  .navbar-responsive-menu {
+    display: none;
+  }
+
+  .navbar-mobile-menu {
+    display: block;
   }
 }
