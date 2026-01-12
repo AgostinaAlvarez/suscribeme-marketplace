@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import '../../public/styles/bestSellersCarouselStyles.css';
 
 interface SellerData {
   _id: string;
   name: string;
   category: string;
   avatar_image?: {
+    url: string;
+  } | null;
+  cover_image?: {
     url: string;
   } | null;
 }
@@ -26,6 +30,9 @@ const BestSellersGrid: React.FC = () => {
       avatar_image: {
         url: 'https://cdn.brandfetch.io/idv_JJeUyo/w/128/h/128/fallback/lettermark/icon.webp?c=1gx1770569107102bfgqlaCM3n5scUKSNH',
       },
+      cover_image: {
+        url: 'https://cdn.brandfetch.io/bodyfittraining.com/fallback/transparent/w/600/h/200/banner?c=1bfwsmEH20zzEfSNTed',
+      },
     },
     {
       _id: '3',
@@ -34,6 +41,9 @@ const BestSellersGrid: React.FC = () => {
       avatar_image: {
         url: 'https://cdn.brandfetch.io/shortwave.com/fallback/lettermark/theme/dark/h/256/w/256/icon?c=1bfwsmEH20zzEfSNTed',
       },
+      cover_image: {
+        url: 'https://cdn.brandfetch.io/rm.com/fallback/transparent/w/600/h/200/banner?c=1bfwsmEH20zzEfSNTed',
+      },
     },
     {
       _id: '4',
@@ -41,6 +51,9 @@ const BestSellersGrid: React.FC = () => {
       category: 'Comida y snacks',
       avatar_image: {
         url: 'https://cdn.brandfetch.io/idpPypZaSR/w/128/h/128/fallback/lettermark/icon.webp?c=1gx1770300364715bfgqlaCM3nmIv8Vf3R',
+      },
+      cover_image: {
+        url: 'https://cdn.brandfetch.io/kroger.com/fallback/transparent/w/600/h/200/banner?c=1bfwsmEH20zzEfSNTed',
       },
     },
     {
@@ -76,39 +89,104 @@ const BestSellersGrid: React.FC = () => {
       },
     },
   ];
+
+  const [mobileComponent, setMobileComponent] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Solo ejecuta en cliente
+    const checkMobile = () => {
+      setMobileComponent(window.innerWidth < 620);
+    };
+    checkMobile(); // Inicializa al montar
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
-    <ul className="sellers-section-grid">
-      {topSellers.map((seller, index) => (
-        <li key={index}>
-          <article
-            className="sellers-section-grid-item"
-            onClick={() => (window.location.href = '/store')}
-          >
-            <div className="sellers-section-grid-item-avatar">
-              {seller.avatar_image && (
-                <img
-                  style={{
-                    height: '100%',
-                    width: '100%',
-                    objectFit: 'cover',
-                    objectPosition: 'center',
-                  }}
-                  src={seller.avatar_image.url}
-                  alt={`${seller.name} logo`}
-                  loading="lazy"
-                  decoding="async"
-                  referrerPolicy="no-referrer"
-                />
-              )}
+    <>
+      {mobileComponent ? (
+        <>
+          <div className="responsive-carousel">
+            <div className="responsive-group">
+              {topSellers.map((seller, index) => (
+                <div className="responsive-best-seller-card">
+                  {seller.cover_image ? (
+                    <img
+                      src={seller.cover_image.url}
+                      alt="cover-image"
+                      className="responsive-best-seller-card-cover-image"
+                    />
+                  ) : (
+                    <img
+                      src="https://cdn.brandfetch.io/bestbuy.com/fallback/transparent/w/600/h/200/banner?c=1bfwsmEH20zzEfSNTed"
+                      alt="cover-image"
+                      className="responsive-best-seller-card-cover-image"
+                    />
+                  )}
+                  <div className="responsive-best-seller-card-cover-image-layer"></div>
+                  <div className="responsive-best-seller-card-layer">
+                    <div className="responsive-best-seller-card-avatar">
+                      {seller.avatar_image && (
+                        <img
+                          style={{
+                            height: '100%',
+                            width: '100%',
+                            objectFit: 'cover',
+                            objectPosition: 'center',
+                          }}
+                          src={seller.avatar_image.url}
+                          alt={`${seller.name} logo`}
+                          loading="lazy"
+                          decoding="async"
+                          referrerPolicy="no-referrer"
+                        />
+                      )}
+                    </div>
+                    <h3>{seller.name}</h3>
+                    <span>{seller.category}</span>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="sellers-section-grid-item-content">
-              <h3>{seller.name}</h3>
-              <span>{seller.category}</span>
-            </div>
-          </article>
-        </li>
-      ))}
-    </ul>
+          </div>
+        </>
+      ) : (
+        <>
+          <ul className="sellers-section-grid">
+            {topSellers.map((seller, index) => (
+              <li key={index}>
+                <article
+                  className="sellers-section-grid-item"
+                  onClick={() => (window.location.href = '/store')}
+                >
+                  <div className="sellers-section-grid-item-avatar">
+                    {seller.avatar_image && (
+                      <img
+                        style={{
+                          height: '100%',
+                          width: '100%',
+                          objectFit: 'cover',
+                          objectPosition: 'center',
+                        }}
+                        src={seller.avatar_image.url}
+                        alt={`${seller.name} logo`}
+                        loading="lazy"
+                        decoding="async"
+                        referrerPolicy="no-referrer"
+                      />
+                    )}
+                  </div>
+                  <div className="sellers-section-grid-item-content">
+                    <h3>{seller.name}</h3>
+                    <span>{seller.category}</span>
+                  </div>
+                </article>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </>
   );
 };
 
