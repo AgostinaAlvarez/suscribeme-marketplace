@@ -191,22 +191,19 @@ const FeaturedStandarPackagesScreen: React.FC = () => {
         aria-hidden={!showStickyBar}
       >
         <div className="featured-screen-sticky-bar-section-banner">
-          <div className="featured-screen-sticky-bar-section-content">
+          <div
+            //className="featured-screen-sticky-bar-section-content"
+            //style={{ backgroundColor: 'pink' }}
+            className="featured-screen-section-container"
+          >
             <span>banner</span>
           </div>
         </div>
         <div className="featured-screen-sticky-bar-section-filter">
-          <div
-            className="featured-screen-sticky-bar-section-content"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}
-          >
+          <div className="featured-screen-section-container featured-screen-sticky-bar-section-content">
             <div style={{ display: 'flex', alignItems: 'center', gap: 30 }}>
               {/*CATEGORY SELECTOR*/}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div className="featured-screen-filters-section">
                 <span>Category:</span>
                 <select
                   style={{
@@ -228,7 +225,7 @@ const FeaturedStandarPackagesScreen: React.FC = () => {
                 </select>
               </div>
               {/*CATEGORY SELECTOR*/}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div className="featured-screen-filters-section">
                 <span>Type:</span>
                 <select
                   style={{
@@ -289,20 +286,7 @@ const FeaturedStandarPackagesScreen: React.FC = () => {
             backgroundColor: '#ffffff',
           }}
         >
-          <div
-            style={{
-              width: '1200px',
-              margin: '0px auto',
-              height: '50px',
-              boxSizing: 'border-box',
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              gap: 10,
-              fontSize: '13px',
-              color: '#8c8c8c',
-            }}
-          >
+          <div className="featured-screen-section-container featured-screen-hero-nav">
             <span style={{ color: '#1890ff' }}>Home</span>
             <img
               src="/assets/icons/right-arrow.svg"
@@ -348,7 +332,7 @@ const FeaturedStandarPackagesScreen: React.FC = () => {
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 30 }}>
               {/*CATEGORY SELECTOR*/}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div className="featured-screen-filters-section">
                 <span>Category:</span>
                 <select
                   style={{
@@ -369,8 +353,8 @@ const FeaturedStandarPackagesScreen: React.FC = () => {
                   <option value="salud">Salud</option>
                 </select>
               </div>
-              {/*CATEGORY SELECTOR*/}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              {/*TYPE SELECTOR*/}
+              <div className="featured-screen-filters-section">
                 <span>Type:</span>
                 <select
                   style={{
@@ -390,88 +374,6 @@ const FeaturedStandarPackagesScreen: React.FC = () => {
                   </option>
                 </select>
               </div>
-              {/*PRICE RANGE*/}
-              {/*
-              <div
-                style={{
-                  display: 'flex',
-                  gap: 10,
-                  alignItems: 'center',
-                }}
-              >
-                <span style={{ fontSize: 13, color: '#595959' }}>Precio</span>
-
-                <div
-                  style={{
-                    width: '100%',
-                    display: 'grid',
-                    gridTemplateColumns: '1fr auto 1fr',
-                    alignItems: 'center',
-                    gap: 5,
-                  }}
-                >
-                  <input
-                    type="number"
-                    style={{
-                      width: '100%',
-                      fontSize: 13,
-                      padding: '5px',
-                      boxSizing: 'border-box',
-                    }}
-                    min={0}
-                    value={
-                      priceRangeFilter[0] === undefined
-                        ? ''
-                        : priceRangeFilter[0]
-                    }
-                    onChange={(e) => {
-                      const val = e.target.value;
-                      const newMin = val === '' ? undefined : Number(val);
-                      const newMax = priceRangeFilter[1];
-                      if (
-                        (newMin === undefined || newMin === 0) &&
-                        (newMax === undefined || newMax === 0)
-                      ) {
-                        setPriceRangeFilter([]);
-                      } else {
-                        setPriceRangeFilter([newMin, newMax]);
-                      }
-                    }}
-                    placeholder="Mínimo"
-                  />
-                  <span style={{ fontSize: 20 }}>-</span>
-                  <input
-                    type="number"
-                    style={{
-                      width: '100%',
-                      fontSize: 13,
-                      padding: '5px',
-                      boxSizing: 'border-box',
-                    }}
-                    min={0}
-                    value={
-                      priceRangeFilter[1] === undefined
-                        ? ''
-                        : priceRangeFilter[1]
-                    }
-                    onChange={(e) => {
-                      const val = e.target.value;
-                      const newMax = val === '' ? undefined : Number(val);
-                      const newMin = priceRangeFilter[0];
-                      if (
-                        (newMin === undefined || newMin === 0) &&
-                        (newMax === undefined || newMax === 0)
-                      ) {
-                        setPriceRangeFilter([]);
-                      } else {
-                        setPriceRangeFilter([newMin, newMax]);
-                      }
-                    }}
-                    placeholder="Máximo"
-                  />
-                </div>
-              </div>
-                */}
             </div>
             {/*SORT BY SELECTOR*/}
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -498,15 +400,7 @@ const FeaturedStandarPackagesScreen: React.FC = () => {
       {/* ================= SECTIONS ================= */}
       <section
         aria-labelledby="standar-plans-section"
-        className="featured-screen-section-container"
-        style={{
-          width: '100%',
-          boxSizing: 'border-box',
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr 1fr',
-          gap: 20,
-          rowGap: 30,
-        }}
+        className="featured-screen-section-container featured-screen-grid-section"
       >
         {packages.map((pckg, index) => (
           <article key={index} className="standar-package-card-content">
@@ -590,7 +484,7 @@ const FeaturedStandarPackagesScreen: React.FC = () => {
       </section>
       <nav
         style={{ marginTop: 30 }}
-        className="pagination-container"
+        className="pagination-container featured-screen-navigation"
         aria-label="Paginación de paquetes estándar"
       >
         <button className="pagination-arrow">‹</button>
