@@ -489,6 +489,20 @@ header .navbar-container a:hover {
   gap: 20px;
 }
 
+.close-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.close-icon:hover {
+  background-color: #efefef;
+}
+
 @keyframes ant-spin {
   to {
     transform: rotate(360deg);

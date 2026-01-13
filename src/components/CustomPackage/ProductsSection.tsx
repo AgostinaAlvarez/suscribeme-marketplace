@@ -217,21 +217,24 @@ const ProductsSection: React.FC<ComponentProps> = ({
             }}
           >
             <div
-              style={{
-                position: 'absolute',
-                top: 10,
-                right: 20,
-                cursor: 'pointer',
-              }}
               onClick={() => {
                 setSelectedProduct(null);
                 setOpenProductModal(false);
                 reset();
                 setAmountModal(1);
               }}
+              className="close-icon"
+              style={{ position: 'absolute', top: 12, right: 20 }}
             >
-              x
+              <img
+                className="navbar-responsive-logo"
+                src="/assets/icons/close-icon.svg"
+                alt="Menu icon"
+                width="20"
+                height="20"
+              />
             </div>
+
             <div className="custom-package-add-item-modal-base-container custom-package-add-item-modal-content">
               {selectedProduct?.image ? (
                 <img

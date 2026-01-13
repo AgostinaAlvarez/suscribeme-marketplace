@@ -5,12 +5,14 @@ interface DrawerProps {
   open: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  customClassName?: string;
 }
 
 const DrawerComponent: React.FC<DrawerProps> = ({
   open,
   onClose,
   children,
+  customClassName,
 }) => {
   const [visible, setVisible] = useState(false);
 
@@ -29,7 +31,10 @@ const DrawerComponent: React.FC<DrawerProps> = ({
   if (!visible) return null;
   return (
     <div className={`drawer-mask ${open ? 'open' : 'close'}`} onClick={onClose}>
-      <div className="drawer-container" onClick={(e) => e.stopPropagation()}>
+      <div
+        className={`drawer-container ${customClassName ? customClassName : ''}`}
+        onClick={(e) => e.stopPropagation()}
+      >
         {children}
       </div>
     </div>

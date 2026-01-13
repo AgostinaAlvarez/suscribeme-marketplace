@@ -1,0 +1,11 @@
+.custom-package-details-drawer-container {
+  width: 400px;
+  height: 100vh;
+}
+
+@media screen and (max-width: 430px) {
+  .custom-package-details-drawer-container {
+    width: 100%;
+    border-radius: 0px;
+  }
+}

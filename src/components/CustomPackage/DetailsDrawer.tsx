@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import DrawerComponent from '../DrawerComponent.tsx';
 import EmptyCartAnimation from '../EmptyCartAnimation.tsx';
+import '../../../public/styles/CustomPackageDetailsDrawer.css';
 
 interface ComponentProps {
   planDetailsDrawerOpen: boolean;
@@ -300,6 +301,7 @@ const DetailsDrawer: React.FC<ComponentProps> = ({
         onClose={() => {
           setPlanDetailsDrawerOpen(false);
         }}
+        customClassName="custom-package-details-drawer-container"
       >
         <>
           {productsInCart.length !== 0 ||
@@ -318,7 +320,20 @@ const DetailsDrawer: React.FC<ComponentProps> = ({
                     Details of your recurring plan
                   </span>
                 </div>
-                <div>x</div>
+                <div
+                  onClick={() => {
+                    setPlanDetailsDrawerOpen(false);
+                  }}
+                  className="close-icon"
+                >
+                  <img
+                    className="navbar-responsive-logo"
+                    src="/assets/icons/close-icon.svg"
+                    alt="Menu icon"
+                    width="20"
+                    height="20"
+                  />
+                </div>
               </div>
               <ul className="custom-package-plan-details-drawer-base-container custom-package-plan-details-drawer-list-container">
                 {productsInCart.length !== 0 && (
