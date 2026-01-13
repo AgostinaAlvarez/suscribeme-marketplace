@@ -374,6 +374,10 @@
     gap: 30px;
     align-items: center;
     padding: 0px 20px;
+    border-radius: 10px 10px 0px 0px;
+    box-shadow:
+      0 -8px 32px 0 rgba(44, 26, 71, 0.18),
+      0 -2px 8px 0 rgba(44, 26, 71, 0.1);
   }
 }
 

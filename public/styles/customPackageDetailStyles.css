@@ -665,11 +665,13 @@
     bottom: 0;
     left: 0;
     z-index: 1000;
-    background-color: red;
     background-color: #fff;
     padding: 30px 50px;
     padding-top: 10px;
     border-radius: 20px 20px 0px 0px;
+    box-shadow:
+      0 -8px 32px 0 rgba(44, 26, 71, 0.18),
+      0 -2px 8px 0 rgba(44, 26, 71, 0.1);
   }
 }
 
@@ -738,7 +740,7 @@
   }
 
   .custom-package-bottom-sticky-bar {
-    padding: 20px 10px;
-    padding-bottom: 30px;
+    padding: 10px;
+    padding-bottom: 15px;
   }
 }
