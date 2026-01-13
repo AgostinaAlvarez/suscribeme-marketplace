@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ModalComponent from '../ModalComponent.tsx';
 import { useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
+import '../../../public/styles/AddItemCustomPackageModal.css';
 
 interface ComponentProps {
   selectedProduct: {
@@ -197,7 +198,9 @@ const ProductsSection: React.FC<ComponentProps> = ({
           reset();
           setAmountModal(1);
         }}
-        containerStyles={{ width: '780px', height: '500px' }}
+        //containerStyles={{ width: '780px', height: '500px' }}
+        customClassName="add-item-custom-package-modal-container"
+        customMaskClassName="add-item-custom-package-modal-mask"
       >
         {selectedProduct && (
           <form
@@ -232,24 +235,16 @@ const ProductsSection: React.FC<ComponentProps> = ({
             <div className="custom-package-add-item-modal-base-container custom-package-add-item-modal-content">
               {selectedProduct?.image ? (
                 <img
-                  className="custom-package-add-item-modal-img"
+                  className="custom-package-add-item-modal-img add-item-custom-package-modal-desktop-component"
                   src={selectedProduct.image.url}
                 />
               ) : (
                 <div
-                  className="custom-package-add-item-modal-img"
+                  className="custom-package-add-item-modal-img add-item-custom-package-modal-desktop-component"
                   style={{ backgroundColor: 'grey' }}
                 ></div>
               )}
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  width: '100%',
-                  boxSizing: 'border-box',
-                  gap: 12,
-                }}
-              >
+              <div className="add-item-custom-package-modal-item-info add-item-custom-package-modal-desktop-component">
                 <span style={{ fontWeight: 600, fontSize: 19 }}>
                   {selectedProduct?.name}
                 </span>
@@ -439,6 +434,220 @@ const ProductsSection: React.FC<ComponentProps> = ({
                   </div>
                 ))}
               </div>
+              {/*responsive content*/}
+              <div className="add-item-custom-package-modal-responsive-item-info">
+                {/*img*/}
+                {selectedProduct?.image ? (
+                  <img
+                    className="add-item-custom-package-modal-responsive-item-info-img"
+                    src={selectedProduct.image.url}
+                  />
+                ) : (
+                  <div
+                    className="add-item-custom-package-modal-responsive-item-info-img"
+                    style={{ backgroundColor: 'grey' }}
+                  ></div>
+                )}
+                <div className="add-item-custom-package-modal-item-info">
+                  <span style={{ fontWeight: 600, fontSize: 19 }}>
+                    {selectedProduct?.name}
+                  </span>
+                  <p
+                    style={{
+                      fontSize: 11,
+                      lineHeight: 1.3,
+                      margin: 0,
+                      fontWeight: 400,
+                      color: 'grey',
+                    }}
+                  >
+                    Smooth, rich cold brew coffee made from premium organic
+                    beans. Perfect for your morning routine or afternoon
+                    pick-me-up. Low acidity and naturally sweet.
+                  </p>
+                  <span style={{ fontWeight: 800, fontSize: 23 }}>
+                    ${selectedProduct?.price}{' '}
+                    <span
+                      style={{
+                        fontWeight: 300,
+                        fontSize: 12,
+                        color: '#595959',
+                      }}
+                    >
+                      per unit
+                    </span>
+                  </span>
+                </div>
+              </div>
+              <div className="add-item-custom-package-modal-responsive-props">
+                <div
+                  className="custom-package-add-item-info-container"
+                  style={{
+                    marginBottom: 10,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 10,
+                  }}
+                >
+                  <div
+                    style={{
+                      width: '100%',
+                      boxSizing: 'border-box',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 10,
+                    }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="15"
+                      height="15"
+                      fill="currentColor"
+                      className="bi bi-truck"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5zm1.294 7.456A2 2 0 0 1 4.732 11h5.536a2 2 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456M12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
+                    </svg>
+                    <span style={{ fontSize: 11.5, fontWeight: 500 }}>
+                      Delivery Type
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      width: '100%',
+                      boxSizing: 'border-box',
+                      border: '2px solid #1d39c4',
+                      backgroundColor: ' #ffffff',
+                      padding: 10,
+                      borderRadius: 8,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 6,
+                    }}
+                  >
+                    {selectedProduct.shipping_required ? (
+                      <>
+                        <div
+                          style={{
+                            width: '100%',
+                            boxSizing: 'border-box',
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                            gap: 5,
+                          }}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="11"
+                            height="11"
+                            fill="currentColor"
+                            className="bi bi-house-fill"
+                            viewBox="0 0 16 16"
+                          >
+                            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
+                            <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z" />
+                          </svg>
+                          <span style={{ fontSize: 11, fontWeight: 500 }}>
+                            Home Delivery
+                          </span>
+                        </div>
+                        <p
+                          style={{
+                            fontSize: 10,
+                            fontWeight: 300,
+                            color: 'grey',
+                            margin: 0,
+                            lineHeight: 1.3,
+                          }}
+                        >
+                          Delivered to your doorstep with your subscription
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <div
+                          style={{
+                            width: '100%',
+                            boxSizing: 'border-box',
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                            gap: 5,
+                          }}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="11"
+                            height="11"
+                            fill="currentColor"
+                            className="bi bi-shop"
+                            viewBox="0 0 16 16"
+                          >
+                            <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.37 2.37 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.375 2.375 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0M1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5M4 15h3v-5H4zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zm3 0h-2v3h2z" />
+                          </svg>
+                          <span style={{ fontSize: 11, fontWeight: 500 }}>
+                            Store Pickup
+                          </span>
+                        </div>
+                        <p
+                          style={{
+                            fontSize: 10,
+                            fontWeight: 300,
+                            color: 'grey',
+                            margin: 0,
+                            lineHeight: 1.3,
+                          }}
+                        >
+                          Pick up at your nearest location
+                        </p>
+                      </>
+                    )}
+                  </div>
+                </div>
+                {productModalError && (
+                  <span
+                    style={{
+                      marginBottom: 10,
+                      fontSize: 12,
+                      color: '#f5222d',
+                    }}
+                  >
+                    *{productModalError}
+                  </span>
+                )}
+
+                {/*--------*/}
+                {selectedProduct.selectableOptions.map((option) => (
+                  <div
+                    key={option.keyOption}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 5,
+                    }}
+                  >
+                    <label style={{ display: 'block', fontSize: 13 }}>
+                      {option.keyOption}
+                    </label>
+
+                    <div className="radio-group">
+                      {option.valueOption.map((value) => (
+                        <label key={value} className="radio-card">
+                          <input
+                            type="radio"
+                            value={value}
+                            {...register(option.keyOption, {
+                              onChange: () => setProductModalError(null),
+                            })}
+                            name={option.keyOption}
+                          />
+                          <span>{value}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {/*Quantity*/}
               <div
                 style={{
                   display: 'flex',

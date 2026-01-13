@@ -6,6 +6,8 @@ interface ModalProps {
   onClose: () => void;
   children: React.ReactNode;
   containerStyles?: React.CSSProperties;
+  customClassName?: string;
+  customMaskClassName?: string;
 }
 
 const ModalComponent: React.FC<ModalProps> = ({
@@ -13,6 +15,8 @@ const ModalComponent: React.FC<ModalProps> = ({
   onClose,
   children,
   containerStyles,
+  customClassName,
+  customMaskClassName,
 }) => {
   const [visible, setVisible] = useState(false);
 
@@ -30,9 +34,12 @@ const ModalComponent: React.FC<ModalProps> = ({
 
   if (!visible) return null;
   return (
-    <div className={`modal-mask ${open ? 'open' : 'close'}`} onClick={onClose}>
+    <div
+      className={`modal-mask ${customMaskClassName ? customMaskClassName : ''} ${open ? 'open' : 'close'}`}
+      onClick={onClose}
+    >
       <div
-        className="modal-container"
+        className={`modal-container ${customClassName ? customClassName : ''}`}
         style={containerStyles}
         onClick={(e) => e.stopPropagation()}
       >
