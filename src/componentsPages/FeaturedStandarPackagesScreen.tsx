@@ -191,11 +191,7 @@ const FeaturedStandarPackagesScreen: React.FC = () => {
         aria-hidden={!showStickyBar}
       >
         <div className="featured-screen-sticky-bar-section-banner">
-          <div
-            //className="featured-screen-sticky-bar-section-content"
-            //style={{ backgroundColor: 'pink' }}
-            className="featured-screen-section-container"
-          >
+          <div className="featured-screen-section-container">
             <span>banner</span>
           </div>
         </div>

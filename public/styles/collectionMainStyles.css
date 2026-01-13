@@ -4,9 +4,36 @@
 }
 
 .collection-section-container {
-  max-width: 1120px;
+  width: 1300px;
   box-sizing: border-box;
   margin: 0 auto;
+}
+
+.collection-screen-hero-nav {
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #8c8c8c;
+}
+
+.collection-screen-filters-section {
+  width: fit-content;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.collection-screen-items-grid {
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 20px;
+  row-gap: 30px;
 }
 
 /* ================= HERO SECTION ================= */
@@ -53,9 +80,9 @@
 }
 
 .collection-sticky-bar-section-content {
-  width: 1200px;
-  box-sizing: border-box;
-  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .collection-sticky-bar-section-banner {
@@ -97,3 +124,78 @@
   border-top: 1px solid #efefef;
   border-bottom: 1px solid #efefef;
 }
+
+.collections-screen-informative-message-container {
+  background-color: #f0f6ff;
+  box-sizing: border-box;
+  padding: 30px;
+  border-radius: 10px;
+  color: #1f3a89;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  border: 1px solid #bfdbfe;
+}
+
+@media screen and (max-width: 1350px) {
+  .collection-section-container {
+    width: 100%;
+    padding: 0px 40px;
+  }
+
+  .collection-hero-section-content {
+    padding: 100px 40px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .collection-screen-items-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .collection-screen-filters-section {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1020px) {
+  .collection-screen-items-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .collection-section-container {
+    width: 100%;
+    padding: 0px 20px;
+  }
+
+  .collection-hero-section-content {
+    padding: 100px 20px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .collection-hero-section-content h1 {
+    font-size: 30px;
+    font-weight: 500;
+  }
+
+  .collection-hero-section-content p {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .collection-screen-items-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*
+.collection-screen-filters-section {
+}
+
+*/

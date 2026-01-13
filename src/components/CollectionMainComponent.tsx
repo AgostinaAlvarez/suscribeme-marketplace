@@ -193,22 +193,22 @@ const CollectionMainComponent: React.FC = () => {
         aria-hidden={!showStickyBar}
       >
         <div className="collection-sticky-bar-section-banner">
-          <div className="collection-sticky-bar-section-content">
+          <div className="collection-section-container">
             <span>banner</span>
           </div>
         </div>
         <div className="collection-sticky-bar-section-filter">
           <div
-            className="collection-sticky-bar-section-content"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}
+            className="collection-section-container collection-sticky-bar-section-content"
+            //style={{
+            //  display: 'flex',
+            //  alignItems: 'center',
+            //  justifyContent: 'space-between',
+            //}}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 30 }}>
               {/*CATEGORY SELECTOR*/}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div className="collection-screen-filters-section">
                 <span>Category:</span>
                 <select
                   style={{
@@ -230,7 +230,7 @@ const CollectionMainComponent: React.FC = () => {
                 </select>
               </div>
               {/*CATEGORY SELECTOR*/}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div className="collection-screen-filters-section">
                 <span>Type:</span>
                 <select
                   style={{
@@ -291,20 +291,7 @@ const CollectionMainComponent: React.FC = () => {
             backgroundColor: '#ffffff',
           }}
         >
-          <div
-            style={{
-              width: '1200px',
-              margin: '0px auto',
-              height: '50px',
-              boxSizing: 'border-box',
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              gap: 10,
-              fontSize: '13px',
-              color: '#8c8c8c',
-            }}
-          >
+          <div className="collection-section-container collection-screen-hero-nav">
             <span style={{ color: '#1890ff' }}>Home</span>
             <img
               src="/assets/icons/right-arrow.svg"
@@ -358,7 +345,7 @@ const CollectionMainComponent: React.FC = () => {
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 30 }}>
               {/*CATEGORY SELECTOR*/}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div className="collection-screen-filters-section">
                 <span>Category:</span>
                 <select
                   style={{
@@ -380,7 +367,7 @@ const CollectionMainComponent: React.FC = () => {
                 </select>
               </div>
               {/*CATEGORY SELECTOR*/}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div className="collection-screen-filters-section">
                 <span>Type:</span>
                 <select
                   style={{
@@ -506,336 +493,336 @@ const CollectionMainComponent: React.FC = () => {
         </section>
       </div>
       {/* ================= SECTIONS ================= */}
-      <section
-        aria-labelledby="standar-packages-section"
-        className="collection-section-container"
-        style={{ display: 'flex', flexDirection: 'column', gap: 30 }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            boxSizing: 'border-box',
-            gap: 6,
-            borderLeft: '4px solid #7d2ae8',
-            paddingLeft: 10,
-          }}
-        >
-          <h2 style={{ margin: 0, fontSize: 23, fontWeight: 500 }}>
-            Ready-made subscription packages
-          </h2>
-          <p
-            style={{
-              margin: 0,
-              fontSize: 14,
-              lineHeight: 1.4,
-              color: '#595959',
-            }}
-          >
-            Chose a plan and start inmediately
-          </p>
-        </div>
-        <div
-          style={{
-            width: '100%',
-            boxSizing: 'border-box',
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr 1fr',
-            //gap: 20,
-            columnGap: 20,
-            rowGap: 30,
-          }}
-        >
-          {packages.slice(0, 6).map((pckg, index) => (
-            <article
-              className="card-content"
-              key={index}
-              style={{
-                minHeight: '0',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                position: 'relative',
-              }}
-            >
-              <div
-                className="card-tag"
-                style={{
-                  position: 'absolute',
-                  top: 10,
-                  right: 10,
-                  backgroundColor: 'green',
-                  color: 'white',
-                }}
-              >
-                <span>Multiple plans</span>
-              </div>
-              {pckg.coverImage ? (
-                <img
-                  className="card-image"
-                  src={pckg.coverImage.url}
-                  alt={`${pckg.title}`}
-                  loading="lazy"
-                  decoding="async"
-                  referrerPolicy="no-referrer"
-                />
-              ) : (
-                <div className="card-image-default" aria-hidden="true"></div>
-              )}
-              <div
-                className="card-content-information"
-                style={{ height: 'fit-content' }}
-              >
-                <div className="card-content-information-description-container">
-                  <h3>{pckg.title}</h3>
-                  <div
-                    style={{
-                      width: '100%',
-                      boxSizing: 'border-box',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <div className="card-tag">
-                      <span>Belleza y Care</span>
-                    </div>
-                    <span>4.7 (312)</span>
-                  </div>
-                  <p>{pckg.briefDescription}</p>
-                  <div
-                    style={{
-                      width: '100%',
-                      boxSizing: 'border-box',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <div
-                      style={{ display: 'flex', gap: 5, alignItems: 'center' }}
-                    >
-                      <div
-                        style={{
-                          width: 20,
-                          height: 20,
-                          borderRadius: 3,
-                          backgroundColor: '#efefef',
-                        }}
-                      ></div>
-                      <span
-                        style={{
-                          fontSize: 13,
-                          color: '#545454',
-                          margin: 0,
-                          lineHeight: 1,
-                        }}
-                      >
-                        Store Name
-                      </span>
-                    </div>
-                    <span
-                      style={{
-                        fontSize: 13,
-                        color: ' #000000',
-                        fontWeight: 500,
-                      }}
-                    >
-                      From $29 / month
-                    </span>
-                  </div>
-                </div>
-                <button
-                  className="card-button"
-                  onClick={() => (window.location.href = '/package')}
-                >
-                  View Package
-                </button>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-      <section
-        aria-labelledby="custom-packages-section"
-        className="collection-section-container"
-        style={{ display: 'flex', flexDirection: 'column', gap: 30 }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            boxSizing: 'border-box',
-            gap: 6,
-            borderLeft: '4px solid #7d2ae8',
-            paddingLeft: 10,
-          }}
-        >
-          <h2 style={{ margin: 0, fontSize: 23, fontWeight: 500 }}>
-            Build your own subscription
-          </h2>
-          <p
-            style={{
-              margin: 0,
-              fontSize: 14,
-              lineHeight: 1.4,
-              color: '#595959',
-            }}
-          >
-            Customize products, services and benefits to fit your needs
-          </p>
-        </div>
-        <div
-          style={{
-            width: '100%',
-            boxSizing: 'border-box',
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr 1fr',
-            gap: 20,
-          }}
-        >
-          {packages.slice(0, 6).map((pckg, index) => (
-            <article
-              className="card-content"
-              key={index}
-              style={{
-                minHeight: '0',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                position: 'relative',
-              }}
-            >
-              <div
-                className="card-tag"
-                style={{
-                  position: 'absolute',
-                  top: 10,
-                  right: 10,
-                  backgroundColor: 'green',
-                  color: 'white',
-                }}
-              >
-                <span>Customizable</span>
-              </div>
-              {pckg.coverImage ? (
-                <img
-                  className="card-image"
-                  src={pckg.coverImage.url}
-                  alt={`${pckg.title}`}
-                  loading="lazy"
-                  decoding="async"
-                  referrerPolicy="no-referrer"
-                />
-              ) : (
-                <div className="card-image-default" aria-hidden="true"></div>
-              )}
-              <div
-                className="card-content-information"
-                style={{ height: 'fit-content' }}
-              >
-                <div className="card-content-information-description-container">
-                  <h3>{pckg.title}</h3>
-                  <div
-                    style={{
-                      width: '100%',
-                      boxSizing: 'border-box',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <div className="card-tag">
-                      <span>Belleza y Care</span>
-                    </div>
-                    <span>4.7 (312)</span>
-                  </div>
-                  <p>{pckg.briefDescription}</p>
-                  <div
-                    style={{
-                      width: '100%',
-                      boxSizing: 'border-box',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <div
-                      style={{ display: 'flex', gap: 5, alignItems: 'center' }}
-                    >
-                      <div
-                        style={{
-                          width: 20,
-                          height: 20,
-                          borderRadius: 3,
-                          backgroundColor: '#efefef',
-                        }}
-                      ></div>
-                      <span
-                        style={{
-                          fontSize: 13,
-                          color: '#545454',
-                          margin: 0,
-                          lineHeight: 1,
-                        }}
-                      >
-                        Store Name
-                      </span>
-                    </div>
-                    <span
-                      style={{
-                        fontSize: 13,
-                        color: ' #000000',
-                        fontWeight: 500,
-                      }}
-                    >
-                      From $29 / month
-                    </span>
-                  </div>
-                </div>
-                <button
-                  className="card-button"
-                  onClick={() => (window.location.href = '/package')}
-                >
-                  View Package
-                </button>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
       <div
-        className="collection-section-container"
         style={{
-          width: '1100px',
-          backgroundColor: '#f0f6ff',
+          width: '100%',
           boxSizing: 'border-box',
-          padding: 30,
-          borderRadius: 10,
-          color: '#1f3a89',
-          display: 'grid',
-          gridTemplateColumns: 'auto 1fr',
-          gap: 10,
-          border: '1px solid #bfdbfe',
-          marginTop: 30,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 60,
         }}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="15"
-          height="15"
-          fill="#2762ea"
-          className="bi bi-info-circle-fill"
-          viewBox="0 0 16 16"
+        <section
+          aria-labelledby="standar-packages-section"
+          className="collection-section-container"
+          style={{ display: 'flex', flexDirection: 'column', gap: 40 }}
         >
-          <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
-        </svg>
-        <p style={{ margin: 0, lineHeight: 1.5, fontSize: 14 }}>
-          This collection was carefully curated by our team to include the most
-          essential subscriptions for remote workers. Each package has been
-          tested ar viewed for quality, value, and user experience. We regularly
-          update this collection based on user feedback and market trends
-        </p>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              boxSizing: 'border-box',
+              gap: 6,
+              borderLeft: '4px solid #7d2ae8',
+              paddingLeft: 10,
+            }}
+          >
+            <h2 style={{ margin: 0, fontSize: 23, fontWeight: 500 }}>
+              Ready-made subscription packages
+            </h2>
+            <p
+              style={{
+                margin: 0,
+                fontSize: 14,
+                lineHeight: 1.4,
+                color: '#595959',
+              }}
+            >
+              Chose a plan and start inmediately
+            </p>
+          </div>
+          <div className="collection-screen-items-grid">
+            {packages.slice(0, 6).map((pckg, index) => (
+              <article
+                className="card-content"
+                key={index}
+                style={{
+                  minHeight: '0',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  position: 'relative',
+                }}
+              >
+                <div
+                  className="card-tag"
+                  style={{
+                    position: 'absolute',
+                    top: 10,
+                    right: 10,
+                    backgroundColor: 'green',
+                    color: 'white',
+                  }}
+                >
+                  <span>Multiple plans</span>
+                </div>
+                {pckg.coverImage ? (
+                  <img
+                    className="card-image"
+                    src={pckg.coverImage.url}
+                    alt={`${pckg.title}`}
+                    loading="lazy"
+                    decoding="async"
+                    referrerPolicy="no-referrer"
+                  />
+                ) : (
+                  <div className="card-image-default" aria-hidden="true"></div>
+                )}
+                <div
+                  className="card-content-information"
+                  style={{ height: 'fit-content' }}
+                >
+                  <div className="card-content-information-description-container">
+                    <h3>{pckg.title}</h3>
+                    <div
+                      style={{
+                        width: '100%',
+                        boxSizing: 'border-box',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <div className="card-tag">
+                        <span>Belleza y Care</span>
+                      </div>
+                      <span>4.7 (312)</span>
+                    </div>
+                    <p>{pckg.briefDescription}</p>
+                    <div
+                      style={{
+                        width: '100%',
+                        boxSizing: 'border-box',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: 'flex',
+                          gap: 5,
+                          alignItems: 'center',
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: 20,
+                            height: 20,
+                            borderRadius: 3,
+                            backgroundColor: '#efefef',
+                          }}
+                        ></div>
+                        <span
+                          style={{
+                            fontSize: 13,
+                            color: '#545454',
+                            margin: 0,
+                            lineHeight: 1,
+                          }}
+                        >
+                          Store Name
+                        </span>
+                      </div>
+                      <span
+                        style={{
+                          fontSize: 13,
+                          color: ' #000000',
+                          fontWeight: 500,
+                        }}
+                      >
+                        From $29 / month
+                      </span>
+                    </div>
+                  </div>
+                  <button
+                    className="card-button"
+                    onClick={() => (window.location.href = '/package')}
+                  >
+                    View Package
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section
+          aria-labelledby="custom-packages-section"
+          className="collection-section-container"
+          style={{ display: 'flex', flexDirection: 'column', gap: 40 }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              boxSizing: 'border-box',
+              gap: 6,
+              borderLeft: '4px solid #7d2ae8',
+              paddingLeft: 10,
+            }}
+          >
+            <h2 style={{ margin: 0, fontSize: 23, fontWeight: 500 }}>
+              Build your own subscription
+            </h2>
+            <p
+              style={{
+                margin: 0,
+                fontSize: 14,
+                lineHeight: 1.4,
+                color: '#595959',
+              }}
+            >
+              Customize products, services and benefits to fit your needs
+            </p>
+          </div>
+          <div className="collection-screen-items-grid">
+            {packages.slice(0, 6).map((pckg, index) => (
+              <article
+                className="card-content"
+                key={index}
+                style={{
+                  minHeight: '0',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  position: 'relative',
+                }}
+              >
+                <div
+                  className="card-tag"
+                  style={{
+                    position: 'absolute',
+                    top: 10,
+                    right: 10,
+                    backgroundColor: 'green',
+                    color: 'white',
+                  }}
+                >
+                  <span>Customizable</span>
+                </div>
+                {pckg.coverImage ? (
+                  <img
+                    className="card-image"
+                    src={pckg.coverImage.url}
+                    alt={`${pckg.title}`}
+                    loading="lazy"
+                    decoding="async"
+                    referrerPolicy="no-referrer"
+                  />
+                ) : (
+                  <div className="card-image-default" aria-hidden="true"></div>
+                )}
+                <div
+                  className="card-content-information"
+                  style={{ height: 'fit-content' }}
+                >
+                  <div className="card-content-information-description-container">
+                    <h3>{pckg.title}</h3>
+                    <div
+                      style={{
+                        width: '100%',
+                        boxSizing: 'border-box',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <div className="card-tag">
+                        <span>Belleza y Care</span>
+                      </div>
+                      <span>4.7 (312)</span>
+                    </div>
+                    <p>{pckg.briefDescription}</p>
+                    <div
+                      style={{
+                        width: '100%',
+                        boxSizing: 'border-box',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: 'flex',
+                          gap: 5,
+                          alignItems: 'center',
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: 20,
+                            height: 20,
+                            borderRadius: 3,
+                            backgroundColor: '#efefef',
+                          }}
+                        ></div>
+                        <span
+                          style={{
+                            fontSize: 13,
+                            color: '#545454',
+                            margin: 0,
+                            lineHeight: 1,
+                          }}
+                        >
+                          Store Name
+                        </span>
+                      </div>
+                      <span
+                        style={{
+                          fontSize: 13,
+                          color: ' #000000',
+                          fontWeight: 500,
+                        }}
+                      >
+                        From $29 / month
+                      </span>
+                    </div>
+                  </div>
+                  <button
+                    className="card-button"
+                    onClick={() => (window.location.href = '/package')}
+                  >
+                    View Package
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+        <div
+          className="collection-section-container collections-screen-informative-message-container"
+          //style={{
+          //  width: '1100px',
+          //  backgroundColor: '#f0f6ff',
+          //  boxSizing: 'border-box',
+          //  padding: 30,
+          //  borderRadius: 10,
+          //  color: '#1f3a89',
+          //  display: 'grid',
+          //  gridTemplateColumns: 'auto 1fr',
+          //  gap: 10,
+          //  border: '1px solid #bfdbfe',
+          //}}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="15"
+            height="15"
+            fill="#2762ea"
+            className="bi bi-info-circle-fill"
+            viewBox="0 0 16 16"
+          >
+            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
+          </svg>
+          <p style={{ margin: 0, lineHeight: 1.5, fontSize: 14 }}>
+            This collection was carefully curated by our team to include the
+            most essential subscriptions for remote workers. Each package has
+            been tested ar viewed for quality, value, and user experience. We
+            regularly update this collection based on user feedback and market
+            trends
+          </p>
+        </div>
       </div>
     </>
   );
