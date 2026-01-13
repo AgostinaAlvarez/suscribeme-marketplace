@@ -544,6 +544,7 @@
   padding: 15px 0px;
   display: flex;
   flex-direction: column;
+  /*background-color: pink;*/
 }
 
 .custom-package-navigation-sticky-content-right-col {
@@ -745,8 +746,22 @@
   }
 }
 
+@media screen and (max-width: 560px) {
+  .custom-package-navigation-sticky-content-left-col {
+    padding: 5px 30px;
+  }
+
+  .custom-package-categories-carousel {
+    padding-bottom: 10px;
+  }
+}
+
 @media screen and (max-width: 450px) {
   .custom-package-items-grid {
     grid-template-columns: 1fr;
+  }
+
+  .custom-package-categories-carousel {
+    padding-bottom: 5px;
   }
 }

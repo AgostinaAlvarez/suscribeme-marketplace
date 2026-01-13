@@ -674,7 +674,7 @@ const CustomPackageDetailsContent: React.FC = () => {
           aria-hidden={!showSecondaryStickyBar}
         >
           <div className="custom-package-navigation-sticky-content">
-            <div className="custom-package-navigation-sticky-content-left-col ">
+            <div className="custom-package-navigation-sticky-content-left-col">
               {/* ================= CATEGORIES ================= */}
               <div className="custom-package-categories-carousel">
                 <div className="custom-package-categories-group">
