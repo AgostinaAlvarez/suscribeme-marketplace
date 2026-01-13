@@ -649,84 +649,29 @@ const CustomPackageDetailsContent: React.FC = () => {
           }}
           aria-hidden={!showSecondaryStickyBar}
         >
-          <div
-            style={{
-              width: '1300px',
-              margin: '0 auto',
-
-              display: 'grid',
-              gridTemplateColumns: '1fr auto',
-              gap: 40,
-              height: 'fit-content',
-            }}
-          >
-            <div
-              style={{
-                width: '100%',
-                height: '100%',
-                boxSizing: 'border-box',
-                background: '#fff',
-                backgroundColor: '#f9fafb',
-                padding: '15px 0px',
-              }}
-            >
-              <div
-                className="custom-package-categories-section"
-                style={{
-                  boxSizing: 'border-box',
-                }}
-              >
-                {categories.map((cat) => (
-                  <div
-                    key={cat.name}
-                    className={`custom-package-categories-item${activeCategory === cat.name ? ' custom-package-categories-item-cta' : ''}`}
-                    onClick={() => handleCategoryClick(cat.ref, cat.name)}
-                    style={{ cursor: 'pointer' }}
-                  >
-                    <span>
-                      {cat.name} ({cat.count})
-                    </span>
-                  </div>
-                ))}
+          <div className="custom-package-navigation-sticky-content">
+            <div className="custom-package-navigation-sticky-content-left-col ">
+              {/* ================= CATEGORIES ================= */}
+              <div className="custom-package-categories-carousel">
+                <div className="custom-package-categories-group">
+                  {categories.map((categorie, index) => (
+                    <div
+                      key={index}
+                      className={`custom-package-categories-card ${activeCategory === categorie.name ? 'custom-package-categories-card-cta' : ''}`}
+                      onClick={() =>
+                        handleCategoryClick(categorie.ref, categorie.name)
+                      }
+                    >
+                      <span>
+                        {categorie.name} ({categorie.count})
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-            <div style={{ width: '400px' }}></div>
+            <div className="custom-package-navigation-sticky-content-right-col"></div>
           </div>
-          {/*
-          <div
-            style={{
-              width: '100%',
-              boxSizing: 'border-box',
-              backgroundColor: 'red',
-              display: 'grid',
-              gridTemplateColumns: '1fr auto',
-            }}
-          >
-            <div
-              className="custom-package-categories-section"
-              style={{
-                boxSizing: 'border-box',
-                paddingTop: '10px',
-                paddingLeft: '45px',
-                paddingBottom: '20px',
-              }}
-            >
-              {categories.map((cat) => (
-                <div
-                  key={cat.name}
-                  className={`custom-package-categories-item${activeCategory === cat.name ? ' custom-package-categories-item-cta' : ''}`}
-                  onClick={() => handleCategoryClick(cat.ref, cat.name)}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <span>
-                    {cat.name} ({cat.count})
-                  </span>
-                </div>
-              ))}
-            </div>
-            
-          </div>
-            */}
         </section>
       )}
       {/* ================= HERO ================= */}
@@ -786,23 +731,28 @@ const CustomPackageDetailsContent: React.FC = () => {
               designed to accelerate your marketing success at every stage.
             </p>
           </div>
+
           {/* ================= CATEGORIES ================= */}
+
           <div
-            className="custom-package-categories-section"
+            className="custom-package-categories-carousel"
             ref={secondaryStickyRef}
           >
-            {categories.map((cat) => (
-              <div
-                key={cat.name}
-                className={`custom-package-categories-item${activeCategory === cat.name ? ' custom-package-categories-item-cta' : ''}`}
-                onClick={() => handleCategoryClick(cat.ref, cat.name)}
-                style={{ cursor: 'pointer' }}
-              >
-                <span>
-                  {cat.name} ({cat.count})
-                </span>
-              </div>
-            ))}
+            <div className="custom-package-categories-group">
+              {categories.map((categorie, index) => (
+                <div
+                  key={index}
+                  className={`custom-package-categories-card ${activeCategory === categorie.name ? 'custom-package-categories-card-cta' : ''}`}
+                  onClick={() =>
+                    handleCategoryClick(categorie.ref, categorie.name)
+                  }
+                >
+                  <span>
+                    {categorie.name} ({categorie.count})
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
           {/* ================= PRODUCTS ================= */}
           <div ref={productsSectionRef} />

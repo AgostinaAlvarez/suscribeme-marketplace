@@ -126,7 +126,7 @@ const ProductsSection: React.FC<ComponentProps> = ({
         }}
       >
         <h2 style={{ margin: 0, fontSize: 16 }}>Productos</h2>
-        <div className="custom-package-items-grid">
+        <div className="custom-package-items-grid custom-package-products-grid">
           {products.map((item, index) => (
             <article key={index} className="custom-package-item-card">
               <div className="custom-package-item-card-content">
