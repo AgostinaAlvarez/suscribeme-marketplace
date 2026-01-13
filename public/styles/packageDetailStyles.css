@@ -767,15 +767,11 @@
   }
 
   .package-detail-hero-section-content h1 {
-    margin: 0;
-    font-size: 45px;
     font-size: 30px;
     font-weight: 500;
   }
 
   .package-detail-hero-section-content p {
-    margin: 0;
-    font-size: 18px;
     line-height: 1.4;
     margin-bottom: 15px;
     font-size: 13px;

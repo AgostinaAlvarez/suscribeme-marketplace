@@ -17,6 +17,10 @@ const CustomPackageDetailsContent: React.FC = () => {
   const [hideAside, setHideAside] = useState(false);
   const asideRef = useRef<HTMLDivElement>(null);
 
+  // Nuevo estado para ocultar el sticky bar inferior
+  const [hideBottomStickyBar, setHideBottomStickyBar] = useState(false);
+  const bottomStickyBarRef = useRef<HTMLDivElement>(null);
+
   const [showSecondaryStickyBar, setShowSecondaryStickyBar] = useState(false);
   const secondaryStickyRef = useRef<HTMLDivElement>(null);
 
@@ -390,6 +394,26 @@ const CustomPackageDetailsContent: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const footer = document.querySelector('footer');
+      const bottomStickyBar = bottomStickyBarRef.current;
+      if (footer && bottomStickyBar) {
+        const footerRect = footer.getBoundingClientRect();
+        const stickyRect = bottomStickyBar.getBoundingClientRect();
+        // Oculta el sticky bar inferior antes de tocar el footer
+        if (stickyRect.bottom > footerRect.top - 20) {
+          setHideBottomStickyBar(true);
+        } else {
+          setHideBottomStickyBar(false);
+        }
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const [planDetailsDrawerOpen, setPlanDetailsDrawerOpen] =
     useState<boolean>(false);
 
@@ -725,7 +749,7 @@ const CustomPackageDetailsContent: React.FC = () => {
             }}
           >
             <h2 className="custom-package-section-title">Choose your items</h2>
-            <p>
+            <p style={{ color: '#8c8c8c' }}>
               A comprehensive subscription package featuring multiple learning
               paths, tools, and support levels. Choose from flexible plans
               designed to accelerate your marketing success at every stage.
@@ -1106,6 +1130,187 @@ const CustomPackageDetailsContent: React.FC = () => {
           </div>
         </div>
       </section>
+      {showSecondaryStickyBar && (
+        <section
+          className="custom-package-bottom-sticky-bar"
+          ref={bottomStickyBarRef}
+          style={{
+            opacity: hideBottomStickyBar ? 0 : 1,
+            pointerEvents: hideBottomStickyBar ? 'none' : 'auto',
+            transition: 'opacity 0.4s',
+          }}
+        >
+          <div
+            className="custom-package-aside-total-card"
+            style={{ border: 'none', boxShadow: 'unset' }}
+          >
+            {productsInCart.length !== 0 ||
+            servicesInCart.length !== 0 ||
+            benefitsInCart.length !== 0 ||
+            discountsInCart.length !== 0 ? (
+              <>
+                <div className="custom-package-aside-total-card-title-container">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    fill="currentColor"
+                    className="bi bi-cart"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                  </svg>
+                  <span style={{ fontSize: 15 }}>Tu Plan Personalizad9o</span>
+                </div>
+                {productsInCart.length !== 0 && (
+                  <span
+                    style={{
+                      fontSize: 13,
+                      color: '#8c8c8c',
+                      fontWeight: 300,
+                    }}
+                  >
+                    • {getTotalProductsInCart()} producto
+                    {getTotalProductsInCart() > 1 ? 's' : ''}
+                  </span>
+                )}
+                {servicesInCart.length !== 0 && (
+                  <span
+                    style={{
+                      fontSize: 13,
+                      color: '#8c8c8c',
+                      fontWeight: 300,
+                    }}
+                  >
+                    • {getTotalServicesInCart()} servicio
+                    {getTotalServicesInCart() > 1 ? 's' : ''}
+                  </span>
+                )}
+
+                {benefitsInCart.length !== 0 && (
+                  <span
+                    style={{
+                      fontSize: 13,
+                      color: '#8c8c8c',
+                      fontWeight: 300,
+                    }}
+                  >
+                    • {getTotalBenefitsInCart()} beneficio
+                    {getTotalBenefitsInCart() > 1 ? 's' : ''}
+                  </span>
+                )}
+
+                {discountsInCart.length !== 0 && (
+                  <span
+                    style={{
+                      fontSize: 13,
+                      color: '#8c8c8c',
+                      fontWeight: 300,
+                    }}
+                  >
+                    • {getTotalDiscountsInCart()} descuento
+                    {getTotalDiscountsInCart() > 1 ? 's' : ''}
+                  </span>
+                )}
+                <button
+                  type="button"
+                  style={{
+                    width: 'fit-content',
+                    background: 'none',
+                    border: 'none',
+                    padding: 0,
+                    margin: 0,
+                    color: '#37AFE1',
+                    //textDecoration: 'underline',
+                    cursor: 'pointer',
+                    font: 'inherit',
+                    outline: 'none',
+                    boxShadow: 'none',
+                    display: 'inline',
+                    fontWeight: 400,
+                    fontSize: 13,
+                    textDecoration: 'underline',
+                  }}
+                  onClick={() => {
+                    console.log(productsInCart);
+                    setPlanDetailsDrawerOpen(true);
+                  }}
+                >
+                  Ver Detalles
+                </button>
+                <div className="custom-package-aside-total-container">
+                  <span style={{ fontSize: 15 }}>Total mensual</span>
+                  <h4>
+                    ${calculateTotal()} <span>ARS</span>
+                  </h4>
+                </div>
+                <button
+                  className="custom-package-aside-total-button"
+                  onClick={() => (window.location.href = '/package')}
+                >
+                  Subscribe Now
+                </button>
+              </>
+            ) : (
+              <>
+                <div
+                  className="custom-package-aside-total-card-title-container"
+                  style={{ marginBottom: 10 }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    fill="currentColor"
+                    className="bi bi-cart"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                  </svg>
+                  <span style={{ fontSize: 15 }}>Tu Plan Personalizado</span>
+                </div>
+
+                <div className="custom-package-aside-total-container">
+                  <span style={{ fontSize: 15 }}>Total mensual</span>
+                  <h4>
+                    $0 <span>ARS</span>
+                  </h4>
+                </div>
+
+                <button
+                  className="custom-package-aside-total-button"
+                  style={{
+                    background:
+                      'linear-gradient(90deg, #e0e0e0 0%, #f5f5f5 100%)',
+                    color: '#bdbdbd',
+                    border: '1px solid #e0e0e0',
+                    cursor: 'not-allowed',
+                    opacity: 0.7,
+                    boxShadow: 'none',
+                    fontWeight: 600,
+                  }}
+                  disabled
+                >
+                  Subscribe Now
+                </button>
+                <span
+                  style={{
+                    fontSize: 12,
+                    color: '#8c8c8c',
+                    fontWeight: 300,
+                    display: 'block',
+                    textAlign: 'center',
+                  }}
+                >
+                  ¡Tu carrito está vacío! Agrega productos para crear tu plan
+                  personalizado.
+                </span>
+              </>
+            )}
+          </div>
+        </section>
+      )}
+
       <DetailsDrawer
         planDetailsDrawerOpen={planDetailsDrawerOpen}
         setPlanDetailsDrawerOpen={setPlanDetailsDrawerOpen}
