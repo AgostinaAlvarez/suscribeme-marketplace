@@ -216,6 +216,7 @@ const ProductsSection: React.FC<ComponentProps> = ({
               position: 'relative',
             }}
           >
+            {/*CLOSE BUTTON*/}
             <div
               onClick={() => {
                 setSelectedProduct(null);
@@ -234,7 +235,7 @@ const ProductsSection: React.FC<ComponentProps> = ({
                 height="20"
               />
             </div>
-
+            {/*CONTENT*/}
             <div className="custom-package-add-item-modal-base-container custom-package-add-item-modal-content">
               {selectedProduct?.image ? (
                 <img
@@ -247,6 +248,7 @@ const ProductsSection: React.FC<ComponentProps> = ({
                   style={{ backgroundColor: 'grey' }}
                 ></div>
               )}
+              {/*desktop render*/}
               <div className="add-item-custom-package-modal-item-info add-item-custom-package-modal-desktop-component">
                 <span style={{ fontWeight: 600, fontSize: 19 }}>
                   {selectedProduct?.name}
@@ -405,7 +407,6 @@ const ProductsSection: React.FC<ComponentProps> = ({
                   </span>
                 )}
 
-                {/*--------*/}
                 {selectedProduct.selectableOptions.map((option) => (
                   <div
                     key={option.keyOption}
@@ -482,6 +483,7 @@ const ProductsSection: React.FC<ComponentProps> = ({
                   </span>
                 </div>
               </div>
+              {/*standar*/}
               <div className="add-item-custom-package-modal-responsive-props">
                 <div
                   className="custom-package-add-item-info-container"
@@ -750,7 +752,7 @@ const ProductsSection: React.FC<ComponentProps> = ({
                 </div>
               </div>
             </div>
-
+            {/*BUTTON*/}
             <div className="custom-package-add-item-modal-base-container custom-package-add-item-modal-footer">
               <button
                 className="card-button"

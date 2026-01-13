@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import ModalComponent from '../ModalComponent.tsx';
+import '../../../public/styles/AddItemCustomPackageModal.css';
 
 interface ComponentProps {
   openEditServiceModal: boolean;
@@ -90,7 +91,9 @@ const EditServiceModal: React.FC<ComponentProps> = ({
           setEditServiceAmount(1);
           setEditServiceModalError(null);
         }}
-        containerStyles={{ width: '780px', height: '500px' }}
+        //containerStyles={{ width: '780px', height: '500px' }}
+        customClassName="add-item-custom-package-modal-container"
+        customMaskClassName="add-item-custom-package-modal-mask"
       >
         {editServiceData && (
           <form
@@ -111,45 +114,42 @@ const EditServiceModal: React.FC<ComponentProps> = ({
               position: 'relative',
             }}
           >
+            {/*CLOSE BUTTON*/}
             <div
-              style={{
-                position: 'absolute',
-                top: 10,
-                right: 20,
-                cursor: 'pointer',
-              }}
               onClick={() => {
                 setOpenEditServiceModal(false);
                 setEditServiceData(null);
                 setEditServiceAmount(1);
                 setEditServiceModalError(null);
               }}
+              className="close-icon"
+              style={{ position: 'absolute', top: 12, right: 20 }}
             >
-              x
+              <img
+                className="navbar-responsive-logo"
+                src="/assets/icons/close-icon.svg"
+                alt="Menu icon"
+                width="20"
+                height="20"
+              />
             </div>
+            {/*CONTENT*/}
             <div className="custom-package-add-item-modal-base-container custom-package-add-item-modal-content">
               {editServiceData?.image ? (
                 <img
-                  className="custom-package-add-item-modal-img"
+                  className="custom-package-add-item-modal-img add-item-custom-package-modal-desktop-component"
                   src={editServiceData.image.url}
                 />
               ) : (
                 <div
-                  className="custom-package-add-item-modal-img"
+                  className="custom-package-add-item-modal-img add-item-custom-package-modal-desktop-component"
                   style={{ backgroundColor: 'grey' }}
                 ></div>
               )}
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  width: '100%',
-                  boxSizing: 'border-box',
-                  gap: 12,
-                }}
-              >
+              {/*desktop render*/}
+              <div className="add-item-custom-package-modal-item-info add-item-custom-package-modal-desktop-component">
                 <span style={{ fontWeight: 600, fontSize: 19 }}>
-                  {editServiceData?.name} OPT 2
+                  {editServiceData?.name}
                 </span>
                 <p
                   style={{
@@ -298,6 +298,178 @@ const EditServiceModal: React.FC<ComponentProps> = ({
                   </div>
                 ))}
               </div>
+              {/*responsive content*/}
+              <div className="add-item-custom-package-modal-responsive-item-info">
+                {/*img*/}
+                {editServiceData?.image ? (
+                  <img
+                    className="add-item-custom-package-modal-responsive-item-info-img"
+                    src={editServiceData.image.url}
+                  />
+                ) : (
+                  <div
+                    className="add-item-custom-package-modal-responsive-item-info-img"
+                    style={{ backgroundColor: 'grey' }}
+                  ></div>
+                )}
+                <div className="add-item-custom-package-modal-item-info">
+                  <span style={{ fontWeight: 600, fontSize: 19 }}>
+                    {editServiceData?.name}
+                  </span>
+                  <p
+                    style={{
+                      fontSize: 11,
+                      lineHeight: 1.3,
+                      margin: 0,
+                      fontWeight: 400,
+                      color: 'grey',
+                    }}
+                  >
+                    Smooth, rich cold brew coffee made from premium organic
+                    beans. Perfect for your morning routine or afternoon
+                    pick-me-up. Low acidity and naturally sweet.
+                  </p>
+                  <span style={{ fontWeight: 800, fontSize: 23 }}>
+                    ${editServiceData?.price}{' '}
+                    <span
+                      style={{
+                        fontWeight: 300,
+                        fontSize: 12,
+                        color: '#595959',
+                      }}
+                    >
+                      per unit
+                    </span>
+                  </span>
+                </div>
+              </div>
+              {/*standar*/}
+              <div className="add-item-custom-package-modal-responsive-props">
+                <div
+                  className="custom-package-add-item-info-container"
+                  style={{
+                    marginBottom: 10,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 10,
+                  }}
+                >
+                  <div
+                    style={{
+                      width: '100%',
+                      boxSizing: 'border-box',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 10,
+                    }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="15"
+                      height="15"
+                      fill="currentColor"
+                      className="bi bi-truck"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5zm1.294 7.456A2 2 0 0 1 4.732 11h5.536a2 2 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456M12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
+                    </svg>
+                    <span style={{ fontSize: 11.5, fontWeight: 500 }}>
+                      Delivery Type
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      width: '100%',
+                      boxSizing: 'border-box',
+                      border: '2px solid #1d39c4',
+                      backgroundColor: ' #ffffff',
+                      padding: 10,
+                      borderRadius: 8,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 6,
+                    }}
+                  >
+                    <>
+                      <div
+                        style={{
+                          width: '100%',
+                          boxSizing: 'border-box',
+                          display: 'flex',
+                          alignItems: 'flex-start',
+                          gap: 5,
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="11"
+                          height="11"
+                          fill="currentColor"
+                          className="bi bi-house-fill"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
+                          <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z" />
+                        </svg>
+                        <span style={{ fontSize: 11, fontWeight: 500 }}>
+                          Home Delivery
+                        </span>
+                      </div>
+                      <p
+                        style={{
+                          fontSize: 10,
+                          fontWeight: 300,
+                          color: 'grey',
+                          margin: 0,
+                          lineHeight: 1.3,
+                        }}
+                      >
+                        Delivered to your doorstep with your subscription
+                      </p>
+                    </>
+                  </div>
+                </div>
+                {editServiceModalError && (
+                  <span
+                    style={{ marginBottom: 10, fontSize: 12, color: '#f5222d' }}
+                  >
+                    *{editServiceModalError}
+                  </span>
+                )}
+
+                {editServiceData.selectableOptions.map((option: any) => (
+                  <div
+                    key={option.keyOption}
+                    style={{ display: 'flex', flexDirection: 'column', gap: 5 }}
+                  >
+                    <label style={{ display: 'block', fontSize: 13 }}>
+                      {option.keyOption}
+                    </label>
+                    <div className="radio-group">
+                      {option.valueOption.map((value: string) => (
+                        <label key={value} className="radio-card">
+                          <input
+                            type="radio"
+                            value={value}
+                            {...register(option.keyOption, {
+                              onChange: () => setEditServiceModalError(null),
+                            })}
+                            name={option.keyOption}
+                            defaultChecked={
+                              editServiceData.selectedOptions?.find(
+                                (opt: any) =>
+                                  opt.keyOption === option.keyOption,
+                              )?.valueOption === value
+                            }
+                          />
+                          <span>{value}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {/*Quantity*/}
               <div
                 style={{
                   display: 'flex',
@@ -392,6 +564,7 @@ const EditServiceModal: React.FC<ComponentProps> = ({
                 </div>
               </div>
             </div>
+            {/*BUTTON*/}
             <div className="custom-package-add-item-modal-base-container custom-package-add-item-modal-footer">
               <button
                 className="card-button"

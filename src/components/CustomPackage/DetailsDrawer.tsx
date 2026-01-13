@@ -863,7 +863,20 @@ const DetailsDrawer: React.FC<ComponentProps> = ({
                     Details of your recurring plan
                   </span>
                 </div>
-                <div>x</div>
+                <div
+                  onClick={() => {
+                    setPlanDetailsDrawerOpen(false);
+                  }}
+                  className="close-icon"
+                >
+                  <img
+                    className="navbar-responsive-logo"
+                    src="/assets/icons/close-icon.svg"
+                    alt="Menu icon"
+                    width="20"
+                    height="20"
+                  />
+                </div>
               </div>
               <div className="custom-package-plan-details-drawer-empty-cart-container">
                 <EmptyCartAnimation />
