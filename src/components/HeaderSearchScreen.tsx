@@ -24,6 +24,14 @@ const HeaderSearchScreen: React.FC<ComponentProps> = ({
           <a href="/" aria-label="Inicio Suscribeme">
             <span>Suscribeme</span>
           </a>
+          <img
+            onClick={() => (window.location.href = '/')}
+            className="search-screen-header-navbar-responsive-logo"
+            src="/assets/icons/bag-icon.svg"
+            alt="Menu icon"
+            width="14"
+            height="14"
+          />
           <div className="nav-search-bar-container">
             <div className="nav-search-bar-icon-container">
               <img
@@ -48,7 +56,10 @@ const HeaderSearchScreen: React.FC<ComponentProps> = ({
               <span>Search</span>
             </div>
           </div>
-          <nav aria-label="Navegación principal">
+          <nav
+            className="search-screen-header-navbar"
+            aria-label="Navegación principal"
+          >
             <ul>
               {/*
               <li>
@@ -70,6 +81,13 @@ const HeaderSearchScreen: React.FC<ComponentProps> = ({
               </li>
             </ul>
           </nav>
+          <img
+            className="search-screen-header-navbar-responsive-logo"
+            src="/assets/icons/menu.svg"
+            alt="Menu icon"
+            width="14"
+            height="14"
+          />
         </div>
       </div>
       <div className="search-screen-section-container search-screen-header-results-container">
@@ -91,19 +109,7 @@ const HeaderSearchScreen: React.FC<ComponentProps> = ({
             <span>Custom Packages</span>
           </div>
         </div>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            width: 'fit-content',
-            boxSizing: 'border-box',
-            gap: 10,
-            border: '1px solid #efefef',
-            padding: '5px 15px',
-            borderRadius: 5,
-            backgroundColor: ' #ffffff',
-          }}
-        >
+        <div className="search-screen-filters-categories-box">
           <img
             src="/assets/icons/menu.svg"
             alt="Menu icon"

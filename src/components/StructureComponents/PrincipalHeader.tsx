@@ -84,8 +84,12 @@ const PrincipalHeader: React.FC<ComponentProps> = ({
           alt="Menu icon"
           width="14"
           height="14"
+          onClick={() => (window.location.href = '/')}
         />
-        <div className="nav-search-bar-container nav-search-bar-container-principal-structure nav-search-bar-responsive-container">
+        <div
+          className="nav-search-bar-container nav-search-bar-container-principal-structure nav-search-bar-responsive-container"
+          onClick={() => (window.location.href = '/search')}
+        >
           <div
             className="nav-search-bar-icon-container"
             style={{ border: 'none' }}
