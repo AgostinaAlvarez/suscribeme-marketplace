@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import StandarPackagesSection from '../components/CategoriesScreen/StandarPackagesSection';
 import CustomPackagesSection from '../components/CategoriesScreen/CustomPackagesSection';
 
@@ -20,6 +20,47 @@ interface CustomPackageData {
 }
 
 const CategoriesScreen: React.FC = () => {
+  const [responsiveComponent, setResponsiveComponent] =
+    useState<boolean>(false);
+
+  const [showStickyBar, setShowStickyBar] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const hero = document.querySelector(
+            '.categories-screen-results-container',
+          );
+          const heroHeight = hero
+            ? hero.getBoundingClientRect().bottom + window.scrollY
+            : 400;
+          if (window.scrollY > heroHeight - 80) {
+            setShowStickyBar(true);
+          } else {
+            setShowStickyBar(false);
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    // Solo ejecuta en cliente
+    const checkMobile = () => {
+      setResponsiveComponent(window.innerWidth < 1030);
+    };
+    checkMobile(); // Inicializa al montar
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const subscriptionTypeOptions = [
     'Productos',
     'Servicios',
@@ -243,6 +284,97 @@ const CategoriesScreen: React.FC = () => {
           gap: 20,
         }}
       >
+        {responsiveComponent && (
+          <section
+            id="navigation-sticky"
+            className="categories-screen-navigation-sticky-bar"
+            style={{
+              opacity: showStickyBar ? 1 : 0,
+              pointerEvents: showStickyBar ? 'auto' : 'none',
+              transition: 'opacity 0.3s',
+              position: 'fixed',
+              top: '60px',
+              left: 0,
+              width: '100%',
+              zIndex: 1000,
+            }}
+            aria-hidden={!showStickyBar}
+          >
+            <div
+              className="categories-screen-responsive-banner"
+              style={{
+                height: '160px',
+                //borderRadius: 10
+              }}
+            >
+              <img
+                src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="banner Img"
+                className="categories-screen-responsive-banner-img"
+              />
+              <div
+                className="categories-screen-responsive-banner-layer"
+                style={{ gap: 18 }}
+              >
+                <h2 style={{ fontSize: 22, fontWeight: 500, margin: 0 }}>
+                  Beauty & Health
+                </h2>
+                <div
+                  style={{
+                    width: '100%',
+                    boxSizing: 'border-box',
+                    display: 'grid',
+                    gridTemplateColumns: '1fr auto',
+                    gap: 10,
+                    alignItems: 'center',
+                  }}
+                >
+                  <div
+                    className="nav-search-bar-container nav-search-bar-container-principal-structure"
+                    style={{
+                      width: '100%',
+                      borderRadius: 10,
+                      backgroundColor: '#fff',
+                    }}
+                  >
+                    <div
+                      className="nav-search-bar-icon-container"
+                      style={{ border: 'none' }}
+                    >
+                      <img
+                        src="/assets/icons/search.svg"
+                        alt="Search icon"
+                        width="14"
+                        height="14"
+                        style={{ cursor: 'pointer' }}
+                      />
+                    </div>
+                    <span
+                      style={{
+                        fontSize: '13px',
+                        fontWeight: 300,
+                        margin: 0,
+                        lineHeight: 1,
+                      }}
+                    >
+                      Search
+                    </span>
+                  </div>
+                  <div className="categories-screen-navigation-filters-box">
+                    <img
+                      src="/assets/icons/filter-icon.svg"
+                      alt="Menu icon"
+                      width="14"
+                      height="14"
+                      style={{ cursor: 'pointer' }}
+                    />
+                    <span>Filters</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
         <div className="categories-screen-responsive-banner">
           <img
             src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
