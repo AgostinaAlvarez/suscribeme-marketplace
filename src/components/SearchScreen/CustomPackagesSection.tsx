@@ -102,7 +102,7 @@ const CustomPackagesSection: React.FC<ComponentProps> = ({ packages }) => {
       </div>
       <nav
         style={{ marginTop: 30 }}
-        className="pagination-container"
+        className="pagination-container search-screen-pagination-container"
         aria-label="Paginación de paquetes estándar"
       >
         <button className="pagination-arrow">‹</button>
