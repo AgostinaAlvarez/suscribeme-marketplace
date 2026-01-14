@@ -42,28 +42,46 @@ const StoresScreen: React.FC = () => {
 
   //////
 
+  // refs y estados independientes para cada carrusel
   const scrollRef = useRef<HTMLDivElement>(null);
+  const stickyScrollRef = useRef<HTMLDivElement>(null);
 
   const [showLeft, setShowLeft] = useState(false);
   const [showRight, setShowRight] = useState(false);
+  const [showLeftSticky, setShowLeftSticky] = useState(false);
+  const [showRightSticky, setShowRightSticky] = useState(false);
 
   const updateArrows = () => {
     const el = scrollRef.current;
     if (!el) return;
-
     const { scrollLeft, scrollWidth, clientWidth } = el;
     const maxScroll = scrollWidth - clientWidth;
-
     setShowLeft(scrollLeft > 0);
-    setShowRight(scrollLeft < maxScroll - 1); // margen por decimales
+    setShowRight(scrollLeft < maxScroll - 1);
+  };
+  const updateArrowsSticky = () => {
+    const el = stickyScrollRef.current;
+    if (!el) return;
+    const { scrollLeft, scrollWidth, clientWidth } = el;
+    const maxScroll = scrollWidth - clientWidth;
+    setShowLeftSticky(scrollLeft > 0);
+    setShowRightSticky(scrollLeft < maxScroll - 1);
   };
 
   const scrollByAmount = (direction: 'left' | 'right') => {
     const el = scrollRef.current;
     if (!el) return;
-
     const amount = el.clientWidth * 0.8;
-
+    el.scrollTo({
+      left:
+        direction === 'left' ? el.scrollLeft - amount : el.scrollLeft + amount,
+      behavior: 'smooth',
+    });
+  };
+  const scrollByAmountSticky = (direction: 'left' | 'right') => {
+    const el = stickyScrollRef.current;
+    if (!el) return;
+    const amount = el.clientWidth * 0.8;
     el.scrollTo({
       left:
         direction === 'left' ? el.scrollLeft - amount : el.scrollLeft + amount,
@@ -73,16 +91,24 @@ const StoresScreen: React.FC = () => {
 
   useEffect(() => {
     updateArrows();
-
     const el = scrollRef.current;
     if (!el) return;
-
     el.addEventListener('scroll', updateArrows);
     window.addEventListener('resize', updateArrows);
-
     return () => {
       el.removeEventListener('scroll', updateArrows);
       window.removeEventListener('resize', updateArrows);
+    };
+  }, []);
+  useEffect(() => {
+    updateArrowsSticky();
+    const el = stickyScrollRef.current;
+    if (!el) return;
+    el.addEventListener('scroll', updateArrowsSticky);
+    window.addEventListener('resize', updateArrowsSticky);
+    return () => {
+      el.removeEventListener('scroll', updateArrowsSticky);
+      window.removeEventListener('resize', updateArrowsSticky);
     };
   }, []);
 
@@ -122,6 +148,7 @@ const StoresScreen: React.FC = () => {
           <p>The internet’s source for company logos and brand assets.</p>
         </div>
       </section>
+      {/* Carrusel normal */}
       <div className="stores-screen-section-container categories-wrapper-container sticky-ref">
         <div className="categories-wrapper">
           {showLeft && (
@@ -174,6 +201,7 @@ const StoresScreen: React.FC = () => {
         ))}
       </section>
         */}
+      {/* Carrusel sticky */}
       <section
         id="categories-sticky"
         className="stores-screen-navigation-sticky-bar"
@@ -191,17 +219,17 @@ const StoresScreen: React.FC = () => {
       >
         <div className="stores-screen-section-container categories-wrapper-container">
           <div className="categories-wrapper">
-            {showLeft && (
+            {showLeftSticky && (
               <button
                 className="arrow left"
-                onClick={() => scrollByAmount('left')}
+                onClick={() => scrollByAmountSticky('left')}
                 aria-label="Scroll left"
               >
                 ‹
               </button>
             )}
 
-            <div className="categories-scroll" ref={scrollRef}>
+            <div className="categories-scroll" ref={stickyScrollRef}>
               {categories.map((cat) => (
                 <button
                   key={cat.id}
@@ -215,10 +243,10 @@ const StoresScreen: React.FC = () => {
               ))}
             </div>
 
-            {showRight && (
+            {showRightSticky && (
               <button
                 className="arrow right"
-                onClick={() => scrollByAmount('right')}
+                onClick={() => scrollByAmountSticky('right')}
                 aria-label="Scroll right"
               >
                 ›
