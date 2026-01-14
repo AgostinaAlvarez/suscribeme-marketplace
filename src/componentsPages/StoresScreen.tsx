@@ -10,33 +10,6 @@ interface CategoriesFilterProps {
 }
 
 const StoresScreen: React.FC = () => {
-  const categoriesList: { _id: number; name: string }[] = [
-    {
-      _id: 1,
-      name: 'Featured',
-    },
-    {
-      _id: 2,
-      name: 'Technology',
-    },
-    {
-      _id: 3,
-      name: 'Arts and Entretainment',
-    },
-    {
-      _id: 4,
-      name: 'Finance',
-    },
-    {
-      _id: 5,
-      name: 'Food and Drink',
-    },
-    {
-      _id: 6,
-      name: 'Vehicles',
-    },
-  ];
-
   const categories: { id: string; label: string }[] = [
     { id: 'tech', label: 'Technology' },
     { id: 'arts', label: 'Arts and Entertainment' },
@@ -271,7 +244,11 @@ const StoresScreen: React.FC = () => {
         <>
           <section className="stores-screen-section-container stores-screen-principal-grid">
             {Array.from({ length: 10 }).map((_, index) => (
-              <div key={index} className="stores-screen-store-card">
+              <div
+                key={index}
+                className="stores-screen-store-card"
+                onClick={() => (window.location.href = '/store')}
+              >
                 <div className="stores-screen-store-card-header">
                   <div className="stores-screen-store-card-header-avatar-container"></div>
                 </div>

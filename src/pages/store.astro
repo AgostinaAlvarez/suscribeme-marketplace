@@ -3,6 +3,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StoreDetailsComponent from '../components/StoreDetailsComponent.tsx';
 import PrincipalHeader from '../components/StructureComponents/PrincipalHeader';
+import StoreDetailsScreen from '../componentsPages/StoreDetailsScreen';
 ---
 
 <html lang="en">
@@ -20,6 +21,7 @@ import PrincipalHeader from '../components/StructureComponents/PrincipalHeader';
     <link rel="stylesheet" href="/styles/globalStyles.css" />
     <link rel="stylesheet" href="/styles/storeDetailStyles.css" />
     <link rel="stylesheet" href="/styles/planCarouselStyles.css" />
+    <link rel="stylesheet" href="/styles/storeDetailsScreenStyles.css" />
   </head>
   <body>
     <!-- ================= HEADER ================= -->
@@ -27,7 +29,7 @@ import PrincipalHeader from '../components/StructureComponents/PrincipalHeader';
     <!-- ================= MAIN ================= -->
     <main class="main store-detail-main">
       <!-- ================= SCREEN CONTENT ================= -->
-      <StoreDetailsComponent client:load />
+      <StoreDetailsScreen client:load />
     </main>
     <!-- ================= FOOTER ================= -->
     <Footer />
