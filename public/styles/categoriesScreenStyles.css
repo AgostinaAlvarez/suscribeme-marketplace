@@ -357,11 +357,12 @@ hr {
     gap: 10px;
     border: 1px solid violet;
     border: 1px solid #efefef;
-    padding: 5px 15px;
+    padding: 0px 15px;
     border-radius: 10px;
     background-color: pink;
     background-color: #fff;
-    height: 38px;
+    height: 32px;
+    font-size: 13px;
   }
 
   .categories-screen-main-grid-content-cards-grid {

@@ -314,7 +314,7 @@ const CategoriesScreen: React.FC = () => {
               />
               <div
                 className="categories-screen-responsive-banner-layer"
-                style={{ gap: 18 }}
+                style={{ gap: 18, backgroundColor: 'rgba(5, 5, 5, 0.59)' }}
               >
                 <h2 style={{ fontSize: 22, fontWeight: 500, margin: 0 }}>
                   Beauty & Health
@@ -335,6 +335,7 @@ const CategoriesScreen: React.FC = () => {
                       width: '100%',
                       borderRadius: 10,
                       backgroundColor: '#fff',
+                      height: 32,
                     }}
                   >
                     <div
