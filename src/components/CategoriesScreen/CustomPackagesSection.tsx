@@ -36,15 +36,7 @@ const CustomPackagesSection: React.FC<ComponentProps> = ({ packages }) => {
   const [currentPage, setCurrentPage] = useState(1);
   return (
     <>
-      <div
-        style={{
-          width: '100%',
-          boxSizing: 'border-box',
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr 1fr',
-          gap: 20,
-        }}
-      >
+      <div className="categories-screen-main-grid-content-cards-grid">
         {packages.map((_, index) => (
           <article
             className="custom-package-card-content"
@@ -110,7 +102,7 @@ const CustomPackagesSection: React.FC<ComponentProps> = ({ packages }) => {
       </div>
       <nav
         style={{ marginTop: 30 }}
-        className="pagination-container"
+        className="pagination-container categories-screen-pagination-container"
         aria-label="Paginación de paquetes estándar"
       >
         <button className="pagination-arrow">‹</button>

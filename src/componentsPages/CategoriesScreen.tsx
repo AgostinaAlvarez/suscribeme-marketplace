@@ -234,174 +234,30 @@ const CategoriesScreen: React.FC = () => {
 
   return (
     <>
-      <div className="categories-screen-section-container categories-screen-main-grid">
-        {/*LEFT COL - SEARCHER*/}
-        <div className="search-screen-main-grid-search-container">
-          <div className="search-screen-main-grid-search-box">
-            <div className="search-screen-main-grid-search-box-header">
-              <span style={{ fontSize: 16, fontWeight: 600 }}>Filter</span>
-              <span
-                style={{ fontSize: 12, color: '#1890ff', cursor: 'pointer' }}
-              >
-                Reset Filters
-              </span>
-            </div>
-            <div className="divider"></div>
-            <div className="search-screen-main-grid-search-box-section">
-              <h3>Tipo de suscripcion</h3>
-              {subscriptionTypeOptions.map((option) => (
-                <label key={option} className="checkbox square">
-                  <input
-                    type="checkbox"
-                    checked={selectedTypeOptions.includes(option)}
-                    onChange={() =>
-                      toggleOption(
-                        option,
-                        selectedTypeOptions,
-                        setSelectedTypeOptions,
-                      )
-                    }
-                  />
-                  <span className="custom-box" />
-                  {option}
-                </label>
-              ))}
-            </div>
-            <div className="divider"></div>
-            <div className="search-screen-main-grid-search-box-section">
-              <h3>Sort By</h3>
-              {filterTypeOptions.map((option) => (
-                <label key={option} className="checkbox circle">
-                  <input
-                    type="checkbox"
-                    checked={selectedFilterTypeOptions.includes(option)}
-                    onChange={() =>
-                      toggleOption(
-                        option,
-                        selectedFilterTypeOptions,
-                        setSelectedFilterTypeOptions,
-                      )
-                    }
-                  />
-                  <span className="custom-box" />
-                  {option}
-                </label>
-              ))}
-            </div>
-            <div className="divider"></div>
-            <div className="search-screen-main-grid-search-box-section">
-              <h3>Price Range</h3>
-              <div className="search-screen-main-grid-search-box-price-container">
-                <span className="search-screen-main-grid-search-box-price-container">
-                  Minimum
-                </span>
-                <div className="search-screen-main-grid-search-box-price-input-container">
-                  <span>$</span>
-                  <input
-                    type="number"
-                    style={{
-                      width: '100%',
-                      fontSize: 12,
-                      padding: '0px',
-                      boxSizing: 'border-box',
-                      border: 'none',
-                    }}
-                    min={0}
-                    value={
-                      priceAmountFilter[0] === undefined
-                        ? ''
-                        : priceAmountFilter[0]
-                    }
-                    onChange={(e) => {
-                      const val = e.target.value;
-                      const newMin = val === '' ? undefined : Number(val);
-                      const newMax = priceAmountFilter[1];
-                      if (
-                        (newMin === undefined || newMin === 0) &&
-                        (newMax === undefined || newMax === 0)
-                      ) {
-                        setPriceAmountFilter([]);
-                      } else {
-                        setPriceAmountFilter([newMin, newMax]);
-                      }
-                    }}
-                    placeholder="0"
-                  />
-                </div>
-              </div>
-              <div className="search-screen-main-grid-search-box-price-container">
-                <span className="search-screen-main-grid-search-box-price-container">
-                  Maximum
-                </span>
-                <div className="search-screen-main-grid-search-box-price-input-container">
-                  <span>$</span>
-                  <input
-                    type="number"
-                    style={{
-                      width: '100%',
-                      fontSize: 12,
-                      padding: '0px',
-                      boxSizing: 'border-box',
-                      border: 'none',
-                    }}
-                    min={0}
-                    value={
-                      priceAmountFilter[1] === undefined
-                        ? ''
-                        : priceAmountFilter[1]
-                    }
-                    onChange={(e) => {
-                      const val = e.target.value;
-                      const newMax = val === '' ? undefined : Number(val);
-                      const newMin = priceAmountFilter[0];
-                      if (
-                        (newMin === undefined || newMin === 0) &&
-                        (newMax === undefined || newMax === 0)
-                      ) {
-                        setPriceAmountFilter([]);
-                      } else {
-                        setPriceAmountFilter([newMin, newMax]);
-                      }
-                    }}
-                    placeholder="100"
-                  />
-                </div>
-              </div>
-            </div>
-            <button
-              className="card-button"
-              style={{ margin: 0 }}
-              //onClick={() => (window.location.href = '/package')}
-            >
-              Apply
-            </button>
-          </div>
-        </div>
-        {/*RIGHT COL - CONTENT*/}
-        <div className="categories-screen-main-grid-content-container">
-          <div className="categories-screen-main-grid-banner">
-            <img
-              src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="banner Img"
-              className="categories-screen-main-grid-banner-img"
-            />
-            <div className="categories-screen-main-grid-banner-layer">
-              <h2>Beauty & Health</h2>
-            </div>
-          </div>
-          <div
-            style={{
-              width: '100%',
-              boxSizing: 'border-box',
-              display: 'grid',
-              gridTemplateColumns: '1fr auto',
-              alignItems: 'center',
-              gap: 40,
-            }}
-          >
+      <div
+        style={{
+          width: '100%',
+          boxSizing: 'border-box',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 20,
+        }}
+      >
+        <div className="categories-screen-responsive-banner">
+          <img
+            src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="banner Img"
+            className="categories-screen-responsive-banner-img"
+          />
+          <div className="categories-screen-responsive-banner-layer">
+            <h2>Beauty & Health</h2>
             <div
               className="nav-search-bar-container nav-search-bar-container-principal-structure"
-              style={{ width: '100%', borderRadius: 10 }}
+              style={{
+                width: '100%',
+                borderRadius: 10,
+                backgroundColor: '#fff',
+              }}
             >
               <div
                 className="nav-search-bar-icon-container"
@@ -426,51 +282,259 @@ const CategoriesScreen: React.FC = () => {
                 Search for anything
               </span>
             </div>
-            <div className="search-screen-header-results">
-              <div
-                className={`search-screen-header-result ${subscritpionType === 'standar-packages' ? 'search-screen-header-result-cta' : ''}`}
-                onClick={() => {
-                  handleChangeSubscriptionType('standar-packages');
-                }}
-              >
-                <span>Standar Packages</span>
+          </div>
+        </div>
+        <div className="categories-screen-section-container categories-screen-main-grid">
+          {/*LEFT COL - SEARCHER*/}
+          <div className="search-screen-main-grid-search-container">
+            <div className="search-screen-main-grid-search-box">
+              <div className="search-screen-main-grid-search-box-header">
+                <span style={{ fontSize: 16, fontWeight: 600 }}>Filter</span>
+                <span
+                  style={{ fontSize: 12, color: '#1890ff', cursor: 'pointer' }}
+                >
+                  Reset Filters
+                </span>
               </div>
-              <div
-                className={`search-screen-header-result ${subscritpionType === 'custom-packages' ? 'search-screen-header-result-cta' : ''}`}
-                onClick={() => {
-                  handleChangeSubscriptionType('custom-packages');
-                }}
-              >
-                <span>Custom Packages</span>
+              <div className="divider"></div>
+              <div className="search-screen-main-grid-search-box-section">
+                <h3>Tipo de suscripcion</h3>
+                {subscriptionTypeOptions.map((option) => (
+                  <label key={option} className="checkbox square">
+                    <input
+                      type="checkbox"
+                      checked={selectedTypeOptions.includes(option)}
+                      onChange={() =>
+                        toggleOption(
+                          option,
+                          selectedTypeOptions,
+                          setSelectedTypeOptions,
+                        )
+                      }
+                    />
+                    <span className="custom-box" />
+                    {option}
+                  </label>
+                ))}
               </div>
+              <div className="divider"></div>
+              <div className="search-screen-main-grid-search-box-section">
+                <h3>Sort By</h3>
+                {filterTypeOptions.map((option) => (
+                  <label key={option} className="checkbox circle">
+                    <input
+                      type="checkbox"
+                      checked={selectedFilterTypeOptions.includes(option)}
+                      onChange={() =>
+                        toggleOption(
+                          option,
+                          selectedFilterTypeOptions,
+                          setSelectedFilterTypeOptions,
+                        )
+                      }
+                    />
+                    <span className="custom-box" />
+                    {option}
+                  </label>
+                ))}
+              </div>
+              <div className="divider"></div>
+              <div className="search-screen-main-grid-search-box-section">
+                <h3>Price Range</h3>
+                <div className="search-screen-main-grid-search-box-price-container">
+                  <span className="search-screen-main-grid-search-box-price-container">
+                    Minimum
+                  </span>
+                  <div className="search-screen-main-grid-search-box-price-input-container">
+                    <span>$</span>
+                    <input
+                      type="number"
+                      style={{
+                        width: '100%',
+                        fontSize: 12,
+                        padding: '0px',
+                        boxSizing: 'border-box',
+                        border: 'none',
+                      }}
+                      min={0}
+                      value={
+                        priceAmountFilter[0] === undefined
+                          ? ''
+                          : priceAmountFilter[0]
+                      }
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        const newMin = val === '' ? undefined : Number(val);
+                        const newMax = priceAmountFilter[1];
+                        if (
+                          (newMin === undefined || newMin === 0) &&
+                          (newMax === undefined || newMax === 0)
+                        ) {
+                          setPriceAmountFilter([]);
+                        } else {
+                          setPriceAmountFilter([newMin, newMax]);
+                        }
+                      }}
+                      placeholder="0"
+                    />
+                  </div>
+                </div>
+                <div className="search-screen-main-grid-search-box-price-container">
+                  <span className="search-screen-main-grid-search-box-price-container">
+                    Maximum
+                  </span>
+                  <div className="search-screen-main-grid-search-box-price-input-container">
+                    <span>$</span>
+                    <input
+                      type="number"
+                      style={{
+                        width: '100%',
+                        fontSize: 12,
+                        padding: '0px',
+                        boxSizing: 'border-box',
+                        border: 'none',
+                      }}
+                      min={0}
+                      value={
+                        priceAmountFilter[1] === undefined
+                          ? ''
+                          : priceAmountFilter[1]
+                      }
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        const newMax = val === '' ? undefined : Number(val);
+                        const newMin = priceAmountFilter[0];
+                        if (
+                          (newMin === undefined || newMin === 0) &&
+                          (newMax === undefined || newMax === 0)
+                        ) {
+                          setPriceAmountFilter([]);
+                        } else {
+                          setPriceAmountFilter([newMin, newMax]);
+                        }
+                      }}
+                      placeholder="100"
+                    />
+                  </div>
+                </div>
+              </div>
+              <button
+                className="card-button"
+                style={{ margin: 0 }}
+                //onClick={() => (window.location.href = '/package')}
+              >
+                Apply
+              </button>
             </div>
           </div>
-          {loading ? (
-            <div
-              style={{
-                width: '100%',
-                boxSizing: 'border-box',
-                height: '300px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <div className="ant-loader"></div>
+          {/*RIGHT COL - CONTENT*/}
+          <div className="categories-screen-main-grid-content-container">
+            <div className="categories-screen-main-grid-banner">
+              <img
+                src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="banner Img"
+                className="categories-screen-main-grid-banner-img"
+              />
+              <div className="categories-screen-main-grid-banner-layer">
+                <h2>Beauty & Health</h2>
+              </div>
             </div>
-          ) : (
-            <>
-              <span style={{ fontSize: 12, color: '#8c8c8c' }}>
-                1-16 of over 2,000 results
-              </span>
-              {subscritpionType === 'standar-packages' && (
-                <StandarPackagesSection packages={standarPackages} />
-              )}
-              {subscritpionType === 'custom-packages' && (
-                <CustomPackagesSection packages={customPackages} />
-              )}
-            </>
-          )}
+            <div className="categories-screen-search-navbar">
+              <div
+                className="nav-search-bar-container nav-search-bar-container-principal-structure categories-screen-search-bar-desktop"
+                style={{ width: '100%', borderRadius: 10 }}
+              >
+                <div
+                  className="nav-search-bar-icon-container"
+                  style={{ border: 'none' }}
+                >
+                  <img
+                    src="/assets/icons/search.svg"
+                    alt="Search icon"
+                    width="14"
+                    height="14"
+                    style={{ cursor: 'pointer' }}
+                  />
+                </div>
+                <span
+                  style={{
+                    fontSize: '13px',
+                    fontWeight: 300,
+                    margin: 0,
+                    lineHeight: 1,
+                  }}
+                >
+                  Search for anything
+                </span>
+              </div>
+              <div className="search-screen-header-results">
+                <div
+                  className={`search-screen-header-result ${subscritpionType === 'standar-packages' ? 'search-screen-header-result-cta' : ''}`}
+                  onClick={() => {
+                    handleChangeSubscriptionType('standar-packages');
+                  }}
+                >
+                  <span>Standar Packages</span>
+                </div>
+                <div
+                  className={`search-screen-header-result ${subscritpionType === 'custom-packages' ? 'search-screen-header-result-cta' : ''}`}
+                  onClick={() => {
+                    handleChangeSubscriptionType('custom-packages');
+                  }}
+                >
+                  <span>Custom Packages</span>
+                </div>
+              </div>
+              <div className="categories-screen-filters-box">
+                <img
+                  src="/assets/icons/filter-icon.svg"
+                  alt="Menu icon"
+                  width="14"
+                  height="14"
+                  style={{ cursor: 'pointer' }}
+                />
+                <span>Filters</span>
+              </div>
+            </div>
+            {loading ? (
+              <div
+                style={{
+                  width: '100%',
+                  boxSizing: 'border-box',
+                  height: '300px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <div className="ant-loader"></div>
+              </div>
+            ) : (
+              <>
+                <div className="categories-screen-results-container">
+                  <span className="categories-screen-results-span ">
+                    1-16 of over 2,000 results
+                  </span>
+                  <div className="categories-screen-filters-box-mobile">
+                    <img
+                      src="/assets/icons/filter-icon.svg"
+                      alt="Menu icon"
+                      width="14"
+                      height="14"
+                      style={{ cursor: 'pointer' }}
+                    />
+                    <span>Filters</span>
+                  </div>
+                </div>
+                {subscritpionType === 'standar-packages' && (
+                  <StandarPackagesSection packages={standarPackages} />
+                )}
+                {subscritpionType === 'custom-packages' && (
+                  <CustomPackagesSection packages={customPackages} />
+                )}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </>
