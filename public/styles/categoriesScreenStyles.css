@@ -346,6 +346,7 @@ hr {
     flex-direction: column;
     align-items: flex-end;
     gap: 10px;
+    border-bottom: 1px solid transparent;
   }
 
   .categories-screen-navigation-filters-box {

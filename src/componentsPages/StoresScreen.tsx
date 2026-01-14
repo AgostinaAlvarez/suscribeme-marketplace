@@ -1,7 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+
+interface Category {
+  id: string;
+  label: string;
+}
+
+interface CategoriesFilterProps {
+  categories: Category[];
+}
 
 const StoresScreen: React.FC = () => {
-  const categories: { _id: number; name: string }[] = [
+  const categoriesList: { _id: number; name: string }[] = [
     {
       _id: 1,
       name: 'Featured',
@@ -28,12 +37,28 @@ const StoresScreen: React.FC = () => {
     },
   ];
 
-  const [selectedCategory, setSelectedCategory] = useState<number>(1);
+  const categories: { id: string; label: string }[] = [
+    { id: 'tech', label: 'Technology' },
+    { id: 'arts', label: 'Arts and Entertainment' },
+    { id: 'finance', label: 'Finance' },
+    { id: 'food', label: 'Food and Drink' },
+    { id: 'vehicles', label: 'Vehicles' },
+    { id: 'travel', label: 'Travel and tourism' },
+    { id: 'shopping', label: 'E-Commerce and Shopping' },
+    { id: 'business', label: 'Business and Consumer Services' },
+    { id: 'news', label: 'News and Media' },
+    { id: 'lifestyle', label: 'Lifestyle' },
+    { id: 'luxury', label: 'Luxury' },
+  ];
+
+  const [selectedCategory, setSelectedCategory] = useState<string>(
+    categories[0].id,
+  );
   const [currentPage, setCurrentPage] = useState(1);
 
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleChangeSubscriptionType = (categoryId: number) => {
+  const handleChangeSubscriptionType = (categoryId: string) => {
     window.scrollTo(0, 0);
     setLoading(true);
     setSelectedCategory(categoryId);
@@ -41,6 +66,80 @@ const StoresScreen: React.FC = () => {
       setLoading(false);
     }, 1500);
   };
+
+  //////
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const [showLeft, setShowLeft] = useState(false);
+  const [showRight, setShowRight] = useState(false);
+
+  const updateArrows = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const { scrollLeft, scrollWidth, clientWidth } = el;
+    const maxScroll = scrollWidth - clientWidth;
+
+    setShowLeft(scrollLeft > 0);
+    setShowRight(scrollLeft < maxScroll - 1); // margen por decimales
+  };
+
+  const scrollByAmount = (direction: 'left' | 'right') => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const amount = el.clientWidth * 0.8;
+
+    el.scrollTo({
+      left:
+        direction === 'left' ? el.scrollLeft - amount : el.scrollLeft + amount,
+      behavior: 'smooth',
+    });
+  };
+
+  useEffect(() => {
+    updateArrows();
+
+    const el = scrollRef.current;
+    if (!el) return;
+
+    el.addEventListener('scroll', updateArrows);
+    window.addEventListener('resize', updateArrows);
+
+    return () => {
+      el.removeEventListener('scroll', updateArrows);
+      window.removeEventListener('resize', updateArrows);
+    };
+  }, []);
+
+  //////
+
+  const [showStickyBar, setShowStickyBar] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const hero = document.querySelector('.sticky-ref');
+          const heroHeight = hero
+            ? hero.getBoundingClientRect().bottom + window.scrollY
+            : 400;
+          if (window.scrollY > heroHeight - 80) {
+            setShowStickyBar(true);
+          } else {
+            setShowStickyBar(false);
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
@@ -50,8 +149,46 @@ const StoresScreen: React.FC = () => {
           <p>The internet’s source for company logos and brand assets.</p>
         </div>
       </section>
+      <div className="stores-screen-section-container categories-wrapper-container sticky-ref">
+        <div className="categories-wrapper">
+          {showLeft && (
+            <button
+              className="arrow left"
+              onClick={() => scrollByAmount('left')}
+              aria-label="Scroll left"
+            >
+              ‹
+            </button>
+          )}
+
+          <div className="categories-scroll" ref={scrollRef}>
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                className="category-item"
+                onClick={() => {
+                  handleChangeSubscriptionType(cat.id);
+                }}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+
+          {showRight && (
+            <button
+              className="arrow right"
+              onClick={() => scrollByAmount('right')}
+              aria-label="Scroll right"
+            >
+              ›
+            </button>
+          )}
+        </div>
+      </div>
+      {/*
       <section className="stores-screen-section-container stores-screen-categories-container">
-        {categories.map((cat, index) => (
+        {categoriesList.map((cat, index) => (
           <div
             key={index}
             className={`stores-screen-category-item ${selectedCategory === cat._id ? 'stores-screen-category-item-cta' : ''}`}
@@ -62,6 +199,60 @@ const StoresScreen: React.FC = () => {
             <span>Categorie</span>
           </div>
         ))}
+      </section>
+        */}
+      <section
+        id="categories-sticky"
+        className="stores-screen-navigation-sticky-bar"
+        style={{
+          opacity: showStickyBar ? 1 : 0,
+          pointerEvents: showStickyBar ? 'auto' : 'none',
+          transition: 'opacity 0.3s',
+          position: 'fixed',
+          top: '60px',
+          left: 0,
+          width: '100%',
+          zIndex: 1000,
+        }}
+        aria-hidden={!showStickyBar}
+      >
+        <div className="stores-screen-section-container categories-wrapper-container">
+          <div className="categories-wrapper">
+            {showLeft && (
+              <button
+                className="arrow left"
+                onClick={() => scrollByAmount('left')}
+                aria-label="Scroll left"
+              >
+                ‹
+              </button>
+            )}
+
+            <div className="categories-scroll" ref={scrollRef}>
+              {categories.map((cat) => (
+                <button
+                  key={cat.id}
+                  className="category-item"
+                  onClick={() => {
+                    handleChangeSubscriptionType(cat.id);
+                  }}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+
+            {showRight && (
+              <button
+                className="arrow right"
+                onClick={() => scrollByAmount('right')}
+                aria-label="Scroll right"
+              >
+                ›
+              </button>
+            )}
+          </div>
+        </div>
       </section>
       {loading ? (
         <div
@@ -94,7 +285,7 @@ const StoresScreen: React.FC = () => {
           </section>
           <nav
             style={{ marginTop: 30 }}
-            className="pagination-container"
+            className="pagination-container stores-screen-pagination-container"
             aria-label="Paginación de paquetes estándar"
           >
             <button className="pagination-arrow">‹</button>
